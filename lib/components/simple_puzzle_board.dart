@@ -1,16 +1,16 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:slide_puzzle/components/puzzle_tile.dart';
+import 'package:slide_puzzle/components/simple_puzzle_tile.dart';
 
-class PuzzleBoard extends StatefulWidget {
-  const PuzzleBoard({Key? key}) : super(key: key);
+class SimplePuzzleBoard extends StatefulWidget {
+  const SimplePuzzleBoard({Key? key}) : super(key: key);
 
   @override
-  State<PuzzleBoard> createState() => _PuzzleBoardState();
+  State<SimplePuzzleBoard> createState() => _SimplePuzzleBoardState();
 }
 
-class _PuzzleBoardState extends State<PuzzleBoard> {
+class _SimplePuzzleBoardState extends State<SimplePuzzleBoard> {
   List<int> order = [];
 
   bool checkWin(List<int> order) {
@@ -43,7 +43,7 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
           shrinkWrap: true,
           children: [
             for (int puzzleIndex in order)
-              PuzzleTile(
+              SimplePuzzleTile(
                 order: order,
                 index: puzzleIndex,
                 onTap: () {

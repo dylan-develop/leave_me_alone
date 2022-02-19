@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:slide_puzzle/components/puzzle_tile.dart';
 
 import 'animated_puzzle_tile.dart';
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-class PuzzleTile extends StatelessWidget {
+class SimplePuzzleTile extends StatelessWidget {
   final List<int> order;
   final int index;
   final Function onTap;
 
-  const PuzzleTile({
+  const SimplePuzzleTile({
     Key? key,
     required this.order,
     required this.index,

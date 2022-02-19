@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:slide_puzzle/components/puzzle_board.dart';
+import 'package:slide_puzzle/components/simple_puzzle_board.dart';
 
 import '../components/animated_puzzle_board.dart';
 
@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
             key: UniqueKey(),
           ),
           Expanded(
-            child: PuzzleBoard(
+            child: SimplePuzzleBoard(
               key: UniqueKey(),
             ),
           ),
