@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:slide_puzzle/components/puzzle_tile.dart';
 
@@ -15,17 +14,21 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
   List<int> order = [];
 
   bool checkWin(List<int> order) {
-    var temp = [...this.order]..sort();
-    print('check win: ${listEquals(temp, order)}');
-    return listEquals(temp, order);
+    for (int i = 0 ; i < order.length; i++) {
+      if (i % 2 != order[i] % 2) {
+        return false;
+      }
+    }
+    print('win');
+    return true;
   }
 
   @override
   void initState() {
-    order = [for (int i = 0; i < 16; i++) i]
+    order = [for (int i = 0; i < 9; i++) i]
       ..shuffle()
-      ..remove(15)
-      ..add(15);
+      ..remove(8)
+      ..add(8);
     super.initState();
   }
 
@@ -34,7 +37,7 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
     return Stack(
       children: [
         GridView.count(
-          crossAxisCount: 4,
+          crossAxisCount: 3,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           shrinkWrap: true,
