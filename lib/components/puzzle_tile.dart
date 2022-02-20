@@ -5,8 +5,13 @@ import 'package:slide_puzzle/models/tile.dart';
 
 class PuzzleTile extends StatelessWidget {
   final Tile tile;
+  final double dimension;
 
-  const PuzzleTile({Key? key, required this.tile}) : super(key: key);
+  const PuzzleTile({
+    Key? key,
+    required this.tile,
+    required this.dimension,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,7 @@ class PuzzleTile extends StatelessWidget {
             context.read<PuzzleBloc>().add(TileTapped(tile));
           },
           child: SizedBox.square(
-            dimension: 500 / 3,
+            dimension: dimension,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),

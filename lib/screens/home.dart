@@ -19,9 +19,11 @@ class _HomePageState extends State<HomePage> {
           create: (context) => PuzzleBloc()..add(PuzzleReset()),
         ),
       ],
-      child: const Scaffold(
+      child: Scaffold(
         body: Center(
-          child: PuzzleBoard(),
+          child: PuzzleBoard(
+            dimenision: MediaQuery.of(context).size.width,
+          ),
         )
       ),
     );
