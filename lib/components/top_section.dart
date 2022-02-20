@@ -12,19 +12,22 @@ class TopSection extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 12),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           const Text(
             'BETA',
             style: TextStyle(
               fontSize: 32,
+              fontFamily: 'ThinkBig',
             ),
           ),
           const Text(
             'separate everyone with the 1.5m blocks',
             style: TextStyle(
               fontSize: 20,
+              fontFamily: 'HandWriting',
             ),
+            textAlign: TextAlign.center,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -33,6 +36,7 @@ class TopSection extends StatelessWidget {
                 '8 tiles',
                 style: TextStyle(
                   fontSize: 24,
+                  fontFamily: 'HandWriting',
                 ),
               ),
               Container(
@@ -45,6 +49,7 @@ class TopSection extends StatelessWidget {
                 '$moves steps',
                 style: const TextStyle(
                   fontSize: 24,
+                  fontFamily: 'HandWriting',
                 ),
               ),
             ],

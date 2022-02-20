@@ -15,12 +15,14 @@ class BottomSection extends StatelessWidget {
         children: [
           CustomElevatedButton(
             title: 'Shuffle',
+            keyCharacter: 'r',
             onPressed: () {
               context.read<PuzzleBloc>().add(PuzzleReset());
             },
           ),
           CustomElevatedButton(
             title: 'Hint',
+            keyCharacter: 'h',
             onPressed: () {},
           ),
         ],

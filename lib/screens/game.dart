@@ -6,6 +6,7 @@ import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
 import 'package:slide_puzzle/components/bottom_section.dart';
 import 'package:slide_puzzle/components/puzzle_board.dart';
 import 'package:slide_puzzle/components/responsive_layout_builder.dart';
+import 'package:slide_puzzle/components/side_section.dart';
 import 'package:slide_puzzle/components/top_section.dart';
 
 class GamePage extends StatelessWidget {
@@ -42,26 +43,27 @@ class GamePage extends StatelessWidget {
               ),
             ],
           ),
-          desktop: Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Container(
-                  color: Colors.pink,
+          desktop: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 96),
+            child: Row(
+              children: [
+                const Expanded(
+                  flex: 5,
+                  child: SideSection(),
                 ),
-              ),
-              Expanded(
-                flex: 3,
-                child: Center(
-                  child: PuzzleBoard(
-                    dimenision: min(
-                      MediaQuery.of(context).size.width * 3 / 5,
-                      MediaQuery.of(context).size.height - 167 * 2
+                Expanded(
+                  flex: 6,
+                  child: Center(
+                    child: PuzzleBoard(
+                      dimenision: min(
+                        (MediaQuery.of(context).size.width - 96 * 2) * 6 / 11,
+                        MediaQuery.of(context).size.height * 0.9
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

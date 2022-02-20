@@ -15,21 +15,16 @@ class PuzzleBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     final puzzle = context.select((PuzzleBloc bloc) => bloc.state.puzzle);
 
-    print('dimenision: ${dimenision / 3}');
-
     return SizedBox.square(
       dimension: dimenision,
-      child: Container(
-        color: Colors.orange,
-        child: Stack(
-          children: [
-            for (int i = 0; i < puzzle.tiles.length; i++)
-              PuzzleTile(
-                tile: puzzle.tiles[i],
-                dimension: dimenision / 3,
-              ),
-          ],
-        ),
+      child: Stack(
+        children: [
+          for (int i = 0; i < puzzle.tiles.length; i++)
+            PuzzleTile(
+              tile: puzzle.tiles[i],
+              dimension: dimenision / 3,
+            ),
+        ],
       ),
     );
   }

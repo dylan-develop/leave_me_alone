@@ -18,7 +18,7 @@ class PuzzleTile extends StatelessWidget {
     return Visibility(
       visible: !tile.isWhitespace,
       child: AnimatedAlign(
-        duration: const Duration(seconds: 1),
+        duration: const Duration(milliseconds: 500),
         alignment: FractionalOffset(
           tile.currentPosition.x / (3 - 1),
           tile.currentPosition.y / (3 - 1),

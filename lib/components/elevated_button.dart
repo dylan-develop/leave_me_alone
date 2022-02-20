@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 class CustomElevatedButton extends StatefulWidget {
   final String title;
   final Function onPressed;
+  final double fontSize;
+  final String? keyCharacter;
 
   const CustomElevatedButton({
     Key? key,
     required this.title,
     required this.onPressed,
+    this.fontSize = 24,
+    this.keyCharacter,
   }) : super(key: key);
 
   @override
@@ -15,32 +19,35 @@ class CustomElevatedButton extends StatefulWidget {
 }
 
 class _CustomElevatedButtonState extends State<CustomElevatedButton> {
+  bool onHover = false;
   bool isTapped = false;
 
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
       onEnter: (onEnter) {
+        onHover = true;
         setState(() {
           isTapped = true;
         });
       },
       onExit: (onExit) {
+        onHover = false;
         setState(() {
           isTapped = false;
         });
       },
       child: AnimatedSlide(
         duration: const Duration(microseconds: 200),
-        offset: isTapped ? const Offset(0.03, 0.03) : const Offset(0, 0),
+        offset: isTapped ? const Offset(0.04, 0.04) : const Offset(0, 0),
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(),
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                color: isTapped ? Colors.transparent: Colors.black,
-                offset: isTapped ? const Offset(0, 0) : const Offset(3, 3),
+                color: isTapped ? Colors.transparent : Colors.black,
+                offset: isTapped ? const Offset(0, 0) : const Offset(4, 4),
               ),
             ],
           ),
@@ -51,17 +58,21 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
             ),
             onPressed: () {
               widget.onPressed.call();
+              setState(() {
+                isTapped = true;
+              });
             },
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 5,
+              padding: EdgeInsets.symmetric(
+                horizontal: 20 * MediaQuery.of(context).size.width / 768,
+                vertical: 5 * MediaQuery.of(context).size.width / 768,
               ),
               child: Text(
                 widget.title,
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: widget.fontSize,
                   color: isTapped ? Colors.grey[850] : Colors.black,
+                  fontFamily: 'HandWriting',
                 ),
               ),
             ),
