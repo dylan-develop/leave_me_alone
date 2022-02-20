@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
 import 'package:slide_puzzle/components/elevated_button.dart';
+import 'package:slide_puzzle/components/popup_container.dart';
 
 class BottomSection extends StatelessWidget {
   const BottomSection({Key? key}) : super(key: key);
@@ -15,15 +16,20 @@ class BottomSection extends StatelessWidget {
         children: [
           CustomElevatedButton(
             title: 'Shuffle',
-            keyCharacter: 'r',
             onPressed: () {
               context.read<PuzzleBloc>().add(PuzzleReset());
             },
           ),
           CustomElevatedButton(
             title: 'Hint',
-            keyCharacter: 'h',
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return PopupContainer(child: Text(''));
+                },
+              );
+            },
           ),
         ],
       ),

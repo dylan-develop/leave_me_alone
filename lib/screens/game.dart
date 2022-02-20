@@ -30,10 +30,12 @@ class GamePage extends StatelessWidget {
               ),
               Expanded(
                 flex: 9,
-                child: PuzzleBoard(
-                  dimenision: min(
-                    MediaQuery.of(context).size.width - 16 * 2,
-                    MediaQuery.of(context).size.height * 9 / 20,
+                child: Center(
+                  child: PuzzleBoard(
+                    dimenision: min(
+                      MediaQuery.of(context).size.width - 16 * 2,
+                      MediaQuery.of(context).size.height * 9 / 20,
+                    ),
                   ),
                 ),
               ),

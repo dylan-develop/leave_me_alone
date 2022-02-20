@@ -4,14 +4,12 @@ class CustomElevatedButton extends StatefulWidget {
   final String title;
   final Function onPressed;
   final double fontSize;
-  final String? keyCharacter;
 
   const CustomElevatedButton({
     Key? key,
     required this.title,
     required this.onPressed,
     this.fontSize = 24,
-    this.keyCharacter,
   }) : super(key: key);
 
   @override
