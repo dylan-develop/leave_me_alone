@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:equatable/equatable.dart';
+import 'package:slide_puzzle/models/position.dart';
 import 'package:slide_puzzle/models/tile.dart';
 
 class Puzzle extends Equatable {
@@ -40,6 +41,17 @@ class Puzzle extends Equatable {
     tiles[whitespaceTileIndex] = whitespaceTile.copyWith(tile.currentPosition);
 
     return Puzzle(tiles);
+  }
+
+  Puzzle sort() {
+    final sortedTiles = [
+      for (int i = 0; i < tiles.length; i++)
+        tiles[i].copyWith(Position(
+          i % 3,
+          i ~/ 3,
+        ))
+    ];
+    return Puzzle(sortedTiles);
   }
 
   @override

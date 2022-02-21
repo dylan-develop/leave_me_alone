@@ -24,18 +24,22 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
       emit(state);
     });
     on<PuzzleReset>((event, emit) {
-      final values = [for (int i = 0; i < 9; i++) i]
-        ..shuffle();
-      emit(PuzzleState(
+      final values = [for (int i = 0; i < 9; i++) i]..shuffle();
+      emit(
+        PuzzleState(
           puzzle: Puzzle([
-        for (int i = 0; i < values.length; i++)
-          Tile(
-            value: i,
-            currentPosition:
-                Position(values.indexOf(i) % 3, values.indexOf(i) ~/ 3),
-            isWhitespace: i == 8,
-          )
-      ])));
+            for (int i = 0; i < values.length; i++)
+              Tile(
+                value: i,
+                currentPosition: Position(
+                  values.indexOf(i) % 3,
+                  values.indexOf(i) ~/ 3,
+                ),
+                isWhitespace: i == 8,
+              )
+          ]),
+        ),
+      );
     });
   }
 }

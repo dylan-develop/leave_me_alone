@@ -29,20 +29,26 @@ class PopupContainer extends StatelessWidget {
               ),
             ],
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Icon(Icons.close),
+          child: SizedBox(
+            width: min(
+              MediaQuery.of(context).size.width - 16 * 2,
+              MediaQuery.of(context).size.height * 9 / 20,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Icon(Icons.close),
+                  ),
                 ),
-              ),
-              child,
-            ],
+                child,
+              ],
+            ),
           ),
         ),
       ),
@@ -69,29 +75,35 @@ class PopupContainer extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: SizedBox.square(
-                    dimension: min(
-                        (MediaQuery.of(context).size.width - 96 * 2) * 6 / 11,
-                        MediaQuery.of(context).size.height * 0.9),
-                    child: Container(
-                      margin: const EdgeInsets.all(32),
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Icon(Icons.close),
-                            ),
+                  child: LayoutBuilder(
+                    builder: ((context, constraints) {
+                      return SizedBox.square(
+                        dimension: min(
+                          constraints.maxWidth,
+                          constraints.maxHeight,
+                        ),
+                        child: Container(
+                          margin: const EdgeInsets.all(32),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Icon(Icons.close),
+                                ),
+                              ),
+                              Expanded(
+                                child: child,
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: child,
-                          ),
-                        ],
-                      ),
-                    ),
+                        ),
+                      );
+                    }),
                   ),
                 ),
               ),

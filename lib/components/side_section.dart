@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
 import 'package:slide_puzzle/components/elevated_button.dart';
-import 'package:slide_puzzle/components/popup_container.dart';
+import 'package:slide_puzzle/components/popup_hints.dart';
 
 class SideSection extends StatelessWidget {
   const SideSection({Key? key}) : super(key: key);
@@ -81,9 +81,9 @@ class SideSection extends StatelessWidget {
               fontSize: 36,
               onPressed: () {
                 showDialog(
-                  context: context, 
+                  context: context,
                   builder: (context) {
-                    return PopupContainer(child: Container());
+                    return const HintsPopup();
                   },
                 );
               },
