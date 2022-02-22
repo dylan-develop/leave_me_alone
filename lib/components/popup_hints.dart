@@ -14,15 +14,29 @@ class HintsPopup extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           LayoutBuilder(builder: ((context, constraints) {
-            return Container(
-              margin: const EdgeInsets.only(bottom: 32),
-              child: Text(
-                'YOUR HINT',
-                style: TextStyle(
-                  fontSize: constraints.maxWidth > 768 ? 36 : 32,
-                  fontFamily: 'ThinkBig',
+            return Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 16),
+                  child: Text(
+                    'YOUR HINT',
+                    style: TextStyle(
+                      fontSize: constraints.maxWidth > 768 ? 36 : 32,
+                      fontFamily: 'ThinkBig',
+                    ),
+                  ),
                 ),
-              ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 32),
+                  child: Text(
+                    'psst.....There is more than one way to win',
+                    style: TextStyle(
+                      fontSize: constraints.maxWidth > 768 ? 24 : 20,
+                      fontFamily: 'HandWriting',
+                    ),
+                  ),
+                ),
+              ],
             );
           })),
           Flexible(

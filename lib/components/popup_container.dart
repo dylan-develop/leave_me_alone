@@ -29,25 +29,28 @@ class PopupContainer extends StatelessWidget {
               ),
             ],
           ),
-          child: SizedBox(
-            width: min(
-              MediaQuery.of(context).size.width - 16 * 2,
-              MediaQuery.of(context).size.height * 9 / 20,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Icon(Icons.close),
+          child: Material(
+            color: Colors.transparent,
+            child: SizedBox(
+              width: min(
+                MediaQuery.of(context).size.width - 16 * 2,
+                MediaQuery.of(context).size.height * 9 / 20,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Icon(Icons.close),
+                    ),
                   ),
-                ),
-                child,
-              ],
+                  child,
+                ],
+              ),
             ),
           ),
         ),
@@ -75,35 +78,38 @@ class PopupContainer extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: LayoutBuilder(
-                    builder: ((context, constraints) {
-                      return SizedBox.square(
-                        dimension: min(
-                          constraints.maxWidth,
-                          constraints.maxHeight,
-                        ),
-                        child: Container(
-                          margin: const EdgeInsets.all(32),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Icon(Icons.close),
-                                ),
-                              ),
-                              Expanded(
-                                child: child,
-                              ),
-                            ],
+                  child: Material(
+                    color: Colors.transparent,
+                    child: LayoutBuilder(
+                      builder: ((context, constraints) {
+                        return SizedBox.square(
+                          dimension: min(
+                            constraints.maxWidth,
+                            constraints.maxHeight,
                           ),
-                        ),
-                      );
-                    }),
+                          child: Container(
+                            margin: const EdgeInsets.all(32),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Icon(Icons.close),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: child,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
                   ),
                 ),
               ),

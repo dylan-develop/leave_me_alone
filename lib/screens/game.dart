@@ -9,6 +9,7 @@ import 'package:slide_puzzle/components/puzzle_board.dart';
 import 'package:slide_puzzle/components/responsive_layout_builder.dart';
 import 'package:slide_puzzle/components/side_section.dart';
 import 'package:slide_puzzle/components/top_section.dart';
+import 'package:slide_puzzle/helpers/modal_helper.dart';
 
 class GamePage extends StatelessWidget {
   const GamePage({Key? key}) : super(key: key);
@@ -21,9 +22,9 @@ class GamePage extends StatelessWidget {
         listener: (context, state) {
           if (state.status == PuzzleStatus.complete) {
             Future.delayed(const Duration(milliseconds: 800), () {
-              showDialog(
+              showScaleDialog(
                 context: context,
-                builder: (context) => const WinPopup(),
+                child: const WinPopup(),
               );
             });
           }

@@ -61,8 +61,8 @@ class _CharacterBlockState extends State<CharacterBlock>
               offset: Offset(5 * shake(controller.value), 0),
               child: Image.asset(
                 kIsWeb
-                    ? 'images/character2.png'
-                    : 'assets/images/character2.png',
+                    ? 'images/character0.png'
+                    : 'assets/images/character0.png',
               ),
             );
           }),

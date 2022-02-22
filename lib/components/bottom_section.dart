@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
 import 'package:slide_puzzle/components/elevated_button.dart';
 import 'package:slide_puzzle/components/popup_hints.dart';
+import 'package:slide_puzzle/helpers/modal_helper.dart';
 
 class BottomSection extends StatelessWidget {
   const BottomSection({Key? key}) : super(key: key);
@@ -23,11 +24,9 @@ class BottomSection extends StatelessWidget {
           CustomElevatedButton(
             title: 'Hint',
             onPressed: () {
-              showDialog(
+              showScaleDialog(
                 context: context,
-                builder: (context) {
-                  return const HintsPopup();
-                },
+                child: const HintsPopup(),
               );
             },
           ),
