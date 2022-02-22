@@ -11,7 +11,8 @@ class Puzzle extends Equatable {
 
   int getDimension() => sqrt(tiles.length).toInt();
 
-  Tile getWhitespaceTile() => tiles.singleWhere((tile) => tile.isWhitespace);
+  Tile getWhitespaceTile() =>
+      tiles.singleWhere((tile) => tile.type == TileType.whitespace);
 
   bool isComplete() {
     for (Tile tile in tiles) {
@@ -41,7 +42,7 @@ class Puzzle extends Equatable {
   }
 
   bool isSocialDistanceAround(Tile tile) {
-    if (tile.value % 2 == 0 && !tile.isWhitespace) {
+    if (tile.type == TileType.character) {
       final top = tiles.where(
         (element) => tile.currentPosition.top() == element.currentPosition,
       );
@@ -55,16 +56,32 @@ class Puzzle extends Equatable {
         (element) => tile.currentPosition.right() == element.currentPosition,
       );
 
-      if (top.isNotEmpty && top.where((tile) => tile.isWhitespace || tile.value % 2 != 0).isEmpty) {
+      if (top.isNotEmpty &&
+          top
+              .where((tile) =>
+                  tile.type == TileType.whitespace || tile.value % 2 != 0)
+              .isEmpty) {
         return false;
       }
-      if (bottom.isNotEmpty && bottom.where((tile) => tile.isWhitespace || tile.value % 2 != 0).isEmpty) {
+      if (bottom.isNotEmpty &&
+          bottom
+              .where((tile) =>
+                  tile.type == TileType.whitespace || tile.value % 2 != 0)
+              .isEmpty) {
         return false;
       }
-      if (left.isNotEmpty && left.where((tile) => tile.isWhitespace || tile.value % 2 != 0).isEmpty) {
+      if (left.isNotEmpty &&
+          left
+              .where((tile) =>
+                  tile.type == TileType.whitespace || tile.value % 2 != 0)
+              .isEmpty) {
         return false;
       }
-      if (right.isNotEmpty && right.where((tile) => tile.isWhitespace || tile.value % 2 != 0).isEmpty) {
+      if (right.isNotEmpty &&
+          right
+              .where((tile) =>
+                  tile.type == TileType.whitespace || tile.value % 2 != 0)
+              .isEmpty) {
         return false;
       }
     }

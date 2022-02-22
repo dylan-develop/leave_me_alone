@@ -24,7 +24,7 @@ class PuzzleTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: !tile.isWhitespace,
+      visible: tile.type != TileType.whitespace,
       child: AnimatedAlign(
         duration: const Duration(milliseconds: 500),
         alignment: FractionalOffset(
@@ -33,14 +33,14 @@ class PuzzleTile extends StatelessWidget {
         ),
         child: GestureDetector(
           onTap: () {
-            if (!isReadOnly) {
+            if (!isReadOnly || !isHints) {
               context.read<PuzzleBloc>().add(TileTapped(tile));
             }
           },
           child: SizedBox.square(
             dimension: dimension,
-            child: tile.value % 2 == 0
-                ? const CharacterBlock()
+            child: tile.type == TileType.character
+                ? CharacterBlock(isHints: isHints)
                 : SocialDistanceBlock(fontSize: isHints ? 24 : null),
           ),
         ),

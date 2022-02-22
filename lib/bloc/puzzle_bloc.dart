@@ -12,21 +12,9 @@ part 'puzzle_state.dart';
 class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
   PuzzleBloc() : super(const PuzzleState()) {
     on<PuzzleInitialized>((event, emit) {
-      final values = [for (int i = 0; i < pow(event.dimension, 2); i++) i]
-        ..shuffle();
       emit(
         PuzzleState(
-          puzzle: Puzzle([
-            for (int i = 0; i < values.length; i++)
-              Tile(
-                value: i,
-                currentPosition: Position(
-                  values.indexOf(i) % event.dimension,
-                  values.indexOf(i) ~/ event.dimension,
-                ),
-                isWhitespace: i == values.length - 1,
-              ),
-          ]),
+          puzzle:  _generatePuzzle(event.dimension),
           numberOfMoves: 0,
           status: PuzzleStatus.incomplete,
         ),
@@ -59,25 +47,47 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
       }
     });
     on<PuzzleReset>((event, emit) {
-      final values = [for (int i = 0; i < state.puzzle.tiles.length; i++) i]
-        ..shuffle();
       emit(
         PuzzleState(
-          puzzle: Puzzle([
-            for (int i = 0; i < values.length; i++)
-              Tile(
-                value: i,
-                currentPosition: Position(
-                  values.indexOf(i) % sqrt(values.length).toInt(),
-                  values.indexOf(i) ~/ sqrt(values.length).toInt(),
-                ),
-                isWhitespace: i == values.length - 1,
-              ),
-          ]),
+          puzzle: _generatePuzzle(state.puzzle.getDimension()),
           numberOfMoves: 0,
           status: PuzzleStatus.incomplete,
         ),
       );
     });
+  }
+
+  Puzzle _generatePuzzle(int dimension) {
+    final values = [for (int i = 0; i < pow(dimension, 2); i++) i]..shuffle();
+
+    final puzzle = Puzzle([
+      for (int i = 0; i < values.length; i++)
+        Tile(
+          value: i,
+          currentPosition: Position(
+            values.indexOf(i) % dimension,
+            values.indexOf(i) ~/ dimension,
+          ),
+          type: i == values.length - 1
+              ? TileType.whitespace
+              : dimension % 2 != 0
+                  ? i % 2 == 0
+                      ? TileType.character
+                      : TileType.socialDistance
+                  : i ~/ dimension % 2 == 0
+                      ? i % 2 == 0
+                          ? TileType.character
+                          : TileType.socialDistance
+                      : i % 2 != 0
+                          ? TileType.character
+                          : TileType.socialDistance,
+        ),
+    ]);
+
+    if (puzzle.isComplete()) {
+      return _generatePuzzle(dimension);
+    } else {
+      return puzzle;
+    }
   }
 }
