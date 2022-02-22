@@ -6,19 +6,20 @@ import 'package:slide_puzzle/models/puzzle.dart';
 
 class PuzzleBoard extends StatelessWidget {
   final double dimenision;
-  final bool isReadOnly;
+  final bool isHints;
 
   const PuzzleBoard({
     Key? key,
     required this.dimenision,
-    this.isReadOnly = false,
+    this.isHints = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Puzzle puzzle = context.select((PuzzleBloc bloc) => bloc.state.puzzle);
+    PuzzleStatus status = context.select((PuzzleBloc bloc) => bloc.state.status);
 
-    if (isReadOnly) {
+    if (isHints) {
       puzzle = puzzle.sort();
     }
 
@@ -29,8 +30,10 @@ class PuzzleBoard extends StatelessWidget {
           for (int i = 0; i < puzzle.tiles.length; i++)
             PuzzleTile(
               tile: puzzle.tiles[i],
-              dimension: dimenision / 3,
-              isReadOnly: isReadOnly,
+              puzzleDimension: puzzle.getDimension(),
+              dimension: dimenision / puzzle.getDimension(),
+              isReadOnly: status == PuzzleStatus.complete,
+              isHints: isHints,
             ),
         ],
       ),

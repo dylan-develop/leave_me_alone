@@ -13,21 +13,23 @@ class HintsPopup extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            margin: const EdgeInsets.only(bottom: 32),
-            child: const Text(
-              'YOUR HINT',
-              style: TextStyle(
-                fontSize: 36,
-                fontFamily: 'ThinkBig',
+          LayoutBuilder(builder: ((context, constraints) {
+            return Container(
+              margin: const EdgeInsets.only(bottom: 32),
+              child: Text(
+                'YOUR HINT',
+                style: TextStyle(
+                  fontSize: constraints.maxWidth > 768 ? 36 : 32,
+                  fontFamily: 'ThinkBig',
+                ),
               ),
-            ),
-          ),
+            );
+          })),
           Flexible(
             child: LayoutBuilder(
               builder: ((context, constraints) {
                 return PuzzleBoard(
-                  isReadOnly: true,
+                  isHints: true,
                   dimenision: min(
                     constraints.maxWidth,
                     constraints.maxHeight,

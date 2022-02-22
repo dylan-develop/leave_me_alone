@@ -7,6 +7,15 @@ abstract class PuzzleEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class PuzzleInitialized extends PuzzleEvent {
+  final int dimension;
+
+  const PuzzleInitialized({required this.dimension});
+
+  @override
+  List<Object> get props => [dimension];
+}
+
 class TileTapped extends PuzzleEvent {
   final Tile tile;
 

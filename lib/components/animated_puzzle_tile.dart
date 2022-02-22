@@ -20,8 +20,6 @@ class AnimatedPuzzleTile extends StatefulWidget {
 class _AnimatedPuzzleTileState extends State<AnimatedPuzzleTile> {
   @override
   Widget build(BuildContext context) {
-    print(
-        'build: #${widget.value} [${widget.order.indexOf(widget.value) % 3 / 2}, ${(widget.order.indexOf(widget.value) / 3).floor() / 2}]');
     return Visibility(
       visible: widget.value != widget.order.reduce(max),
       child: GestureDetector(

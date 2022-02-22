@@ -9,12 +9,16 @@ class PuzzleTile extends StatelessWidget {
   final Tile tile;
   final double dimension;
   final bool isReadOnly;
+  final bool isHints;
+  final int puzzleDimension;
 
   const PuzzleTile({
     Key? key,
     required this.tile,
     required this.dimension,
     this.isReadOnly = false,
+    this.isHints = false,
+    required this.puzzleDimension,
   }) : super(key: key);
 
   @override
@@ -24,8 +28,8 @@ class PuzzleTile extends StatelessWidget {
       child: AnimatedAlign(
         duration: const Duration(milliseconds: 500),
         alignment: FractionalOffset(
-          tile.currentPosition.x / (3 - 1),
-          tile.currentPosition.y / (3 - 1),
+          tile.currentPosition.x / (puzzleDimension - 1),
+          tile.currentPosition.y / (puzzleDimension - 1),
         ),
         child: GestureDetector(
           onTap: () {
@@ -37,7 +41,7 @@ class PuzzleTile extends StatelessWidget {
             dimension: dimension,
             child: tile.value % 2 == 0
                 ? const CharacterBlock()
-                : SocialDistanceBlock(fontSize: isReadOnly ? 24 : null),
+                : SocialDistanceBlock(fontSize: isHints ? 24 : null),
           ),
         ),
       ),

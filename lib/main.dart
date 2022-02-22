@@ -15,7 +15,10 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<PuzzleBloc>(
-          create: (context) => PuzzleBloc()..add(PuzzleReset()),
+          create: (context) => PuzzleBloc()
+            ..add(const PuzzleInitialized(
+              dimension: 3,
+            )),
         ),
       ],
       child: const MaterialApp(
