@@ -1,14 +1,16 @@
-import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CharacterBlock extends StatefulWidget {
   final bool isHints;
+  final bool shakeOnHover;
+  final String? imageUrl;
 
   const CharacterBlock({
     Key? key,
     this.isHints = false,
+    this.shakeOnHover = false,
+    this.imageUrl,
   }) : super(key: key);
 
   @override
@@ -22,7 +24,7 @@ class _CharacterBlockState extends State<CharacterBlock>
   @override
   initState() {
     controller = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 100),
       vsync: this,
     )..addListener(() {
         if (controller.isCompleted) {
@@ -45,13 +47,13 @@ class _CharacterBlockState extends State<CharacterBlock>
   Widget build(BuildContext context) {
     return MouseRegion(
       onEnter: (event) {
-        if (!widget.isHints) {
-          // controller.forward();
+        if (!widget.isHints && widget.shakeOnHover) {
+          controller.forward();
         }
       },
       onExit: (event) {
-        if (!widget.isHints) {
-          // controller.stop();
+        if (!widget.isHints && widget.shakeOnHover) {
+          controller.stop();
         }
       },
       child: AnimatedBuilder(
@@ -60,9 +62,10 @@ class _CharacterBlockState extends State<CharacterBlock>
             return Transform.translate(
               offset: Offset(5 * shake(controller.value), 0),
               child: Image.asset(
-                kIsWeb
-                    ? 'images/character0.png'
-                    : 'assets/images/character0.gif',
+                widget.imageUrl ??
+                    (kIsWeb
+                        ? 'images/character0.png'
+                        : 'assets/images/character0.gif'),
               ),
             );
           }),

@@ -60,7 +60,7 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
         },
         child: AnimatedSlide(
           duration: const Duration(milliseconds: 200),
-          offset: isTapped ? const Offset(0.04, 0.04) : const Offset(0, 0),
+          offset: isTapped ? const Offset(0.02, 0.02) : const Offset(0, 0),
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black),
@@ -85,6 +85,7 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
                   color: isTapped ? Colors.grey[850] : Colors.black,
                   fontFamily: 'HandWriting',
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
           ),

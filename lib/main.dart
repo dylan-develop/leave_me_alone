@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
+import 'package:slide_puzzle/screens/difficulties.dart';
 import 'package:slide_puzzle/screens/game.dart';
+import 'package:slide_puzzle/screens/onboard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,9 +23,14 @@ class MyApp extends StatelessWidget {
             )),
         ),
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         title: 'Slide Puzzle',
-        home: GamePage(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const OnboardPage(),
+          '/difficulties': (context) => const DifficultiesPage(),
+          '/game': (context) => const GamePage(),
+        },
       ),
     );
   }

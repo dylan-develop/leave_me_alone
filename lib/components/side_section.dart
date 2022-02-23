@@ -41,7 +41,7 @@ class SideSection extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(bottom: 40),
-              child: Row(
+              child: Wrap(
                 children: [
                   const Text(
                     '8 tiles',
