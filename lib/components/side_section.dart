@@ -84,7 +84,8 @@ class SideSection extends StatelessWidget {
               onPressed: () {
                 showSlideDialog(
                   context: context,
-                  child: const HintsPopup()
+                  child: const HintsPopup(),
+                  beginOffset: const Offset(-1 , 0),
                 );
               },
             ),

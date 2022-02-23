@@ -116,89 +116,94 @@ class OnboardPage extends StatelessWidget {
             ),
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 16,
-                        ),
-                        child: const Text(
-                          'LEAVE ME ALONE',
-                          style: TextStyle(
-                            fontSize: 96,
-                            fontFamily: 'ThinkBig',
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                            vertical: 16,
                           ),
-                          textAlign: TextAlign.center,
+                          child: const Text(
+                            'LEAVE ME ALONE',
+                            style: TextStyle(
+                              fontSize: 96,
+                              fontFamily: 'ThinkBig',
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
-                    ),
-                    Center(
-                      child: Container(
+                      Center(
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                            bottom: 72,
+                          ),
+                          child: const Text(
+                            'a stupid game',
+                            style: TextStyle(
+                              fontSize: 36,
+                              fontFamily: 'HandWriting',
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                      Container(
                         margin: const EdgeInsets.only(
-                          bottom: 72,
+                          bottom: 96,
                         ),
-                        child: const Text(
-                          'a stupid game',
-                          style: TextStyle(
-                            fontSize: 36,
-                            fontFamily: 'HandWriting',
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                        bottom: 96,
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(
-                                right: 40,
-                              ),
-                              child: const CharacterBlock(
-                                imageUrl: kIsWeb
-                                    ? 'images/charactera.png'
-                                    : 'assets/images/charactera.png',
-                                shakeOnHover: true,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(
+                                  right: 40,
+                                ),
+                                child: const CharacterBlock(
+                                  imageUrl: kIsWeb
+                                      ? 'images/charactera.png'
+                                      : 'assets/images/charactera.png',
+                                  shakeOnHover: true,
+                                ),
                               ),
                             ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(
-                                left: 40,
-                              ),
-                              child: const CharacterBlock(
-                                imageUrl: kIsWeb
-                                    ? 'images/characterb.png'
-                                    : 'assets/images/characterb.png',
-                                shakeOnHover: true,
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(
+                                  left: 40,
+                                ),
+                                child: const CharacterBlock(
+                                  imageUrl: kIsWeb
+                                      ? 'images/characterb.png'
+                                      : 'assets/images/characterb.png',
+                                  shakeOnHover: true,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                        bottom: 12,
-                      ),
-                      child: CustomElevatedButton(
-                        title: 'start now',
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/difficulties');
-                        },
-                      ),
-                    )
-                  ],
+                      Container(
+                        margin: const EdgeInsets.only(
+                          bottom: 12,
+                        ),
+                        child: CustomElevatedButton(
+                          title: 'start now',
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/difficulties');
+                          },
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

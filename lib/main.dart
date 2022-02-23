@@ -24,6 +24,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Slide Puzzle',
+        scrollBehavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+        
         initialRoute: '/',
         routes: {
           '/': (context) => const OnboardPage(),

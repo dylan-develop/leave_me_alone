@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:slide_puzzle/components/responsive_layout_builder.dart';
 
 class PopupContainer extends StatelessWidget {
@@ -47,7 +49,11 @@ class PopupContainer extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context).pop();
                         },
-                        child: const Icon(Icons.close),
+                        child: SvgPicture.asset(
+                          kIsWeb
+                              ? 'icons/delete.svg'
+                              : 'assets/icons/delete.svg',
+                        ),
                       ),
                     ),
                   ),

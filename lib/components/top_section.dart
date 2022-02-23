@@ -8,26 +8,38 @@ class TopSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final moves = context.select((PuzzleBloc bloc) => bloc.state.numberOfMoves);
-    
+
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 12),
+      margin: const EdgeInsets.symmetric(
+        vertical: 12,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const Text(
-            'BETA',
-            style: TextStyle(
-              fontSize: 32,
-              fontFamily: 'ThinkBig',
+          Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: 12,
+            ),
+            child: const Text(
+              'BETA',
+              style: TextStyle(
+                fontSize: 32,
+                fontFamily: 'ThinkBig',
+              ),
             ),
           ),
-          const Text(
-            'separate everyone with the 1.5m blocks',
-            style: TextStyle(
-              fontSize: 20,
-              fontFamily: 'HandWriting',
+          Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: 12,
             ),
-            textAlign: TextAlign.center,
+            child: const Text(
+              'separate everyone with the 1.5m blocks',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'HandWriting',
+              ),
+              textAlign: TextAlign.center,
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

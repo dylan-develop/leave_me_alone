@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
 import 'package:slide_puzzle/components/bottom_section.dart';
+import 'package:slide_puzzle/components/page_container.dart';
 import 'package:slide_puzzle/components/popup_win.dart';
 import 'package:slide_puzzle/components/puzzle_board.dart';
 import 'package:slide_puzzle/components/responsive_layout_builder.dart';
@@ -16,9 +17,8 @@ class GamePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: BlocListener<PuzzleBloc, PuzzleState>(
+    return PageContainer(
+      child: BlocListener<PuzzleBloc, PuzzleState>(
         listener: (context, state) {
           if (state.status == PuzzleStatus.complete) {
             Future.delayed(const Duration(milliseconds: 800), () {
@@ -38,13 +38,17 @@ class GamePage extends StatelessWidget {
               ),
               Expanded(
                 flex: 9,
-                child: Center(
-                  child: PuzzleBoard(
-                    dimenision: min(
-                      MediaQuery.of(context).size.width - 16 * 2,
-                      MediaQuery.of(context).size.height * 9 / 20,
-                    ),
-                  ),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Center(
+                      child: PuzzleBoard(
+                        dimenision: min(
+                          constraints.maxWidth - 16 * 2,
+                          constraints.maxHeight,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
               const Expanded(
@@ -63,13 +67,17 @@ class GamePage extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 6,
-                  child: Center(
-                    child: PuzzleBoard(
-                      dimenision: min(
-                        (MediaQuery.of(context).size.width - 96 * 2) * 6 / 11,
-                        MediaQuery.of(context).size.height * 0.9,
-                      ),
-                    ),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return Center(
+                        child: PuzzleBoard(
+                          dimenision: min(
+                            constraints.maxWidth,
+                            constraints.maxHeight,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],

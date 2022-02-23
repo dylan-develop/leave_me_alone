@@ -35,6 +35,7 @@ Future<T?> showSlideDialog<T>({
   required Widget child,
   bool barrierDismissible = true,
   String barrierLabel = '',
+  Offset? beginOffset,
 }) =>
     showGeneralDialog<T>(
       transitionBuilder: (context, animation, secondaryAnimation, widget) {
@@ -46,7 +47,7 @@ Future<T?> showSlideDialog<T>({
         return ResponsiveLayoutBuilder(
           mobile: SlideTransition(
             position: Tween<Offset>(
-              begin: const Offset(0.0, 1.0),
+              begin: beginOffset ?? const Offset(0.0, 1.0),
               end: Offset.zero,
             ).animate(curvedAnimation),
             child: FadeTransition(
@@ -56,7 +57,7 @@ Future<T?> showSlideDialog<T>({
           ),
           desktop: SlideTransition(
             position: Tween<Offset>(
-              begin: const Offset(-1.0, 0.0),
+              begin: beginOffset ?? const Offset(-1.0, 0.0),
               end: Offset.zero,
             ).animate(curvedAnimation),
             child: FadeTransition(
