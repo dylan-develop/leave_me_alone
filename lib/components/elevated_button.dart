@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CustomElevatedButton extends StatefulWidget {
@@ -23,6 +24,7 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
+      cursor: SystemMouseCursors.alias,
       onEnter: (onEnter) {
         onHover = true;
         setState(() {
@@ -40,8 +42,9 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
         offset: isTapped ? const Offset(0.04, 0.04) : const Offset(0, 0),
         child: Container(
           decoration: BoxDecoration(
-            border: Border.all(),
+            border: Border.all(color: Colors.black),
             borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
             boxShadow: [
               BoxShadow(
                 color: isTapped ? Colors.transparent : Colors.black,
@@ -49,15 +52,25 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
               ),
             ],
           ),
-          child: MaterialButton(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            onPressed: () {
-              widget.onPressed.call();
+          child: GestureDetector(
+            onTapDown: (event) {
               setState(() {
                 isTapped = true;
+              });
+              widget.onPressed.call();
+            },
+            onTapUp: (event) {
+              setState(() {
+                if (!kIsWeb) {
+                  isTapped = false;
+                }
+              });
+            },
+            onTapCancel: () {
+              setState(() {
+                if (!kIsWeb) {
+                  isTapped = false;
+                }
               });
             },
             child: Padding(
