@@ -1,3 +1,4 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:slide_puzzle/components/character_block.dart';
@@ -97,7 +98,7 @@ class OnboardPage extends StatelessWidget {
                         child: CustomElevatedButton(
                           title: 'start now',
                           onPressed: () {
-                            Navigator.of(context).pushNamed('/difficulties');
+                            context.beamToNamed('/difficulties');
                           },
                         ),
                       )
@@ -198,7 +199,7 @@ class OnboardPage extends StatelessWidget {
                         child: CustomElevatedButton(
                           title: 'start now',
                           onPressed: () {
-                            Navigator.of(context).pushNamed('/difficulties');
+                            context.beamToNamed('/difficulties');
                           },
                         ),
                       )

@@ -1,3 +1,4 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,12 +19,12 @@ class AppHeader extends StatelessWidget {
         child: Row(
           children: [
             Visibility(
-              visible: ModalRoute.of(context)?.settings.name == '/difficulties',
+              visible: context.currentBeamLocation.state.routeInformation.location == '/difficulties',
               child: MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pop();
+                    context.beamToNamed('/');
                   },
                   child: SvgPicture.asset(
                     kIsWeb ? 'icons/arrow.svg' : 'assets/icons/arrow.svg',
@@ -32,13 +33,13 @@ class AppHeader extends StatelessWidget {
               ),
             ),
             Visibility(
-              visible: ModalRoute.of(context)?.settings.name == '/game',
+              visible: context.currentBeamLocation.state.routeInformation.location == '/puzzle',
               child: MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: GestureDetector(
                   onTap: () {
                     showSlideDialog(
-                      context: context, 
+                      context: context,
                       beginOffset: const Offset(-1, 0),
                       child: const SideMenu(),
                     );
@@ -63,7 +64,7 @@ class AppHeader extends StatelessWidget {
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).popUntil(ModalRoute.withName('/'));
+                  context.beamToNamed('/');
                 },
                 child: const Text(
                   'Home',
@@ -75,7 +76,7 @@ class AppHeader extends StatelessWidget {
               ),
             ),
             Visibility(
-              visible: ModalRoute.of(context)?.settings.name == '/game',
+              visible: context.currentBeamLocation.state.routeInformation.location == '/puzzle',
               child: Row(
                 children: [
                   Container(
@@ -91,8 +92,7 @@ class AppHeader extends StatelessWidget {
                     cursor: SystemMouseCursors.click,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.of(context)
-                            .popUntil(ModalRoute.withName('/difficulties'));
+                        context.beamToNamed('/difficulties');
                       },
                       child: const Text(
                         'Difficulty',

@@ -1,3 +1,4 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -58,8 +59,8 @@ class SideMenu extends StatelessWidget {
                       cursor: SystemMouseCursors.click,
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.of(context)
-                              .popUntil(ModalRoute.withName('/'));
+                          Navigator.of(context).pop();
+                          context.beamToNamed('/');
                         },
                         child: const Text(
                           'Home',
@@ -79,8 +80,8 @@ class SideMenu extends StatelessWidget {
                       cursor: SystemMouseCursors.click,
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.of(context)
-                              .popUntil(ModalRoute.withName('/difficulties'));
+                          Navigator.of(context).pop();
+                          context.beamToNamed('/difficulties');
                         },
                         child: const Text(
                           'Difficulty',

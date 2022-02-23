@@ -1,3 +1,4 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
@@ -7,11 +8,33 @@ import 'package:slide_puzzle/screens/game.dart';
 import 'package:slide_puzzle/screens/onboard.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+
+  final routerDelegate = BeamerDelegate(
+    locationBuilder: RoutesLocationBuilder(
+      routes: {
+        '/': (context, state, data) => const BeamPage(
+              key: ValueKey('onboard'),
+              title: 'Welcome',
+              child: OnboardPage(),
+            ),
+        '/difficulties': (context, state, data) => const BeamPage(
+              key: ValueKey('difficulties'),
+              title: 'Difficulties',
+              child: DifficultiesPage(),
+            ),
+        '/puzzle': (context, state, data) => const BeamPage(
+              key: ValueKey('puzzle'),
+              title: 'Puzzle',
+              child: GamePage(),
+            ),
+      },
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +45,14 @@ class MyApp extends StatelessWidget {
             ..add(const PuzzleInitialized(difficulty: PuzzleDifficulty.alpha)),
         ),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         title: 'Slide Puzzle',
-        scrollBehavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-        
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const OnboardPage(),
-          '/difficulties': (context) => const DifficultiesPage(),
-          '/game': (context) => const GamePage(),
-        },
+        scrollBehavior:
+            ScrollConfiguration.of(context).copyWith(scrollbars: false),
+        routeInformationParser: BeamerParser(),
+        routerDelegate: routerDelegate,
+        backButtonDispatcher:
+            BeamerBackButtonDispatcher(delegate: routerDelegate),
       ),
     );
   }

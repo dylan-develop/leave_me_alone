@@ -1,3 +1,4 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
@@ -50,10 +51,8 @@ class DifficultiesPage extends StatelessWidget {
                             vertical: 24,
                           ),
                           onPressed: () {
-                            context
-                                .read<PuzzleBloc>()
-                                .add(PuzzleInitialized(difficulty: difficulty));
-                            Navigator.of(context).pushNamed('/game');
+                            context.read<PuzzleBloc>().add(PuzzleInitialized(difficulty: difficulty));
+                            context.beamToNamed('/puzzle');
                           },
                         ),
                       ),
@@ -104,10 +103,9 @@ class DifficultiesPage extends StatelessWidget {
                               vertical: 24,
                             ),
                             onPressed: () {
-                              context
-                                  .read<PuzzleBloc>()
-                                  .add(PuzzleInitialized(difficulty: difficulty));
-                              Navigator.of(context).pushNamed('/game');
+                              context.read<PuzzleBloc>().add(
+                                  PuzzleInitialized(difficulty: difficulty));
+                              context.beamToNamed('/puzzle');
                             },
                           ),
                         ),
