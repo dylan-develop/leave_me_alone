@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 Future<T?> showScaleDialog<T>({
@@ -43,14 +45,17 @@ Future<T?> showSlideDialog<T>({
           curve: Curves.easeInOut,
         );
 
-        return SlideTransition(
-          position: Tween<Offset>(
-            begin: beginOffset ?? const Offset(0.0, 1.0),
-            end: Offset.zero,
-          ).animate(curvedAnimation),
-          child: FadeTransition(
-            opacity: curvedAnimation,
-            child: widget,
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+          child: SlideTransition(
+            position: Tween<Offset>(
+              begin: beginOffset ?? const Offset(0.0, 1.0),
+              end: Offset.zero,
+            ).animate(curvedAnimation),
+            child: FadeTransition(
+              opacity: curvedAnimation,
+              child: widget,
+            ),
           ),
         );
       },

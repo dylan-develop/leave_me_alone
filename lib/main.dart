@@ -1,4 +1,5 @@
 import 'package:beamer/beamer.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,7 @@ void main() async {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ],
-  ); //
+  );
   runApp(MyApp());
 }
 
@@ -29,16 +30,19 @@ class MyApp extends StatelessWidget {
               key: ValueKey('onboard'),
               title: 'Welcome',
               child: OnboardPage(),
+              type: kIsWeb ? BeamPageType.fadeTransition : BeamPageType.cupertino,
             ),
         '/difficulties': (context, state, data) => const BeamPage(
               key: ValueKey('difficulties'),
               title: 'Difficulties',
               child: DifficultiesPage(),
+              type: kIsWeb ? BeamPageType.fadeTransition : BeamPageType.cupertino,
             ),
         '/puzzle': (context, state, data) => const BeamPage(
               key: ValueKey('puzzle'),
               title: 'Puzzle',
               child: GamePage(),
+              type: kIsWeb ? BeamPageType.fadeTransition : BeamPageType.cupertino,
             ),
       },
     ),

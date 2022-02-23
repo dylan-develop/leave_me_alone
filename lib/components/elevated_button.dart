@@ -7,6 +7,7 @@ class CustomElevatedButton extends StatefulWidget {
   final double fontSize;
   final String fontFamily;
   final EdgeInsets? padding;
+  final Function(bool isHover)? onHoverCallback;
 
   const CustomElevatedButton({
     Key? key,
@@ -15,6 +16,7 @@ class CustomElevatedButton extends StatefulWidget {
     this.fontSize = 24,
     this.fontFamily = 'HandWriting',
     this.padding,
+    this.onHoverCallback,
   }) : super(key: key);
 
   @override
@@ -31,12 +33,14 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
       cursor: SystemMouseCursors.click,
       onEnter: (onEnter) {
         onHover = true;
+        widget.onHoverCallback?.call(true);
         setState(() {
           isTapped = true;
         });
       },
       onExit: (onExit) {
         onHover = false;
+        widget.onHoverCallback?.call(false);
         setState(() {
           isTapped = false;
         });
@@ -49,6 +53,7 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
           setState(() {
             isTapped = true;
           });
+          widget.onHoverCallback?.call(true);
         },
         onTapUp: (event) {
           setState(() {
@@ -56,6 +61,7 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
               isTapped = false;
             }
           });
+          widget.onHoverCallback?.call(false);
         },
         onTapCancel: () {
           setState(() {
@@ -63,6 +69,7 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
               isTapped = false;
             }
           });
+          widget.onHoverCallback?.call(false);
         },
         child: LayoutBuilder(
           builder: (context, constraints) {

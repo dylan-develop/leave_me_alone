@@ -40,7 +40,6 @@ class AppHeader extends StatelessWidget {
                   onTap: () {
                     showSlideDialog(
                       context: context,
-                      beginOffset: const Offset(-1, 0),
                       child: const SideMenu(),
                     );
                   },
