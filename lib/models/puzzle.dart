@@ -4,12 +4,25 @@ import 'package:equatable/equatable.dart';
 import 'package:slide_puzzle/models/position.dart';
 import 'package:slide_puzzle/models/tile.dart';
 
+enum PuzzleDifficulty { alpha, beta, delta }
+
 class Puzzle extends Equatable {
   final List<Tile> tiles;
 
   const Puzzle(this.tiles);
 
   int getDimension() => sqrt(tiles.length).toInt();
+
+  PuzzleDifficulty getDifficulty() {
+    switch (getDimension()) {
+      case 4:
+        return PuzzleDifficulty.beta;
+      case 5:
+        return PuzzleDifficulty.delta;
+      default:
+        return PuzzleDifficulty.alpha;
+    }
+  }
 
   Tile getWhitespaceTile() =>
       tiles.singleWhere((tile) => tile.type == TileType.whitespace);

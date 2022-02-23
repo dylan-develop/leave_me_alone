@@ -21,9 +21,9 @@ class SideSection extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(bottom: 24),
-              child: const Text(
-                'BETA',
-                style: TextStyle(
+              child: Text(
+                context.read<PuzzleBloc>().state.puzzle.getDifficulty().name,
+                style: const TextStyle(
                   fontSize: 96,
                   fontFamily: 'ThinkBig',
                 ),
@@ -43,19 +43,20 @@ class SideSection extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 40),
               child: Wrap(
                 children: [
-                  const Text(
-                    '8 tiles',
-                    style: TextStyle(
-                      fontSize: 36,
-                      fontFamily: 'HandWriting',
-                    ),
-                  ),
-                  Container(
-                    width: 1,
-                    height: 40,
-                    color: Colors.black,
-                    margin: const EdgeInsets.symmetric(horizontal: 32),
-                  ),
+                  // TODO: Add correct tiles number
+                  // const Text(
+                  //   '8 tiles',
+                  //   style: TextStyle(
+                  //     fontSize: 36,
+                  //     fontFamily: 'HandWriting',
+                  //   ),
+                  // ),
+                  // Container(
+                  //   width: 1,
+                  //   height: 40,
+                  //   color: Colors.black,
+                  //   margin: const EdgeInsets.symmetric(horizontal: 32),
+                  // ),
                   Text(
                     '$moves steps',
                     style: const TextStyle(

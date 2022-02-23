@@ -11,103 +11,111 @@ class OnboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ResponsiveLayoutBuilder(
-          mobile: LayoutBuilder(
-            builder: (context, constraints) {
-              return Container(
-                margin: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.2),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 16,
-                        ),
-                        child: const Text(
-                          'LEAVE ME ALONE',
-                          style: TextStyle(
-                            fontSize: 48,
-                            fontFamily: 'ThinkBig',
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Container(
-                        margin: const EdgeInsets.only(
-                          bottom: 72,
-                        ),
-                        child: const Text(
-                          'a stupid game',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontFamily: 'HandWriting',
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                        bottom: 96,
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(
-                                right: 16,
-                              ),
-                              child: const CharacterBlock(
-                                imageUrl: kIsWeb
-                                    ? 'images/charactera.png'
-                                    : 'assets/images/charactera.png',
-                                shakeOnHover: true,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(
-                                left: 16,
-                              ),
-                              child: const CharacterBlock(
-                                imageUrl: kIsWeb
-                                    ? 'images/characterb.png'
-                                    : 'assets/images/characterb.png',
-                                shakeOnHover: true,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                        bottom: 12,
-                      ),
-                      child: CustomElevatedButton(
-                        title: 'start now',
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/game');
-                        },
-                      ),
-                    )
-                  ],
-                ),
-              );
-            },
-          ),
-          desktop: Row(
-            children: [
-              Expanded(
-                child: Container(),
+        mobile: LayoutBuilder(
+          builder: (context, constraints) {
+            return Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: constraints.maxWidth * 0.2,
               ),
-              Expanded(
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                            vertical: 16,
+                          ),
+                          child: const Text(
+                            'LEAVE ME ALONE',
+                            style: TextStyle(
+                              fontSize: 48,
+                              fontFamily: 'ThinkBig',
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                            bottom: 72,
+                          ),
+                          child: const Text(
+                            'a stupid game',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontFamily: 'HandWriting',
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(
+                          bottom: 96,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(
+                                  right: 16,
+                                ),
+                                child: const CharacterBlock(
+                                  imageUrl: kIsWeb
+                                      ? 'images/charactera.png'
+                                      : 'assets/images/charactera.png',
+                                  shakeOnHover: true,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(
+                                  left: 16,
+                                ),
+                                child: const CharacterBlock(
+                                  imageUrl: kIsWeb
+                                      ? 'images/characterb.png'
+                                      : 'assets/images/characterb.png',
+                                  shakeOnHover: true,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(
+                          bottom: 12,
+                        ),
+                        child: CustomElevatedButton(
+                          title: 'start now',
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/difficulties');
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+        desktop: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Container(),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -186,18 +194,20 @@ class OnboardPage extends StatelessWidget {
                       child: CustomElevatedButton(
                         title: 'start now',
                         onPressed: () {
-                          Navigator.of(context).pushNamed('/game');
+                          Navigator.of(context).pushNamed('/difficulties');
                         },
                       ),
                     )
                   ],
                 ),
               ),
-              Expanded(
-                child: Container(),
-              ),
-            ],
-          )),
+            ),
+            Expanded(
+              child: Container(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -12,9 +12,22 @@ part 'puzzle_state.dart';
 class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
   PuzzleBloc() : super(const PuzzleState()) {
     on<PuzzleInitialized>((event, emit) {
+      int dimension = 3;
+
+      switch (event.difficulty) {
+        case PuzzleDifficulty.beta:
+          dimension = 4;
+          break;
+        case PuzzleDifficulty.delta:
+          dimension = 5;
+          break;
+        default:
+          break;
+      }
+
       emit(
         PuzzleState(
-          puzzle:  _generatePuzzle(event.dimension),
+          puzzle: _generatePuzzle(dimension),
           numberOfMoves: 0,
           status: PuzzleStatus.incomplete,
         ),

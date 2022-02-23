@@ -32,19 +32,20 @@ class TopSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                '8 tiles',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontFamily: 'HandWriting',
-                ),
-              ),
-              Container(
-                width: 1,
-                height: 13,
-                color: Colors.black,
-                margin: const EdgeInsets.symmetric(horizontal: 12),
-              ),
+              // TODO: Add correct tiles number
+              // const Text(
+              //   '8 tiles',
+              //   style: TextStyle(
+              //     fontSize: 24,
+              //     fontFamily: 'HandWriting',
+              //   ),
+              // ),
+              // Container(
+              //   width: 1,
+              //   height: 13,
+              //   color: Colors.black,
+              //   margin: const EdgeInsets.symmetric(horizontal: 12),
+              // ),
               Text(
                 '$moves steps',
                 style: const TextStyle(
