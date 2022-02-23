@@ -24,7 +24,7 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      cursor: SystemMouseCursors.alias,
+      cursor: SystemMouseCursors.click,
       onEnter: (onEnter) {
         onHover = true;
         setState(() {
@@ -37,42 +37,42 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
           isTapped = false;
         });
       },
-      child: AnimatedSlide(
-        duration: const Duration(microseconds: 200),
-        offset: isTapped ? const Offset(0.04, 0.04) : const Offset(0, 0),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: isTapped ? Colors.transparent : Colors.black,
-                offset: isTapped ? const Offset(0, 0) : const Offset(4, 4),
-              ),
-            ],
-          ),
-          child: GestureDetector(
-            onTapDown: (event) {
-              setState(() {
-                isTapped = true;
-              });
-              widget.onPressed.call();
-            },
-            onTapUp: (event) {
-              setState(() {
-                if (!kIsWeb) {
-                  isTapped = false;
-                }
-              });
-            },
-            onTapCancel: () {
-              setState(() {
-                if (!kIsWeb) {
-                  isTapped = false;
-                }
-              });
-            },
+      child: GestureDetector(
+        onTapDown: (event) {
+          setState(() {
+            isTapped = true;
+          });
+          widget.onPressed.call();
+        },
+        onTapUp: (event) {
+          setState(() {
+            if (!kIsWeb) {
+              isTapped = false;
+            }
+          });
+        },
+        onTapCancel: () {
+          setState(() {
+            if (!kIsWeb) {
+              isTapped = false;
+            }
+          });
+        },
+        child: AnimatedSlide(
+          duration: const Duration(milliseconds: 200),
+          offset: isTapped ? const Offset(0.04, 0.04) : const Offset(0, 0),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: isTapped ? Colors.transparent : Colors.black,
+                  offset: isTapped ? const Offset(0, 0) : const Offset(4, 4),
+                ),
+              ],
+            ),
             child: Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: 20 * MediaQuery.of(context).size.width / 768,

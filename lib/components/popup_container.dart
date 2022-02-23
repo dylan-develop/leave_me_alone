@@ -41,11 +41,14 @@ class PopupContainer extends StatelessWidget {
                 children: [
                   Align(
                     alignment: Alignment.centerRight,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Icon(Icons.close),
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Icon(Icons.close),
+                      ),
                     ),
                   ),
                   child,
