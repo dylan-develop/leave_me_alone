@@ -20,9 +20,9 @@ class TopSection extends StatelessWidget {
             margin: const EdgeInsets.symmetric(
               horizontal: 12,
             ),
-            child: const Text(
-              'BETA',
-              style: TextStyle(
+            child: Text(
+              context.read<PuzzleBloc>().state.puzzle.getDifficulty().name,
+              style: const TextStyle(
                 fontSize: 32,
                 fontFamily: 'ThinkBig',
               ),

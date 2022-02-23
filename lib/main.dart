@@ -1,5 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
 import 'package:slide_puzzle/models/puzzle.dart';
@@ -7,7 +8,14 @@ import 'package:slide_puzzle/screens/difficulties.dart';
 import 'package:slide_puzzle/screens/game.dart';
 import 'package:slide_puzzle/screens/onboard.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
+  ); //
   runApp(MyApp());
 }
 

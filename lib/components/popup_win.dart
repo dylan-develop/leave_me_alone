@@ -5,6 +5,7 @@ import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
 import 'package:slide_puzzle/components/elevated_button.dart';
 import 'package:slide_puzzle/components/popup_container.dart';
 import 'package:slide_puzzle/components/responsive_layout_builder.dart';
+import 'package:slide_puzzle/models/puzzle.dart';
 
 class WinPopup extends StatelessWidget {
   const WinPopup({Key? key}) : super(key: key);
@@ -49,11 +50,27 @@ class WinPopup extends StatelessWidget {
               Image.asset(
                 kIsWeb ? 'images/mask.png' : 'assets/images/mask.gif',
               ),
-              CustomElevatedButton(
-                title: difficulty != PuzzleStatus.values.last
-                    ? 'Done'
-                    : 'Next level',
-                onPressed: () {},
+              Container(
+                margin: const EdgeInsets.symmetric(
+                  vertical: 32,
+                ),
+                child: CustomElevatedButton(
+                  title: difficulty == PuzzleDifficulty.values.last
+                      ? 'Done'
+                      : 'Next level',
+                  onPressed: () {
+                    if (difficulty != PuzzleDifficulty.values.last) {
+                      context.read<PuzzleBloc>().add(
+                            PuzzleInitialized(
+                              difficulty: PuzzleDifficulty.values[
+                                  PuzzleDifficulty.values.indexOf(difficulty) +
+                                      1],
+                            ),
+                          );
+                    }
+                    Navigator.of(context).pop();
+                  },
+                ),
               ),
             ],
           ),
@@ -92,11 +109,23 @@ class WinPopup extends StatelessWidget {
               Image.asset(
                 kIsWeb ? 'images/mask.png' : 'assets/images/mask.png',
               ),
-              CustomElevatedButton(
-                title: difficulty != PuzzleStatus.values.last
-                    ? 'Done'
-                    : 'Next level',
-                onPressed: () {},
+              Container(
+                margin: const EdgeInsets.only(top: 32, bottom: 56),
+                child: CustomElevatedButton(
+                  title: difficulty == PuzzleStatus.values.last
+                      ? 'Done'
+                      : 'Next level',
+                  onPressed: () {
+                    if (difficulty != PuzzleDifficulty.values.last) {
+                      context.read<PuzzleBloc>().add(PuzzleInitialized(
+                            difficulty: PuzzleDifficulty.values[
+                                PuzzleDifficulty.values.indexOf(difficulty) +
+                                    1],
+                          ));
+                    }
+                    Navigator.of(context).pop();
+                  },
+                ),
               ),
             ],
           ),

@@ -42,11 +42,13 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
         });
       },
       child: GestureDetector(
+        onTap: () {
+          widget.onPressed.call();
+        },
         onTapDown: (event) {
           setState(() {
             isTapped = true;
           });
-          widget.onPressed.call();
         },
         onTapUp: (event) {
           setState(() {
