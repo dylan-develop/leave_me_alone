@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<PuzzleBloc>(
           create: (context) => PuzzleBloc()
             ..add(const PuzzleInitialized(
-              dimension: 3,
+              dimension: 4,
             )),
         ),
       ],

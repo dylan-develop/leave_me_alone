@@ -1,13 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:slide_puzzle/components/responsive_layout_builder.dart';
 
 class SocialDistanceBlock extends StatefulWidget {
-  final double? fontSize;
+  final bool isHints;
 
   const SocialDistanceBlock({
     Key? key,
-    this.fontSize,
+    this.isHints = false,
   }) : super(key: key);
 
   @override
@@ -21,63 +22,75 @@ class _SocialDistanceBlockState extends State<SocialDistanceBlock> {
   Widget build(BuildContext context) {
     return MouseRegion(
       onEnter: (event) {
-        setState(() {
-          onHover = true;
-        });
+        if (!widget.isHints) {
+          setState(() {
+            onHover = true;
+          });
+        }
       },
       onExit: (event) {
-        setState(() {
-          onHover = false;
-        });
+        if (!widget.isHints) {
+          setState(() {
+            onHover = false;
+          });
+        }
       },
       child: Stack(
+        fit: StackFit.expand,
         children: [
           Image.asset(
             kIsWeb
                 ? 'images/social_distance_block.png'
-                : 'assets/images/social_distance_block.png',
+                : 'assets/images/social_distance_block.gif',
           ),
-          Align(
-            alignment: Alignment.center,
-            child: ResponsiveLayoutBuilder(
-              mobile: AnimatedCrossFade(
-                crossFadeState: !onHover ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-                sizeCurve: Curves.decelerate,
-                duration: const Duration(milliseconds: 500),
-                firstChild: Text(
-                  'Leave me alone',
-                  style: TextStyle(
-                    fontFamily: 'ThinkBig',
-                    fontSize: widget.fontSize == null ? 10 : widget.fontSize! - 14,
+          Positioned.fill(
+            child: LayoutBuilder(
+              builder: ((context, constraints) {
+                return FittedBox(
+                  alignment: Alignment.center,
+                  fit: BoxFit.fitWidth,
+                  child: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 500),
+                    opacity: onHover ? 0 : 1,
+                    child: Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: max(constraints.maxWidth * 0.2, 20),
+                      ),
+                      child: const Text(
+                        'Leave me alone',
+                        style: TextStyle(
+                          fontFamily: 'ThinkBig',
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-                secondChild: Text(
-                  '1.5m',
-                  style: TextStyle(
-                    fontFamily: 'HandWriting',
-                    fontSize: widget.fontSize ?? 24,
+                );
+              }),
+            ),
+          ),
+          Positioned.fill(
+            child: LayoutBuilder(
+              builder: ((context, constraints) {
+                return FittedBox(
+                  alignment: Alignment.center,
+                  fit: BoxFit.fitWidth,
+                  child: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 500),
+                    opacity: onHover ? 1 : 0,
+                    child: Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: max(constraints.maxWidth * 0.2, 20),
+                      ),
+                      child: const Text(
+                        '1.5m',
+                        style: TextStyle(
+                          fontFamily: 'HandWriting',
+                        ),
+                      ),
+                    ),
                   ),
-                ), 
-              ),
-              desktop: AnimatedCrossFade(
-                crossFadeState: !onHover ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-                sizeCurve: Curves.decelerate,
-                duration: const Duration(milliseconds: 500),
-                firstChild: Text(
-                  'Leave me alone',
-                  style: TextStyle(
-                    fontFamily: 'ThinkBig',
-                    fontSize: widget.fontSize == null ? 20 : widget.fontSize! - 14,
-                  ),
-                ),
-                secondChild: Text(
-                  '1.5m',
-                  style: TextStyle(
-                    fontFamily: 'HandWriting',
-                    fontSize: widget.fontSize ?? 32,
-                  ),
-                ), 
-              ),
+                );
+              }),
             ),
           ),
         ],

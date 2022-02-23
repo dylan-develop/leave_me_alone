@@ -34,6 +34,7 @@ class HintsPopup extends StatelessWidget {
                       fontSize: constraints.maxWidth > 768 ? 24 : 20,
                       fontFamily: 'HandWriting',
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ],

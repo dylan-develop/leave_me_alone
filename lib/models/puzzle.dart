@@ -59,28 +59,32 @@ class Puzzle extends Equatable {
       if (top.isNotEmpty &&
           top
               .where((tile) =>
-                  tile.type == TileType.whitespace || tile.value % 2 != 0)
+                  tile.type == TileType.whitespace ||
+                  tile.type == TileType.socialDistance)
               .isEmpty) {
         return false;
       }
       if (bottom.isNotEmpty &&
           bottom
               .where((tile) =>
-                  tile.type == TileType.whitespace || tile.value % 2 != 0)
+                  tile.type == TileType.whitespace ||
+                  tile.type == TileType.socialDistance)
               .isEmpty) {
         return false;
       }
       if (left.isNotEmpty &&
           left
               .where((tile) =>
-                  tile.type == TileType.whitespace || tile.value % 2 != 0)
+                  tile.type == TileType.whitespace ||
+                  tile.type == TileType.socialDistance)
               .isEmpty) {
         return false;
       }
       if (right.isNotEmpty &&
           right
               .where((tile) =>
-                  tile.type == TileType.whitespace || tile.value % 2 != 0)
+                  tile.type == TileType.whitespace ||
+                  tile.type == TileType.socialDistance)
               .isEmpty) {
         return false;
       }

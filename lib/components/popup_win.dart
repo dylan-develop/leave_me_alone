@@ -35,7 +35,7 @@ class WinPopup extends StatelessWidget {
                 ),
               ),
               Image.asset(
-                kIsWeb ? 'images/mask.png' : 'assets/images/mask.png',
+                kIsWeb ? 'images/mask.png' : 'assets/images/mask.gif',
               ),
             ],
           ),

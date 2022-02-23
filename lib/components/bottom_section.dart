@@ -24,7 +24,7 @@ class BottomSection extends StatelessWidget {
           CustomElevatedButton(
             title: 'Hint',
             onPressed: () {
-              showScaleDialog(
+              showSlideDialog(
                 context: context,
                 child: const HintsPopup(),
               );

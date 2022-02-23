@@ -46,12 +46,12 @@ class _CharacterBlockState extends State<CharacterBlock>
     return MouseRegion(
       onEnter: (event) {
         if (!widget.isHints) {
-          controller.forward();
+          // controller.forward();
         }
       },
       onExit: (event) {
         if (!widget.isHints) {
-          controller.stop();
+          // controller.stop();
         }
       },
       child: AnimatedBuilder(
@@ -62,7 +62,7 @@ class _CharacterBlockState extends State<CharacterBlock>
               child: Image.asset(
                 kIsWeb
                     ? 'images/character0.png'
-                    : 'assets/images/character0.png',
+                    : 'assets/images/character0.gif',
               ),
             );
           }),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slide_puzzle/components/responsive_layout_builder.dart';
 
 Future<T?> showScaleDialog<T>({
   required BuildContext context,
@@ -42,14 +43,26 @@ Future<T?> showSlideDialog<T>({
           curve: Curves.easeInOut,
         );
 
-        return SlideTransition(
-          position: Tween<Offset>(
-            begin: const Offset(-1.0, 0.0),
-            end: Offset.zero,
-          ).animate(curvedAnimation),
-          child: FadeTransition(
-            opacity: curvedAnimation,
-            child: widget,
+        return ResponsiveLayoutBuilder(
+          mobile: SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(0.0, 1.0),
+              end: Offset.zero,
+            ).animate(curvedAnimation),
+            child: FadeTransition(
+              opacity: curvedAnimation,
+              child: widget,
+            ),
+          ),
+          desktop: SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(-1.0, 0.0),
+              end: Offset.zero,
+            ).animate(curvedAnimation),
+            child: FadeTransition(
+              opacity: curvedAnimation,
+              child: widget,
+            ),
           ),
         );
       },

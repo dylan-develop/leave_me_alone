@@ -22,7 +22,7 @@ class GamePage extends StatelessWidget {
         listener: (context, state) {
           if (state.status == PuzzleStatus.complete) {
             Future.delayed(const Duration(milliseconds: 800), () {
-              showScaleDialog(
+              showSlideDialog(
                 context: context,
                 child: const WinPopup(),
               );

@@ -41,7 +41,7 @@ class PuzzleTile extends StatelessWidget {
             dimension: dimension,
             child: tile.type == TileType.character
                 ? CharacterBlock(isHints: isHints)
-                : SocialDistanceBlock(fontSize: isHints ? 24 : null),
+                : SocialDistanceBlock(isHints: isHints),
           ),
         ),
       ),
