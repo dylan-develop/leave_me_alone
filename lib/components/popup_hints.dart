@@ -21,7 +21,7 @@ class HintsPopup extends StatelessWidget {
                   child: Text(
                     'YOUR HINT',
                     style: TextStyle(
-                      fontSize: constraints.maxWidth > 768 ? 36 : 32,
+                      fontSize: constraints.maxWidth > 1024 ? 36 : 32,
                       fontFamily: 'ThinkBig',
                     ),
                   ),
@@ -31,7 +31,7 @@ class HintsPopup extends StatelessWidget {
                   child: Text(
                     'psst.....There is more than one way to win',
                     style: TextStyle(
-                      fontSize: constraints.maxWidth > 768 ? 24 : 20,
+                      fontSize: constraints.maxWidth > 1024 ? 24 : 20,
                       fontFamily: 'HandWriting',
                     ),
                     textAlign: TextAlign.center,

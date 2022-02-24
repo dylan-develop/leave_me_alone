@@ -57,10 +57,11 @@ class _SocialDistanceBlockState extends State<SocialDistanceBlock> {
                         horizontal: max(constraints.maxWidth * 0.2, 20),
                       ),
                       child: const Text(
-                        'Leave me alone',
+                        'Leave me \nalone',
                         style: TextStyle(
                           fontFamily: 'ThinkBig',
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),

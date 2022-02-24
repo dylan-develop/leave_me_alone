@@ -50,16 +50,15 @@ class WinPopup extends StatelessWidget {
               Image.asset(
                 kIsWeb ? 'images/mask.png' : 'assets/images/mask.gif',
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(
-                  vertical: 32,
-                ),
-                child: CustomElevatedButton(
-                  title: difficulty == PuzzleDifficulty.values.last
-                      ? 'Done'
-                      : 'Next level',
-                  onPressed: () {
-                    if (difficulty != PuzzleDifficulty.values.last) {
+              Visibility(
+                visible: difficulty != PuzzleStatus.values.last,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 16,
+                  ),
+                  child: CustomElevatedButton(
+                    title: 'Next level',
+                    onPressed: () {
                       context.read<PuzzleBloc>().add(
                             PuzzleInitialized(
                               difficulty: PuzzleDifficulty.values[
@@ -67,9 +66,35 @@ class WinPopup extends StatelessWidget {
                                       1],
                             ),
                           );
-                    }
-                    Navigator.of(context).pop();
-                  },
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(vertical: 16),
+                  child: CustomElevatedButton(
+                    title: 'Play again',
+                    onPressed: () {
+                      context.read<PuzzleBloc>().add(PuzzleReset());
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: difficulty == PuzzleStatus.values.last,
+                child: Center(
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 16),
+                    child: CustomElevatedButton(
+                      title: 'Done',
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -106,25 +131,60 @@ class WinPopup extends StatelessWidget {
                   ),
                 ),
               ),
-              Image.asset(
-                kIsWeb ? 'images/mask.png' : 'assets/images/mask.png',
+              Expanded(
+                child: Image.asset(
+                  kIsWeb ? 'images/mask.png' : 'assets/images/mask.png',
+                ),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 32, bottom: 56),
-                child: CustomElevatedButton(
-                  title: difficulty == PuzzleStatus.values.last
-                      ? 'Done'
-                      : 'Next level',
-                  onPressed: () {
-                    if (difficulty != PuzzleDifficulty.values.last) {
-                      context.read<PuzzleBloc>().add(PuzzleInitialized(
-                            difficulty: PuzzleDifficulty.values[
-                                PuzzleDifficulty.values.indexOf(difficulty) +
-                                    1],
-                          ));
-                    }
-                    Navigator.of(context).pop();
-                  },
+              Visibility(
+                visible: difficulty != PuzzleStatus.values.last,
+                child: Center(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 16),
+                    child: CustomElevatedButton(
+                      title: 'Next level',
+                      fontSize: 36,
+                      padding: const EdgeInsets.symmetric(horizontal: 72),
+                      onPressed: () {
+                        context.read<PuzzleBloc>().add(PuzzleInitialized(
+                              difficulty: PuzzleDifficulty.values[
+                                  PuzzleDifficulty.values.indexOf(difficulty) +
+                                      1],
+                            ));
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(vertical: 16),
+                  child: CustomElevatedButton(
+                    title: 'Play again',
+                    fontSize: 36,
+                    padding: const EdgeInsets.symmetric(horizontal: 72),
+                    onPressed: () {
+                      context.read<PuzzleBloc>().add(PuzzleReset());
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: difficulty == PuzzleStatus.values.last,
+                child: Center(
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 16),
+                    child: CustomElevatedButton(
+                      title: 'Done',
+                      fontSize: 36,
+                      padding: const EdgeInsets.symmetric(horizontal: 72),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
                 ),
               ),
             ],

@@ -41,6 +41,7 @@ class AppHeader extends StatelessWidget {
                     showSlideDialog(
                       context: context,
                       child: const SideMenu(),
+                      beginOffset: const Offset(-1, 0),
                     );
                   },
                   child: SvgPicture.asset(

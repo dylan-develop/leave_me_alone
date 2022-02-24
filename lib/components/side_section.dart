@@ -4,20 +4,26 @@ import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
 import 'package:slide_puzzle/components/elevated_button.dart';
 import 'package:slide_puzzle/components/popup_hints.dart';
 import 'package:slide_puzzle/helpers/modal_helper.dart';
+import 'package:slide_puzzle/models/puzzle.dart';
 
 class SideSection extends StatelessWidget {
   const SideSection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final puzzle = context.select((PuzzleBloc bloc) => bloc.state.puzzle);
+    final status = context.select((PuzzleBloc bloc) => bloc.state.status);
     final moves = context.select((PuzzleBloc bloc) => bloc.state.numberOfMoves);
+
+    bool _hasNext = status == PuzzleStatus.complete &&
+        puzzle.getDifficulty() != PuzzleDifficulty.values.last;
 
     return Container(
       margin: const EdgeInsets.all(12),
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
               margin: const EdgeInsets.only(bottom: 24),
@@ -32,7 +38,7 @@ class SideSection extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(bottom: 40),
               child: const Text(
-                'separate everyone with the 1.5m blocks',
+                'separate everyone with the blocks to win',
                 style: TextStyle(
                   fontSize: 36,
                   fontFamily: 'HandWriting',
@@ -44,19 +50,21 @@ class SideSection extends StatelessWidget {
               child: Wrap(
                 children: [
                   // TODO: Add correct tiles number
-                  // const Text(
-                  //   '8 tiles',
-                  //   style: TextStyle(
-                  //     fontSize: 36,
-                  //     fontFamily: 'HandWriting',
-                  //   ),
-                  // ),
-                  // Container(
-                  //   width: 1,
-                  //   height: 40,
-                  //   color: Colors.black,
-                  //   margin: const EdgeInsets.symmetric(horizontal: 32),
-                  // ),
+                  /*
+                  const Text(
+                    '8 tiles',
+                    style: TextStyle(
+                      fontSize: 36,
+                      fontFamily: 'HandWriting',
+                    ),
+                  ),
+                  Container(
+                    width: 1,
+                    height: 40,
+                    color: Colors.black,
+                    margin: const EdgeInsets.symmetric(horizontal: 32),
+                  ),
+                  */
                   Text(
                     '$moves steps',
                     style: const TextStyle(
@@ -68,24 +76,52 @@ class SideSection extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(bottom: 40),
+              alignment: Alignment.centerLeft,
+              margin: const EdgeInsets.only(
+                bottom: 48,
+              ),
               child: CustomElevatedButton(
-                key: UniqueKey(),
-                title: 'Shuffle',
+                title: _hasNext ? 'Again' : 'Hint',
                 fontSize: 36,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 3,
+                  horizontal: 52,
+                ),
                 onPressed: () {
-                  context.read<PuzzleBloc>().add(PuzzleReset());
+                  if (_hasNext) {
+                    context.read<PuzzleBloc>().add(PuzzleReset());
+                  } else {
+                    showSlideDialog(
+                      context: context,
+                      child: const HintsPopup(),
+                      beginOffset: const Offset(-1, 0),
+                    );
+                  }
                 },
               ),
             ),
-            CustomElevatedButton(
-              title: 'Hint',
-              fontSize: 36,
-              onPressed: () {
-                showSlideDialog(
-                  context: context,
-                  child: const HintsPopup(),
-                  beginOffset: const Offset(-1 , 0),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                return Container(
+                  alignment: Alignment.centerLeft,
+                  child: CustomElevatedButton(
+                    title: _hasNext ? 'Next level' : 'Shuffle',
+                    fontSize: 36,
+                    padding: EdgeInsets.symmetric(
+                      vertical: 3,
+                      horizontal: constraints.maxWidth * 0.6 / 2,
+                    ),
+                    onPressed: () {
+                      if (_hasNext) {
+                        context.read<PuzzleBloc>().add(PuzzleInitialized(
+                            difficulty: PuzzleDifficulty.values[PuzzleDifficulty
+                                .values
+                                .indexOf(puzzle.getDifficulty())]));
+                      } else {
+                        context.read<PuzzleBloc>().add(PuzzleReset());
+                      }
+                    },
+                  ),
                 );
               },
             ),

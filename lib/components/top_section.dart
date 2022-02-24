@@ -9,39 +9,41 @@ class TopSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final moves = context.select((PuzzleBloc bloc) => bloc.state.numberOfMoves);
 
-    return Container(
-      margin: const EdgeInsets.symmetric(
-        vertical: 12,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 12,
-            ),
-            child: Text(
-              context.read<PuzzleBloc>().state.puzzle.getDifficulty().name,
-              style: const TextStyle(
-                fontSize: 32,
-                fontFamily: 'ThinkBig',
-              ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 12,
+          ),
+          child: Text(
+            context.read<PuzzleBloc>().state.puzzle.getDifficulty().name,
+            style: const TextStyle(
+              fontSize: 32,
+              fontFamily: 'ThinkBig',
             ),
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 12,
-            ),
-            child: const Text(
-              'separate everyone with the 1.5m blocks',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'HandWriting',
-              ),
-              textAlign: TextAlign.center,
-            ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 12
           ),
-          Row(
+          child: const Text(
+            'separate everyone with the 1.5m blocks',
+            style: TextStyle(
+              fontSize: 20,
+              fontFamily: 'HandWriting',
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 12
+          ),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // TODO: Add correct tiles number
@@ -61,14 +63,14 @@ class TopSection extends StatelessWidget {
               Text(
                 '$moves steps',
                 style: const TextStyle(
-                  fontSize: 24,
+                  fontSize: 20,
                   fontFamily: 'HandWriting',
                 ),
               ),
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
