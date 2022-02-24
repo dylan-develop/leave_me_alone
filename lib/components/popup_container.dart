@@ -65,7 +65,7 @@ class PopupContainer extends StatelessWidget {
         ),
       ),
       desktop: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 96),
+        margin: const EdgeInsets.symmetric(horizontal: 144),
         child: Row(
           children: [
             Expanded(

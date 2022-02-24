@@ -35,13 +35,23 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
   bool isTapped = false;
 
   @override
-  void didChangeDependencies() {
-    offset = MediaQuery.of(context).size.width > 1024 ? 8 : 4;
+  void initState() {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       final buttonRenderBox = _buttonKey.currentContext?.findRenderObject() as RenderBox?;
       deltaX = offset / (buttonRenderBox?.size.width ?? 1);
       deltaY = offset / (buttonRenderBox?.size.height ?? 1);
     });
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    offset = MediaQuery.of(context).size.width > 1024 ? 8 : 4;
+    // WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    //   final buttonRenderBox = _buttonKey.currentContext?.findRenderObject() as RenderBox?;
+    //   deltaX = offset / (buttonRenderBox?.size.width ?? 1);
+    //   deltaY = offset / (buttonRenderBox?.size.height ?? 1);
+    // });
     super.didChangeDependencies();
   }
 
@@ -75,17 +85,13 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
         },
         onTapUp: (event) {
           setState(() {
-            if (!kIsWeb) {
-              isTapped = false;
-            }
+            isTapped = false;
           });
           widget.onHoverCallback?.call(false);
         },
         onTapCancel: () {
           setState(() {
-            if (!kIsWeb) {
-              isTapped = false;
-            }
+            isTapped = false;
           });
           widget.onHoverCallback?.call(false);
         },

@@ -11,17 +11,18 @@ class PageContainer extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-          child: Stack(
-        children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 64),
-              child: child,
+        child: Stack(
+          children: [
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 64),
+                child: child,
+              ),
             ),
-          ),
-          const AppHeader(),
-        ],
-      )),
+            const AppHeader(),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -18,7 +18,10 @@ class BottomSection extends StatelessWidget {
         puzzle.getDifficulty() != PuzzleDifficulty.values.last;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 32),
+      padding: const EdgeInsets.symmetric(
+        vertical: 32,
+        horizontal: 32,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [

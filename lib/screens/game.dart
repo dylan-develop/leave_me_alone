@@ -32,8 +32,12 @@ class GamePage extends StatelessWidget {
         child: ResponsiveLayoutBuilder(
           mobile: Column(
             children: [
-              const TopSection(),
+              const Expanded(
+                flex: 4,
+                child: TopSection(),
+              ),
               Expanded(
+                flex: 10,
                 child: LayoutBuilder(
                   builder: (context, constraints) {
                     return Center(
@@ -47,7 +51,10 @@ class GamePage extends StatelessWidget {
                   },
                 ),
               ),
-              const BottomSection()
+              const Expanded(
+                flex: 3,
+                child: BottomSection(),
+              )
             ],
           ),
           desktop: Container(
@@ -71,7 +78,7 @@ class GamePage extends StatelessWidget {
                           dimenision: min(
                             constraints.maxWidth,
                             constraints.maxHeight,
-                          ),
+                          ) - 16 * 2,
                         ),
                       );
                     },
