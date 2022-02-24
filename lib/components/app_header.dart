@@ -27,7 +27,7 @@ class AppHeader extends StatelessWidget {
                     context.beamToNamed('/');
                   },
                   child: SvgPicture.asset(
-                    kIsWeb ? 'icons/arrow.svg' : 'assets/icons/arrow.svg',
+                    'assets/icons/arrow.svg',
                   ),
                 ),
               ),
@@ -45,7 +45,7 @@ class AppHeader extends StatelessWidget {
                     );
                   },
                   child: SvgPicture.asset(
-                    kIsWeb ? 'icons/menu.svg' : 'assets/icons/menu.svg',
+                    'assets/icons/menu.svg',
                   ),
                 ),
               ),

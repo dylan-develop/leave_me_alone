@@ -48,7 +48,7 @@ class WinPopup extends StatelessWidget {
                 ),
               ),
               Image.asset(
-                kIsWeb ? 'images/mask.png' : 'assets/images/mask.gif',
+                kIsWeb ? 'assets/images/mask.png' : 'assets/images/mask.gif',
               ),
               Visibility(
                 visible: difficulty != PuzzleStatus.values.last,
@@ -133,7 +133,7 @@ class WinPopup extends StatelessWidget {
               ),
               Expanded(
                 child: Image.asset(
-                  kIsWeb ? 'images/mask.png' : 'assets/images/mask.png',
+                  kIsWeb ? 'assets/images/mask.png' : 'assets/images/mask.gif',
                 ),
               ),
               Visibility(

@@ -76,9 +76,7 @@ class OnboardPage extends StatelessWidget {
                           const Expanded(
                             child: CharacterBlock(
                               shakeOnHover: true,
-                              imageUrl: kIsWeb
-                                  ? 'images/charactera.png'
-                                  : 'assets/images/charactera.png',
+                              imageUrl: 'assets/images/charactera.png',
                             ),
                           ),
                           ResponsiveLayoutBuilder(
@@ -88,9 +86,7 @@ class OnboardPage extends StatelessWidget {
                           const Expanded(
                             child: CharacterBlock(
                               shakeOnHover: true,
-                              imageUrl: kIsWeb
-                                  ? 'images/characterb.png'
-                                  : 'assets/images/characterb.png',
+                              imageUrl: 'assets/images/characterb.png',
                             ),
                           ),
                         ],

@@ -40,7 +40,7 @@ class _SocialDistanceBlockState extends State<SocialDistanceBlock> {
         children: [
           Image.asset(
             kIsWeb
-                ? 'images/social_distance_block.png'
+                ? 'assets/images/social_distance_block.png'
                 : 'assets/images/social_distance_block.gif',
           ),
           Positioned.fill(
