@@ -1,5 +1,4 @@
 import 'package:beamer/beamer.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:leave_me_alone/components/character_block.dart';
 import 'package:leave_me_alone/components/elevated_button.dart';

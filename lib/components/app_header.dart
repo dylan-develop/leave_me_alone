@@ -1,5 +1,4 @@
 import 'package:beamer/beamer.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:leave_me_alone/components/responsive_layout_builder.dart';
