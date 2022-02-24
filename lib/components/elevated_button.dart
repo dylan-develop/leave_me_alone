@@ -57,6 +57,7 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
 
   @override
   Widget build(BuildContext context) {
+    return Container();
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (onEnter) {
