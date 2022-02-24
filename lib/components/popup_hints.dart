@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:slide_puzzle/components/popup_container.dart';
-import 'package:slide_puzzle/components/puzzle_board.dart';
+import 'package:leave_me_alone/components/popup_container.dart';
+import 'package:leave_me_alone/components/puzzle_board.dart';
 
 class HintsPopup extends StatelessWidget {
   const HintsPopup({Key? key}) : super(key: key);

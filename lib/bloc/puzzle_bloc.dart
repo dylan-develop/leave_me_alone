@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:slide_puzzle/models/position.dart';
-import 'package:slide_puzzle/models/puzzle.dart';
-import 'package:slide_puzzle/models/tile.dart';
+import 'package:leave_me_alone/models/position.dart';
+import 'package:leave_me_alone/models/puzzle.dart';
+import 'package:leave_me_alone/models/tile.dart';
 
 part 'puzzle_event.dart';
 part 'puzzle_state.dart';

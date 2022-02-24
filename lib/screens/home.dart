@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
-import 'package:slide_puzzle/components/puzzle_board.dart';
+import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
+import 'package:leave_me_alone/components/puzzle_board.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

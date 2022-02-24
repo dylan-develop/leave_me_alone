@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
-import 'package:slide_puzzle/components/character_block.dart';
-import 'package:slide_puzzle/components/social_distance_block.dart';
-import 'package:slide_puzzle/models/tile.dart';
+import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
+import 'package:leave_me_alone/components/character_block.dart';
+import 'package:leave_me_alone/components/social_distance_block.dart';
+import 'package:leave_me_alone/models/tile.dart';
 
 class PuzzleTile extends StatelessWidget {
   final Tile tile;

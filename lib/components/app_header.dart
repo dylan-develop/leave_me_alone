@@ -2,9 +2,9 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:slide_puzzle/components/responsive_layout_builder.dart';
-import 'package:slide_puzzle/components/side_menu.dart';
-import 'package:slide_puzzle/helpers/modal_helper.dart';
+import 'package:leave_me_alone/components/responsive_layout_builder.dart';
+import 'package:leave_me_alone/components/side_menu.dart';
+import 'package:leave_me_alone/helpers/modal_helper.dart';
 
 class AppHeader extends StatelessWidget {
   const AppHeader({Key? key}) : super(key: key);

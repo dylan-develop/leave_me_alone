@@ -1,9 +1,9 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:slide_puzzle/components/character_block.dart';
-import 'package:slide_puzzle/components/elevated_button.dart';
-import 'package:slide_puzzle/components/responsive_layout_builder.dart';
+import 'package:leave_me_alone/components/character_block.dart';
+import 'package:leave_me_alone/components/elevated_button.dart';
+import 'package:leave_me_alone/components/responsive_layout_builder.dart';
 
 class OnboardPage extends StatelessWidget {
   const OnboardPage({Key? key}) : super(key: key);

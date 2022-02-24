@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:slide_puzzle/models/position.dart';
+import 'package:leave_me_alone/models/position.dart';
 
 enum TileType { character, socialDistance, whitespace }
 

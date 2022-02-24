@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
-import 'package:slide_puzzle/components/elevated_button.dart';
-import 'package:slide_puzzle/components/popup_hints.dart';
-import 'package:slide_puzzle/helpers/modal_helper.dart';
-import 'package:slide_puzzle/models/puzzle.dart';
+import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
+import 'package:leave_me_alone/components/elevated_button.dart';
+import 'package:leave_me_alone/components/popup_hints.dart';
+import 'package:leave_me_alone/helpers/modal_helper.dart';
+import 'package:leave_me_alone/models/puzzle.dart';
 
 class SideSection extends StatelessWidget {
   const SideSection({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:equatable/equatable.dart';
-import 'package:slide_puzzle/models/position.dart';
-import 'package:slide_puzzle/models/tile.dart';
+import 'package:leave_me_alone/models/position.dart';
+import 'package:leave_me_alone/models/tile.dart';
 
 enum PuzzleDifficulty { alpha, beta, delta }
 

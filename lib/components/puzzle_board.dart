@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
-import 'package:slide_puzzle/components/puzzle_tile.dart';
-import 'package:slide_puzzle/models/puzzle.dart';
+import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
+import 'package:leave_me_alone/components/puzzle_tile.dart';
+import 'package:leave_me_alone/models/puzzle.dart';
 
 class PuzzleBoard extends StatelessWidget {
   final double dimenision;

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:slide_puzzle/components/simple_puzzle_tile.dart';
+import 'package:leave_me_alone/components/simple_puzzle_tile.dart';
 
 class SimplePuzzleBoard extends StatefulWidget {
   const SimplePuzzleBoard({Key? key}) : super(key: key);

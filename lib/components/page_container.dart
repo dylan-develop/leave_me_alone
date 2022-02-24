@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:slide_puzzle/components/app_header.dart';
+import 'package:leave_me_alone/components/app_header.dart';
 
 class PageContainer extends StatelessWidget {
   final Widget child;

@@ -2,15 +2,15 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
-import 'package:slide_puzzle/components/bottom_section.dart';
-import 'package:slide_puzzle/components/page_container.dart';
-import 'package:slide_puzzle/components/popup_win.dart';
-import 'package:slide_puzzle/components/puzzle_board.dart';
-import 'package:slide_puzzle/components/responsive_layout_builder.dart';
-import 'package:slide_puzzle/components/side_section.dart';
-import 'package:slide_puzzle/components/top_section.dart';
-import 'package:slide_puzzle/helpers/modal_helper.dart';
+import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
+import 'package:leave_me_alone/components/bottom_section.dart';
+import 'package:leave_me_alone/components/page_container.dart';
+import 'package:leave_me_alone/components/popup_win.dart';
+import 'package:leave_me_alone/components/puzzle_board.dart';
+import 'package:leave_me_alone/components/responsive_layout_builder.dart';
+import 'package:leave_me_alone/components/side_section.dart';
+import 'package:leave_me_alone/components/top_section.dart';
+import 'package:leave_me_alone/helpers/modal_helper.dart';
 
 class GamePage extends StatelessWidget {
   const GamePage({Key? key}) : super(key: key);

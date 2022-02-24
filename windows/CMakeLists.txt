@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(slide_puzzle LANGUAGES CXX)
+project(leave_me_alone LANGUAGES CXX)
 
-set(BINARY_NAME "slide_puzzle")
+set(BINARY_NAME "leave_me_alone")
 
 cmake_policy(SET CMP0063 NEW)
 

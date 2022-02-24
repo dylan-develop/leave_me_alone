@@ -1,4 +1,4 @@
-package com.example.slide_puzzle
+package com.example.leave_me_alone
 
 import io.flutter.embedding.android.FlutterActivity
 

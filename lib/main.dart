@@ -3,11 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slide_puzzle/bloc/puzzle_bloc.dart';
-import 'package:slide_puzzle/models/puzzle.dart';
-import 'package:slide_puzzle/screens/difficulties.dart';
-import 'package:slide_puzzle/screens/game.dart';
-import 'package:slide_puzzle/screens/onboard.dart';
+import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
+import 'package:leave_me_alone/models/puzzle.dart';
+import 'package:leave_me_alone/screens/difficulties.dart';
+import 'package:leave_me_alone/screens/game.dart';
+import 'package:leave_me_alone/screens/onboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp.router(
-        title: 'Slide Puzzle',
+        title: 'Leave Me Alone',
         scrollBehavior:
             ScrollConfiguration.of(context).copyWith(scrollbars: false),
         routeInformationParser: BeamerParser(),
