@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
 import 'package:leave_me_alone/components/app_elevated_button.dart';
-import 'package:leave_me_alone/components/elevated_button.dart';
 import 'package:leave_me_alone/components/popup_hints.dart';
 import 'package:leave_me_alone/helpers/modal_helper.dart';
 import 'package:leave_me_alone/models/puzzle.dart';

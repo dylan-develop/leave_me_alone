@@ -18,8 +18,7 @@ class PopupContainer extends StatelessWidget {
     return ResponsiveLayoutBuilder(
       mobile: Center(
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 18),
-          padding: const EdgeInsets.all(30),
+          padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
             border: Border.all(),
             borderRadius: BorderRadius.circular(10),
@@ -77,7 +76,9 @@ class PopupContainer extends StatelessWidget {
               child: Center(
                 child: Container(
                   decoration: BoxDecoration(
-                    border: Border.all(),
+                    border: Border.all(
+                      width: 2
+                    ),
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
                     boxShadow: const [
