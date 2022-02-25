@@ -16,8 +16,7 @@ class SideSection extends StatelessWidget {
     final status = context.select((PuzzleBloc bloc) => bloc.state.status);
     final moves = context.select((PuzzleBloc bloc) => bloc.state.numberOfMoves);
 
-    bool _hasNext = status == PuzzleStatus.complete &&
-        puzzle.getDifficulty() != PuzzleDifficulty.values.last;
+    bool _hasNextLevel = puzzle.getDifficulty() != PuzzleDifficulty.values.last;
 
     return Container(
       margin: const EdgeInsets.all(12),
@@ -50,22 +49,6 @@ class SideSection extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 40),
               child: Wrap(
                 children: [
-                  // TODO: Add correct tiles number
-                  /*
-                  const Text(
-                    '8 tiles',
-                    style: TextStyle(
-                      fontSize: 36,
-                      fontFamily: 'HandWriting',
-                    ),
-                  ),
-                  Container(
-                    width: 1,
-                    height: 40,
-                    color: Colors.black,
-                    margin: const EdgeInsets.symmetric(horizontal: 32),
-                  ),
-                  */
                   AnimatedOpacity(
                     opacity: status == PuzzleStatus.complete ? 1 : 0,
                     duration: const Duration(milliseconds: 500),
@@ -96,14 +79,14 @@ class SideSection extends StatelessWidget {
                 bottom: 48,
               ),
               child: CustomElevatedButton(
-                title: _hasNext ? 'Again' : 'Hint',
+                title: _hasNextLevel ? 'Again' : 'Hint',
                 fontSize: 36,
                 padding: const EdgeInsets.symmetric(
                   vertical: 3,
                   horizontal: 52,
                 ),
                 onPressed: () {
-                  if (_hasNext) {
+                  if (_hasNextLevel) {
                     context.read<PuzzleBloc>().add(PuzzleReset());
                   } else {
                     showSlideDialog(
@@ -119,14 +102,14 @@ class SideSection extends StatelessWidget {
                 return Container(
                   alignment: Alignment.centerLeft,
                   child: CustomElevatedButton(
-                    title: _hasNext ? 'Next level' : 'Shuffle',
+                    title: _hasNextLevel ? 'Next level' : 'Shuffle',
                     fontSize: 36,
                     padding: EdgeInsets.symmetric(
                       vertical: 3,
                       horizontal: constraints.maxWidth * 0.6 / 2,
                     ),
                     onPressed: () {
-                      if (_hasNext) {
+                      if (_hasNextLevel) {
                         context.read<PuzzleBloc>().add(PuzzleInitialized(
                             difficulty: PuzzleDifficulty.values[PuzzleDifficulty
                                 .values

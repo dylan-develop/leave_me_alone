@@ -16,10 +16,10 @@ class ResponsiveLayoutBuilder extends StatelessWidget {
       builder: (context, constraints) {
         final screenWidth = MediaQuery.of(context).size.width;
 
-        if (screenWidth <= 1024) {
+        if (screenWidth <= 768) {
           return mobile;
         }
-        if (screenWidth > 1024) {
+        if (screenWidth > 768) {
           return desktop;
         }
 

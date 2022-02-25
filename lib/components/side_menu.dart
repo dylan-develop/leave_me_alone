@@ -43,9 +43,7 @@ class SideMenu extends StatelessWidget {
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: SvgPicture.asset(
-                            kIsWeb
-                                ? 'icons/delete.svg'
-                                : 'assets/icons/delete.svg',
+                            'assets/icons/delete.svg',
                           ),
                         ),
                       ),

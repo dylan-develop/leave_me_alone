@@ -14,19 +14,18 @@ class BottomSection extends StatelessWidget {
     final puzzle = context.select((PuzzleBloc bloc) => bloc.state.puzzle);
     final status = context.select((PuzzleBloc bloc) => bloc.state.status);
 
-    bool _hasNext = status == PuzzleStatus.complete &&
-        puzzle.getDifficulty() != PuzzleDifficulty.values.last;
+    bool _hasNextLevel = puzzle.getDifficulty() != PuzzleDifficulty.values.last;
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           AnimatedOpacity(
-            opacity: _hasNext ? 1 : 0,
+            opacity: _hasNextLevel && status == PuzzleStatus.complete ? 1 : 0,
             duration: const Duration(milliseconds: 300),
             child: Visibility(
-              visible: _hasNext,
+              visible: _hasNextLevel && status == PuzzleStatus.complete,
               child: AppElevatedButton(
                 width: 136,
                 height: 40,
@@ -53,14 +52,11 @@ class BottomSection extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            width: 36 * MediaQuery.of(context).size.width / 375,
-          ),
           AnimatedOpacity(
-            opacity: _hasNext ? 1 : 0,
+            opacity: status == PuzzleStatus.complete ? 1 : 0,
             duration: const Duration(milliseconds: 300),
             child: Visibility(
-              visible: _hasNext,
+              visible: status == PuzzleStatus.complete,
               child: AppElevatedButton(
                 width: 136,
                 height: 40,
