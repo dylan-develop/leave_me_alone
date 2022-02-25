@@ -101,7 +101,7 @@ class SideSection extends StatelessWidget {
                 bottom: 48,
               ),
               child: AppElevatedButton(
-                width: status == PuzzleStatus.complete && _hasNextLevel ? 200 : 296,
+                width: status == PuzzleStatus.complete ? _hasNextLevel ? 200 : 0 : 296,
                 height: 56,
                 title: status == PuzzleStatus.complete && _hasNextLevel ? 'Next level' : 'Shuffle',
                 fontSize: 36,

@@ -16,76 +16,52 @@ class BottomSection extends StatelessWidget {
 
     bool _hasNextLevel = puzzle.getDifficulty() != PuzzleDifficulty.values.last;
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          AnimatedOpacity(
-            opacity: _hasNextLevel && status == PuzzleStatus.complete ? 1 : 0,
-            duration: const Duration(milliseconds: 300),
-            child: Visibility(
-              visible: _hasNextLevel && status == PuzzleStatus.complete,
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 64
+      ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              margin: EdgeInsets.only(
+                right: !_hasNextLevel && status == PuzzleStatus.complete ? 0 : 36,
+              ),
               child: AppElevatedButton(
-                width: 136,
+                width: !_hasNextLevel && status == PuzzleStatus.complete ? 0 : 136,
                 height: 40,
-                title: 'Next Level',
+                title: _hasNextLevel && status == PuzzleStatus.complete
+                    ? 'Next Level'
+                    : 'Shuffle',
                 onTap: () {
-                  context.read<PuzzleBloc>().add(PuzzleInitialized(
-                      difficulty: puzzle.getNextDifficulty()));
+                  if (_hasNextLevel && status == PuzzleStatus.complete) {
+                    context.read<PuzzleBloc>().add(
+                        PuzzleInitialized(difficulty: puzzle.getNextDifficulty()));
+                  } else {
+                    context.read<PuzzleBloc>().add(PuzzleReset());
+                  }
                 },
               ),
             ),
-          ),
-          AnimatedOpacity(
-            opacity: status == PuzzleStatus.incomplete ? 1 : 0,
-            duration: const Duration(milliseconds: 300),
-            child: Visibility(
-              visible: status == PuzzleStatus.incomplete,
-              child: AppElevatedButton(
-                width: 136,
-                height: 40,
-                title: 'Shuffle',
-                onTap: () {
+            AppElevatedButton(
+              width: status == PuzzleStatus.complete ? 136 : 80,
+              height: 40,
+              title: status == PuzzleStatus.complete ? 'Play Again' : 'Hint',
+              onTap: () {
+                if (status == PuzzleStatus.complete) {
                   context.read<PuzzleBloc>().add(PuzzleReset());
-                },
-              ),
-            ),
-          ),
-          AnimatedOpacity(
-            opacity: status == PuzzleStatus.complete ? 1 : 0,
-            duration: const Duration(milliseconds: 300),
-            child: Visibility(
-              visible: status == PuzzleStatus.complete,
-              child: AppElevatedButton(
-                width: 136,
-                height: 40,
-                title: 'Play Again',
-                onTap: () {
-                  context.read<PuzzleBloc>().add(PuzzleReset());
-                },
-              ),
-            ),
-          ),
-          AnimatedOpacity(
-            opacity: status == PuzzleStatus.incomplete ? 1 : 0,
-            duration: const Duration(milliseconds: 300),
-            child: Visibility(
-              visible: status == PuzzleStatus.incomplete,
-              child: AppElevatedButton(
-                width: 80,
-                height: 40,
-                title: 'Hint',
-                onTap: () {
+                } else {
                   showSlideDialog(
                     context: context,
                     child: const HintsPopup(),
                   );
-                },
-              ),
+                }
+              },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

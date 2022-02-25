@@ -15,7 +15,7 @@ class PageContainer extends StatelessWidget {
           children: [
             Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 64),
+                padding: const EdgeInsets.only(top: 64),
                 child: child,
               ),
             ),
