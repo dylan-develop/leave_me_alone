@@ -1,7 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
+import 'package:leave_me_alone/components/app_elevated_button.dart';
 import 'package:leave_me_alone/components/elevated_button.dart';
 import 'package:leave_me_alone/components/popup_hints.dart';
 import 'package:leave_me_alone/helpers/modal_helper.dart';
@@ -46,6 +46,7 @@ class SideSection extends StatelessWidget {
               ),
             ),
             Container(
+              height: 36,
               margin: const EdgeInsets.only(bottom: 40),
               child: Wrap(
                 children: [
@@ -59,6 +60,7 @@ class SideSection extends StatelessWidget {
                         child: Image.asset(
                           'assets/images/mask.png',
                           width: 68,
+                          height: 32,
                         ),
                       ),
                     ),
@@ -74,53 +76,43 @@ class SideSection extends StatelessWidget {
               ),
             ),
             Container(
-              alignment: Alignment.centerLeft,
               margin: const EdgeInsets.only(
                 bottom: 48,
               ),
-              child: CustomElevatedButton(
-                title: _hasNextLevel ? 'Again' : 'Hint',
+              child: AppElevatedButton(
+                width: status == PuzzleStatus.incomplete ? 133 : 200,
+                height: 56,
+                title: status == PuzzleStatus.incomplete ? 'Hint' : 'Play Again',
                 fontSize: 36,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 3,
-                  horizontal: 52,
-                ),
-                onPressed: () {
-                  if (_hasNextLevel) {
-                    context.read<PuzzleBloc>().add(PuzzleReset());
-                  } else {
+                onTap: () {
+                  if (status == PuzzleStatus.incomplete) {
                     showSlideDialog(
                       context: context,
                       child: const HintsPopup(),
                     );
+                  } else {
+                    context.read<PuzzleBloc>().add(PuzzleReset());
                   }
                 },
               ),
             ),
-            LayoutBuilder(
-              builder: (context, constraints) {
-                return Container(
-                  alignment: Alignment.centerLeft,
-                  child: CustomElevatedButton(
-                    title: _hasNextLevel ? 'Next level' : 'Shuffle',
-                    fontSize: 36,
-                    padding: EdgeInsets.symmetric(
-                      vertical: 3,
-                      horizontal: constraints.maxWidth * 0.6 / 2,
-                    ),
-                    onPressed: () {
-                      if (_hasNextLevel) {
-                        context.read<PuzzleBloc>().add(PuzzleInitialized(
-                            difficulty: PuzzleDifficulty.values[PuzzleDifficulty
-                                .values
-                                .indexOf(puzzle.getDifficulty())]));
-                      } else {
-                        context.read<PuzzleBloc>().add(PuzzleReset());
-                      }
-                    },
-                  ),
-                );
-              },
+            Container(
+              margin: const EdgeInsets.only(
+                bottom: 48,
+              ),
+              child: AppElevatedButton(
+                width: status == PuzzleStatus.complete && _hasNextLevel ? 200 : 296,
+                height: 56,
+                title: status == PuzzleStatus.complete && _hasNextLevel ? 'Next level' : 'Shuffle',
+                fontSize: 36,
+                onTap: () {
+                  if (status == PuzzleStatus.complete && _hasNextLevel) {
+                    context.read<PuzzleBloc>().add(PuzzleInitialized(difficulty: puzzle.getNextDifficulty()));
+                  } else {
+                    context.read<PuzzleBloc>().add(PuzzleReset());
+                  }
+                },
+              ),
             ),
           ],
         ),

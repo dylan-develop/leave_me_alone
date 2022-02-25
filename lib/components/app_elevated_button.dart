@@ -42,7 +42,8 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
           Positioned(
             left: widget.offset ?? (_isDesktop ? 8 : 4),
             top: widget.offset ?? (_isDesktop ? 8 : 4),
-            child: Container(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
               decoration: BoxDecoration(
                 color: Colors.black,
                 borderRadius: BorderRadius.circular(8),
@@ -91,7 +92,8 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
                   });
                   widget.onHover?.call(false);
                 },
-                child: Container(
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
                   width: widget.width,
                   height: widget.height,
                   decoration: BoxDecoration(
