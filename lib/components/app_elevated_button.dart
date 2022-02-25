@@ -6,6 +6,7 @@ class AppElevatedButton extends StatefulWidget {
   final String title;
   final String fontFamily;
   final double fontSize;
+  final double? offset;
   final Function onTap;
   final Function(bool value)? onHover;
 
@@ -16,6 +17,7 @@ class AppElevatedButton extends StatefulWidget {
     required this.title,
     this.fontFamily = 'HandWriting',
     this.fontSize = 24,
+    this.offset,
     required this.onTap,
     this.onHover,
   }) : super(key: key);
@@ -38,8 +40,8 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
         clipBehavior: Clip.none,
         children: [
           Positioned(
-            left: _isDesktop ? 8 : 4,
-            top: _isDesktop ? 8 : 4,
+            left: widget.offset ?? (_isDesktop ? 8 : 4),
+            top: widget.offset ?? (_isDesktop ? 8 : 4),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.black,
@@ -51,16 +53,8 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
           ),
           AnimatedPositioned(
             duration: const Duration(milliseconds: 200),
-            left: _onHover
-                ? _isDesktop
-                    ? 8
-                    : 4
-                : 0,
-            top: _onHover
-                ? _isDesktop
-                    ? 8
-                    : 4
-                : 0,
+            left: _onHover ? widget.offset ?? (_isDesktop ? 8 : 4) : 0,
+            top: _onHover ? widget.offset ?? (_isDesktop ? 8 : 4) : 0,
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
               onEnter: (event) {
