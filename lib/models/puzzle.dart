@@ -24,6 +24,17 @@ class Puzzle extends Equatable {
     }
   }
 
+  PuzzleDifficulty getNextDifficulty() {
+    final index = PuzzleDifficulty.values.indexOf(getDifficulty());
+    if (index >= PuzzleDifficulty.values.length - 1) {
+      return PuzzleDifficulty.values[index];
+    } else if (index <= -1) {
+      return PuzzleDifficulty.values[0];
+    } else {
+      return PuzzleDifficulty.values[index + 1];
+    }
+  }
+
   Tile getWhitespaceTile() =>
       tiles.singleWhere((tile) => tile.type == TileType.whitespace);
 

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
@@ -65,6 +66,20 @@ class SideSection extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(horizontal: 32),
                   ),
                   */
+                  AnimatedOpacity(
+                    opacity: status == PuzzleStatus.complete ? 1 : 0,
+                    duration: const Duration(milliseconds: 500),
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 24),
+                      child: Visibility(
+                        visible: status == PuzzleStatus.complete,
+                        child: Image.asset(
+                          'assets/images/mask.png',
+                          width: 68,
+                        ),
+                      ),
+                    ),
+                  ),
                   Text(
                     '$moves steps',
                     style: const TextStyle(
