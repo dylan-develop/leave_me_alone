@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:leave_me_alone/components/app_elevated_button.dart';
 import 'package:leave_me_alone/components/character_block.dart';
 import 'package:leave_me_alone/components/responsive_layout_builder.dart';
@@ -11,6 +12,7 @@ class OnboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _focusNode = FocusNode()..requestFocus();
     return Scaffold(
       body: ResponsiveLayoutBuilder(
         mobile: Container(
@@ -23,19 +25,20 @@ class OnboardPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: const [
-                  _OnboardTitle(
+                children: [
+                  const _OnboardTitle(
                     fontSize: 48,
                   ),
-                  _OnboardSubtitle(
+                  const _OnboardSubtitle(
                     fontSize: 24,
                   ),
-                  _CharactersRow(
+                  const _CharactersRow(
                     minWidth: 264,
                   ),
                   _OnboardStartButton(
                     fontSize: 24,
                     minWidth: 264,
+                    parentFocusNode: _focusNode,
                   ),
                 ],
               ),
@@ -58,18 +61,19 @@ class OnboardPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    _OnboardTitle(
+                  children: [
+                    const _OnboardTitle(
                       fontSize: 96,
                     ),
-                    _OnboardSubtitle(
+                    const _OnboardSubtitle(
                       fontSize: 36,
                     ),
-                    Flexible(
+                    const Flexible(
                       child: _CharactersRow(),
                     ),
                     _OnboardStartButton(
                       fontSize: 36,
+                      parentFocusNode: _focusNode,
                     ),
                   ],
                 ),
@@ -181,11 +185,13 @@ class _CharactersRow extends StatelessWidget {
 class _OnboardStartButton extends StatelessWidget {
   final double fontSize;
   final double? minWidth;
+  final FocusNode parentFocusNode;
 
   const _OnboardStartButton({
     Key? key,
     required this.fontSize,
     this.minWidth,
+    required this.parentFocusNode,
   }) : super(key: key);
 
   @override
@@ -203,6 +209,8 @@ class _OnboardStartButton extends StatelessWidget {
             onTap: () {
               context.beamToNamed('/difficulties');
             },
+            parentFocusNode: parentFocusNode,
+            defaultPhysicalKey: PhysicalKeyboardKey.enter,
           );
         },
       ),

@@ -50,39 +50,43 @@ class WinPopup extends StatelessWidget {
             Image.asset(
               kIsWeb ? 'assets/images/mask.png' : 'assets/images/mask.gif',
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Flexible(
-                  child: AppElevatedButton(
-                    width: !hasNextLevel && status == PuzzleStatus.complete
-                        ? 144
-                        : 112,
-                    height: 40,
-                    title: 'Play Again',
-                    fontSize: 20,
-                    onTap: () {
-                      context.read<PuzzleBloc>().add(PuzzleReset());
-                      Navigator.of(context).pop();
-                    },
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: AppElevatedButton(
+                      width: !hasNextLevel && status == PuzzleStatus.complete
+                          ? 144
+                          : 112,
+                      height: 40,
+                      title: 'Play Again',
+                      fontSize: 20,
+                      onTap: () {
+                        context.read<PuzzleBloc>().add(PuzzleReset());
+                        Navigator.of(context).pop();
+                      },
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    left: hasNextLevel ? 12 : 0,
+                  Container(
+                    margin: EdgeInsets.only(
+                      left: hasNextLevel ? 12 : 0,
+                    ),
+                    child: AppElevatedButton(
+                      width: hasNextLevel ? 112 : 0,
+                      height: 40,
+                      title: 'Next Level',
+                      fontSize: 20,
+                      onTap: () {
+                        context.read<PuzzleBloc>().add(PuzzleInitialized(
+                            difficulty: puzzle.getNextDifficulty()));
+                        Navigator.of(context).pop();
+                      },
+                    ),
                   ),
-                  child: AppElevatedButton(
-                    width: hasNextLevel ? 112 : 0,
-                    height: 40,
-                    title: 'Next Level',
-                    fontSize: 20,
-                    onTap: () {
-                      context.read<PuzzleBloc>().add(PuzzleInitialized(
-                          difficulty: puzzle.getNextDifficulty()));
-                    },
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
@@ -122,38 +126,43 @@ class WinPopup extends StatelessWidget {
                   kIsWeb ? 'assets/images/mask.png' : 'assets/images/mask.gif',
                 ),
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  AppElevatedButton(
-                    width: !hasNextLevel && status == PuzzleStatus.complete
-                        ? 296
-                        : 204,
-                    height: 56,
-                    title: 'Play Again',
-                    fontSize: 36,
-                    onTap: () {
-                      context.read<PuzzleBloc>().add(PuzzleReset());
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                      left: hasNextLevel ? 24 : 0,
-                    ),
-                    child: AppElevatedButton(
-                      width: hasNextLevel ? 204 : 0,
+              Container(
+                margin: const EdgeInsets.symmetric(
+                  vertical: 24,
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    AppElevatedButton(
+                      width: !hasNextLevel && status == PuzzleStatus.complete
+                          ? 296
+                          : 204,
                       height: 56,
-                      title: 'Next Level',
+                      title: 'Play Again',
                       fontSize: 36,
                       onTap: () {
-                        context.read<PuzzleBloc>().add(PuzzleInitialized(
-                            difficulty: puzzle.getNextDifficulty()));
+                        context.read<PuzzleBloc>().add(PuzzleReset());
                         Navigator.of(context).pop();
                       },
                     ),
-                  ),
-                ],
+                    Container(
+                      margin: EdgeInsets.only(
+                        left: hasNextLevel ? 24 : 0,
+                      ),
+                      child: AppElevatedButton(
+                        width: hasNextLevel ? 204 : 0,
+                        height: 56,
+                        title: 'Next Level',
+                        fontSize: 36,
+                        onTap: () {
+                          context.read<PuzzleBloc>().add(PuzzleInitialized(
+                              difficulty: puzzle.getNextDifficulty()));
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

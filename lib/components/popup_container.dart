@@ -19,6 +19,7 @@ class PopupContainer extends StatelessWidget {
       mobile: Center(
         child: Container(
           padding: const EdgeInsets.all(24),
+          margin: EdgeInsets.all(max(24, MediaQuery.of(context).size.width / 375)),
           decoration: BoxDecoration(
             border: Border.all(),
             borderRadius: BorderRadius.circular(10),

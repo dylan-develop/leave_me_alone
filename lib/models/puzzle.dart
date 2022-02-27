@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/rendering.dart';
 import 'package:leave_me_alone/models/position.dart';
 import 'package:leave_me_alone/models/tile.dart';
+import 'package:collection/collection.dart';
 
 enum PuzzleDifficulty { alpha, beta, delta }
 
@@ -35,8 +37,21 @@ class Puzzle extends Equatable {
     }
   }
 
-  Tile getWhitespaceTile() =>
-      tiles.singleWhere((tile) => tile.type == TileType.whitespace);
+  Tile getWhitespaceTile() {
+    return tiles.singleWhere((tile) => tile.type == TileType.whitespace);
+  }
+
+  Tile? getTileRelativeToWhitespaceTile(Offset relativeOffset) {
+    final whitespace = getWhitespaceTile();
+    return tiles.singleWhereOrNull(
+      (tile) {
+        return tile.currentPosition.x ==
+                whitespace.currentPosition.x + relativeOffset.dx &&
+            tile.currentPosition.y ==
+                whitespace.currentPosition.y + relativeOffset.dy;
+      },
+    );
+  }
 
   bool isComplete() {
     for (Tile tile in tiles) {

@@ -17,25 +17,66 @@ class PuzzleBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Puzzle puzzle = context.select((PuzzleBloc bloc) => bloc.state.puzzle);
-    PuzzleStatus status = context.select((PuzzleBloc bloc) => bloc.state.status);
+    PuzzleStatus status =
+        context.select((PuzzleBloc bloc) => bloc.state.status);
 
     if (isHints) {
       puzzle = puzzle.sort();
     }
 
-    return SizedBox.square(
-      dimension: dimenision,
-      child: Stack(
-        children: [
-          for (int i = 0; i < puzzle.tiles.length; i++)
-            PuzzleTile(
-              tile: puzzle.tiles[i],
-              puzzleDimension: puzzle.getDimension(),
-              dimension: dimenision / puzzle.getDimension(),
-              isReadOnly: status == PuzzleStatus.complete,
-              isHints: isHints,
-            ),
-        ],
+    return GestureDetector(
+      onHorizontalDragEnd: (details) {
+        final puzzle = context.read<PuzzleBloc>().state.puzzle;
+
+        if (details.primaryVelocity! > 0) {
+          final tile =
+              puzzle.getTileRelativeToWhitespaceTile(const Offset(-1, 0));
+          if (tile != null) {
+            context.read<PuzzleBloc>().add(TileTapped(tile));
+          }
+        }
+
+        if (details.primaryVelocity! < 0) {
+          final tile =
+              puzzle.getTileRelativeToWhitespaceTile(const Offset(1, 0));
+          if (tile != null) {
+            context.read<PuzzleBloc>().add(TileTapped(tile));
+          }
+        }
+      },
+      onVerticalDragEnd: (details) {
+        final puzzle = context.read<PuzzleBloc>().state.puzzle;
+
+        if (details.primaryVelocity! > 0) {
+          final tile =
+              puzzle.getTileRelativeToWhitespaceTile(const Offset(0, -1));
+          if (tile != null) {
+            context.read<PuzzleBloc>().add(TileTapped(tile));
+          }
+        }
+        // Swiping in down direction.
+        if (details.primaryVelocity! < 0) {
+          final tile =
+              puzzle.getTileRelativeToWhitespaceTile(const Offset(0, 1));
+          if (tile != null) {
+            context.read<PuzzleBloc>().add(TileTapped(tile));
+          }
+        }
+      },
+      child: SizedBox.square(
+        dimension: dimenision,
+        child: Stack(
+          children: [
+            for (int i = 0; i < puzzle.tiles.length; i++)
+              PuzzleTile(
+                tile: puzzle.tiles[i],
+                puzzleDimension: puzzle.getDimension(),
+                dimension: dimenision / puzzle.getDimension(),
+                isReadOnly: status == PuzzleStatus.complete,
+                isHints: isHints,
+              ),
+          ],
+        ),
       ),
     );
   }

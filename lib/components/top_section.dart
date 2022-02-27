@@ -7,6 +7,7 @@ class TopSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final status = context.select((PuzzleBloc bloc) => bloc.state.status);
     final moves = context.select((PuzzleBloc bloc) => bloc.state.numberOfMoves);
 
     return Column(
@@ -43,6 +44,7 @@ class TopSection extends StatelessWidget {
             horizontal: 12,
             vertical: 12
           ),
+          height: 32,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -60,6 +62,21 @@ class TopSection extends StatelessWidget {
               //   color: Colors.black,
               //   margin: const EdgeInsets.symmetric(horizontal: 12),
               // ),
+              AnimatedScale(
+                scale: status == PuzzleStatus.complete ? 1 : 0,
+                duration: const Duration(milliseconds: 500),
+                child: Container(
+                  margin: const EdgeInsets.only(right: 24),
+                  child: Visibility(
+                    visible: status == PuzzleStatus.complete,
+                    child: Image.asset(
+                      'assets/images/mask.png',
+                      width: 68,
+                      height: 32,
+                    ),
+                  ),
+                ),
+              ),
               Text(
                 '$moves steps',
                 style: const TextStyle(
