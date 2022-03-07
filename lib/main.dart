@@ -30,19 +30,19 @@ class MyApp extends StatelessWidget {
               key: ValueKey('onboard'),
               title: 'Welcome',
               child: OnboardPage(),
-              type: kIsWeb ? BeamPageType.fadeTransition : BeamPageType.cupertino,
+              type: BeamPageType.fadeTransition,
             ),
         '/difficulties': (context, state, data) => const BeamPage(
               key: ValueKey('difficulties'),
               title: 'Difficulties',
               child: DifficultiesPage(),
-              type: kIsWeb ? BeamPageType.fadeTransition : BeamPageType.cupertino,
+              type: BeamPageType.fadeTransition,
             ),
         '/puzzle': (context, state, data) => const BeamPage(
               key: ValueKey('puzzle'),
               title: 'Puzzle',
               child: GamePage(),
-              type: kIsWeb ? BeamPageType.fadeTransition : BeamPageType.cupertino,
+              type: BeamPageType.fadeTransition,
             ),
       },
     ),
@@ -59,12 +59,10 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
         title: 'Leave Me Alone',
-        scrollBehavior:
-            ScrollConfiguration.of(context).copyWith(scrollbars: false),
+        scrollBehavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
         routeInformationParser: BeamerParser(),
         routerDelegate: routerDelegate,
-        backButtonDispatcher:
-            BeamerBackButtonDispatcher(delegate: routerDelegate),
+        backButtonDispatcher: BeamerBackButtonDispatcher(delegate: routerDelegate),
       ),
     );
   }

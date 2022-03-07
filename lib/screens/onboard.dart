@@ -1,10 +1,8 @@
-import 'dart:math';
-
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:leave_me_alone/components/app_elevated_button.dart';
-import 'package:leave_me_alone/components/character_block.dart';
+import 'package:leave_me_alone/components/animated_character_block.dart';
+import 'package:leave_me_alone/components/animated_elevated_button.dart';
+import 'package:leave_me_alone/components/animated_typer_text.dart';
 import 'package:leave_me_alone/components/responsive_layout_builder.dart';
 
 class OnboardPage extends StatelessWidget {
@@ -12,207 +10,158 @@ class OnboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _focusNode = FocusNode()..requestFocus();
     return Scaffold(
       body: ResponsiveLayoutBuilder(
-        mobile: Container(
-          margin: const EdgeInsets.symmetric(
-            horizontal: 32,
-          ),
-          child: Center(
-            child: SingleChildScrollView(
+        mobile: Center(
+          child: SingleChildScrollView(
+            child: SizedBox(
+              width: 264,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const _OnboardTitle(
-                    fontSize: 48,
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 16),
+                    child: const AnimatedTyperText(
+                      text: 'LEAVE ME ALONE',
+                      fontFamily: 'ThinkBig',
+                      fontSize: 48,
+                      initDelay: Duration(milliseconds: 1700),
+                    ),
                   ),
-                  const _OnboardSubtitle(
+                  const AnimatedTyperText(
+                    text: 'A stupid game',
                     fontSize: 24,
+                    initDelay: Duration(milliseconds: 2400),
                   ),
-                  const _CharactersRow(
-                    minWidth: 264,
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 64),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        const Expanded(
+                          flex: 5,
+                          child: AnimatedCharacterBlock(
+                            imageUrl: 'assets/images/character1.png',
+                            initDelay: Duration(milliseconds: 200),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Container(),
+                        ),
+                        const Expanded(
+                          flex: 5,
+                          child: AnimatedCharacterBlock(
+                            imageUrl: 'assets/images/character2.png',
+                            initDelay: Duration(milliseconds: 700),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  _OnboardStartButton(
-                    fontSize: 24,
-                    minWidth: 264,
-                    parentFocusNode: _focusNode,
+                  Center(
+                    child: LayoutBuilder(
+                      builder: (context, constraints) => AnimatedElevatedButton(
+                        initDelay: const Duration(milliseconds: 3050),
+                        offset: 4.0,
+                        width: constraints.maxWidth,
+                        height: 40,
+                        text: 'Start Now',
+                        fontSize: 24,
+                        onPressed: () {
+                          context.beamToNamed('/difficulties');
+                        },
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
           ),
         ),
-        desktop: Container(
-          padding: EdgeInsets.symmetric(
-            vertical: 128 * MediaQuery.of(context).size.height / 1024,
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: Container(),
-              ),
-              Expanded(
-                flex: 4,
+        desktop: Row(
+          children: [
+            Expanded(
+              flex: 4,
+              child: Container(),
+            ),
+            Expanded(
+              flex: 5,
+              child: Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const _OnboardTitle(
-                      fontSize: 96,
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      child: const AnimatedTyperText(
+                        text: 'LEAVE ME ALONE',
+                        fontFamily: 'ThinkBig',
+                        fontSize: 96,
+                        initDelay: Duration(milliseconds: 1700),
+                      ),
                     ),
-                    const _OnboardSubtitle(
+                    const AnimatedTyperText(
+                      text: 'A stupid game',
                       fontSize: 36,
+                      initDelay: Duration(milliseconds: 2400),
                     ),
-                    const Flexible(
-                      child: _CharactersRow(),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 64),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          const Expanded(
+                            flex: 5,
+                            child: AnimatedCharacterBlock(
+                              imageUrl: 'assets/images/character1.png',
+                              initDelay: Duration(milliseconds: 200),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Container(),
+                          ),
+                          const Expanded(
+                            flex: 5,
+                            child: AnimatedCharacterBlock(
+                              imageUrl: 'assets/images/character2.png',
+                              initDelay: Duration(milliseconds: 700),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    _OnboardStartButton(
-                      fontSize: 36,
-                      parentFocusNode: _focusNode,
+                    Center(
+                      child: LayoutBuilder(
+                        builder: (context, constraints) => AnimatedElevatedButton(
+                          initDelay: const Duration(milliseconds: 3050),
+                          offset: 8.0,
+                          width: constraints.maxWidth,
+                          height: 56,
+                          text: 'Start Now',
+                          fontSize: 36,
+                          onPressed: () {
+                            context.beamToNamed('/difficulties');
+                          },
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
-              Expanded(
-                flex: 3,
-                child: Container(),
-              ),
-            ],
-          ),
+            ),
+            Expanded(
+              flex: 4,
+              child: Container(),
+            ),
+          ],
         ),
-      ),
-    );
-  }
-}
-
-class _OnboardTitle extends StatelessWidget {
-  final double fontSize;
-
-  const _OnboardTitle({
-    Key? key,
-    required this.fontSize,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      'LEAVE ME ALONE',
-      style: TextStyle(
-        fontFamily: 'ThinkBig',
-        fontSize: fontSize,
-      ),
-      textAlign: TextAlign.center,
-    );
-  }
-}
-
-class _OnboardSubtitle extends StatelessWidget {
-  final double fontSize;
-
-  const _OnboardSubtitle({
-    Key? key,
-    required this.fontSize,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      'a stupid game',
-      style: TextStyle(
-        fontFamily: 'HandWriting',
-        fontSize: fontSize,
-      ),
-      textAlign: TextAlign.center,
-    );
-  }
-}
-
-class _CharactersRow extends StatelessWidget {
-  final double? minWidth;
-
-  const _CharactersRow({
-    Key? key,
-    this.minWidth,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Center(
-          child: Container(
-            margin: EdgeInsets.symmetric(
-              vertical: 72 * MediaQuery.of(context).size.height / 1024,
-              horizontal: 24
-            ),
-            width: minWidth == null
-                ? constraints.maxWidth
-                : min(minWidth!, constraints.maxWidth),
-            child: Row(
-              children: [
-                const Expanded(
-                  flex: 8,
-                  child: CharacterBlock(
-                    shakeOnHover: true,
-                    imageUrl: 'assets/images/charactera.png',
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(),
-                ),
-                const Expanded(
-                  flex: 8,
-                  child: CharacterBlock(
-                    shakeOnHover: true,
-                    imageUrl: 'assets/images/characterb.png',
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _OnboardStartButton extends StatelessWidget {
-  final double fontSize;
-  final double? minWidth;
-  final FocusNode parentFocusNode;
-
-  const _OnboardStartButton({
-    Key? key,
-    required this.fontSize,
-    this.minWidth,
-    required this.parentFocusNode,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          return AppElevatedButton(
-            width: minWidth == null
-                ? constraints.maxWidth
-                : min(minWidth!, constraints.maxWidth),
-            height: fontSize * 1.5,
-            title: 'start now',
-            fontSize: fontSize,
-            onTap: () {
-              context.beamToNamed('/difficulties');
-            },
-            parentFocusNode: parentFocusNode,
-            defaultPhysicalKey: PhysicalKeyboardKey.enter,
-          );
-        },
       ),
     );
   }
