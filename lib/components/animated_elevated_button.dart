@@ -9,6 +9,7 @@ class AnimatedElevatedButton extends StatefulWidget {
   final String fontFamily;
   final double fontSize;
   final Function onPressed;
+  final Function(bool value)? onHover;
 
   const AnimatedElevatedButton({
     Key? key,
@@ -20,6 +21,7 @@ class AnimatedElevatedButton extends StatefulWidget {
     this.fontFamily = 'HandWriting',
     required this.fontSize,
     required this.onPressed,
+    this.onHover,
   }) : super(key: key);
 
   @override
@@ -31,6 +33,7 @@ class _AnimatedElevatedButtonState extends State<AnimatedElevatedButton> {
   double _opacity = 0;
 
   bool _onHover = false;
+  bool _initAnimationCompleted = false;
 
   @override
   void initState() {
@@ -42,6 +45,7 @@ class _AnimatedElevatedButtonState extends State<AnimatedElevatedButton> {
       Future.delayed(const Duration(milliseconds: 500), () {
         setState(() {
           _opacity = 1;
+          _initAnimationCompleted = true;
         });
       });
     });
@@ -77,12 +81,18 @@ class _AnimatedElevatedButtonState extends State<AnimatedElevatedButton> {
             left: _onHover ? widget.offset : 0,
             top: _onHover ? widget.offset : 0,
             child: MouseRegion(
-              cursor: SystemMouseCursors.click,
+              cursor: _initAnimationCompleted ? SystemMouseCursors.click : SystemMouseCursors.basic,
               onEnter: (event) {
-                setState(() => _onHover = true);
+                if (_initAnimationCompleted) {
+                  widget.onHover?.call(true);
+                  setState(() => _onHover = true);
+                }
               },
               onExit: (event) {
-                setState(() => _onHover = false);
+                if (_initAnimationCompleted) {
+                  widget.onHover?.call(false);
+                  setState(() => _onHover = false);
+                }
               },
               child: AnimatedScale(
                 scale: _scale,
@@ -90,7 +100,27 @@ class _AnimatedElevatedButtonState extends State<AnimatedElevatedButton> {
                 curve: Curves.bounceInOut,
                 child: GestureDetector(
                   onTap: () {
-                    widget.onPressed.call();
+                    if (_initAnimationCompleted) {
+                      widget.onPressed.call();
+                    }
+                  },
+                  onTapDown: (event) {
+                    if (_initAnimationCompleted) {
+                      widget.onHover?.call(true);
+                      setState(() => _onHover = true);
+                    }
+                  },
+                  onTapUp: (event) {
+                    if (_initAnimationCompleted) {
+                      widget.onHover?.call(false);
+                      setState(() => _onHover = false);
+                    }
+                  },
+                  onTapCancel: () {
+                    if (_initAnimationCompleted) {
+                      widget.onHover?.call(false);
+                      setState(() => _onHover = false);
+                    }
                   },
                   child: Container(
                     width: widget.width,

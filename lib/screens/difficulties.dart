@@ -1,11 +1,11 @@
-import 'dart:math';
-
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
-import 'package:leave_me_alone/components/app_elevated_button.dart';
-import 'package:leave_me_alone/components/page_container.dart';
+import 'package:leave_me_alone/components/animated_elevated_button.dart';
+import 'package:leave_me_alone/components/animated_icon_button.dart';
+import 'package:leave_me_alone/components/animated_text_button.dart';
+import 'package:leave_me_alone/components/animated_typer_text.dart';
 import 'package:leave_me_alone/components/responsive_layout_builder.dart';
 import 'package:leave_me_alone/models/puzzle.dart';
 
@@ -17,10 +17,9 @@ class DifficultiesPage extends StatefulWidget {
 }
 
 class _DifficultiesPageState extends State<DifficultiesPage> {
-  bool _showDescription = false;
-  String _levelDescription = '';
+  String _difficultyDescription = 'so you like stupid game huh';
 
-  String getLevelDescription(PuzzleDifficulty difficulty) {
+  String getDifficultyDescription(PuzzleDifficulty difficulty) {
     switch (difficulty) {
       case PuzzleDifficulty.beta:
         return 'Oh, you think you can handle this?';
@@ -33,219 +32,171 @@ class _DifficultiesPageState extends State<DifficultiesPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _screenHeight = MediaQuery.of(context).size.height;
-
-    return PageContainer(
-      child: ResponsiveLayoutBuilder(
-        mobile: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 32,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 16),
-                  child: const _DifficultyTitle(
-                    fontSize: 32,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 24),
-                  child: _DifficultyDescription(
-                    description: _levelDescription,
-                    visible: _showDescription,
-                    fontSize: 24,
-                  ),
-                ),
-                for (final difficulty in PuzzleDifficulty.values)
-                  _DifficultyButton(
-                    minWidth: 309,
-                    height: 80,
-                    title: difficulty.name,
-                    fontSize: 32,
-                    onHover: (bool value) {
-                      setState(() {
-                        _showDescription = value;
-                      });
-                      _levelDescription = getLevelDescription(difficulty);
-                    },
-                    onTap: () {
-                      context
-                          .read<PuzzleBloc>()
-                          .add(PuzzleInitialized(difficulty: difficulty));
-                      context.beamToNamed('/puzzle');
-                    },
-                  ),
-              ],
-            ),
-          ),
-        ),
-        desktop: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: 64 * _screenHeight / 1024,
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: Container(),
-              ),
-              Expanded(
-                flex: 4,
-                child: SingleChildScrollView(
+    return Scaffold(
+      body: ResponsiveLayoutBuilder(
+        mobile: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.only(top: 80),
+                child: SizedBox(
+                  width: 309,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(
-                          bottom: 24 * _screenHeight / 1024,
-                        ),
-                        child: _DifficultyTitle(
-                          fontSize: min(72, 72 * _screenHeight / 1024),
+                        margin: const EdgeInsets.only(bottom: 16),
+                        child: const AnimatedTyperText(
+                          text: 'DIFFICULTY',
+                          fontFamily: 'ThinkBig',
+                          fontSize: 32,
+                          initDelay: Duration(milliseconds: 3250),
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(
-                          bottom: 64 * _screenHeight / 1024,
-                        ),
-                        child: _DifficultyDescription(
-                          description: _levelDescription,
-                          visible: _showDescription,
-                          fontSize: min(36, 36 * _screenHeight / 1024),
+                        margin: const EdgeInsets.only(bottom: 32),
+                        child: AnimatedTyperText(
+                          key: ValueKey(_difficultyDescription),
+                          text: _difficultyDescription,
+                          fontSize: 24,
+                          initDelay: const Duration(milliseconds: 100),
                         ),
                       ),
-                      for (final difficulty in PuzzleDifficulty.values)
-                        _DifficultyButton(
-                          minWidth: 416,
-                          height: min(100, 100 * _screenHeight / 1024),
-                          title: difficulty.name,
-                          fontSize: min(48, 48 * _screenHeight / 1024),
-                          onHover: (bool value) {
-                            setState(() {
-                              _showDescription = value;
-                            });
-                            _levelDescription = getLevelDescription(difficulty);
-                          },
-                          onTap: () {
-                            context
-                                .read<PuzzleBloc>()
-                                .add(PuzzleInitialized(difficulty: difficulty));
-                            context.beamToNamed('/puzzle');
-                          },
-                        ),
+                      for (int i = 0; i < PuzzleDifficulty.values.length; i++)
+                          Center(
+                            child: LayoutBuilder(
+                              builder: (context, constraints) => Container(
+                                margin: const EdgeInsets.only(bottom: 48),
+                                child: AnimatedElevatedButton(
+                                  initDelay: Duration(milliseconds: 1450 + i * 600),
+                                  offset: 4.0,
+                                  width: constraints.maxWidth,
+                                  height: MediaQuery.of(context).size.height / 812 * 80,
+                                  text: PuzzleDifficulty.values[i].name.toUpperCase(),
+                                  fontSize: 32,
+                                  fontFamily: 'ThinkBig',
+                                  onPressed: () {
+                                    context.read<PuzzleBloc>().add(PuzzleInitialized(
+                                      difficulty: PuzzleDifficulty.values[i],
+                                    ));
+                                    context.beamToNamed('/puzzle');
+                                  },
+                                  onHover: (bool value) {
+                                    setState(() {
+                                      _difficultyDescription = getDifficultyDescription(PuzzleDifficulty.values[i]);
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
                     ],
                   ),
                 ),
               ),
-              Expanded(
-                flex: 3,
-                child: Container(),
+            ), 
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(32),
+              child: AnimatedIconButton(
+                initDelay: const Duration(milliseconds: 3750),
+                imageUrl: 'assets/icons/arrow.svg',
+                onPressed: () {
+                  context.beamToNamed('/');
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ),
-    );
-  }
-}
-
-class _DifficultyTitle extends StatelessWidget {
-  final double fontSize;
-
-  const _DifficultyTitle({
-    Key? key,
-    required this.fontSize,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      'DIFFICULTY',
-      style: TextStyle(
-        fontFamily: 'ThinkBig',
-        fontSize: fontSize,
-      ),
-      textAlign: TextAlign.center,
-    );
-  }
-}
-
-class _DifficultyDescription extends StatelessWidget {
-  final String description;
-  final bool visible;
-  final double fontSize;
-
-  const _DifficultyDescription({
-    Key? key,
-    required this.description,
-    required this.visible,
-    required this.fontSize,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedOpacity(
-      opacity: visible ? 1 : 0,
-      duration: const Duration(milliseconds: 500),
-      child: Text(
-        description,
-        style: TextStyle(
-          fontFamily: 'HandWriting',
-          fontSize: fontSize,
+        desktop: Stack(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  flex: 4,
+                  child: Container(),
+                ),
+                Expanded(
+                  flex: 5,
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.only(top: 80),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 16),
+                          child: const AnimatedTyperText(
+                            text: 'DIFFICULTY',
+                            fontFamily: 'ThinkBig',
+                            fontSize: 72,
+                            initDelay: Duration(milliseconds: 3250),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 32),
+                          child: AnimatedTyperText(
+                            key: ValueKey(_difficultyDescription),
+                            text: _difficultyDescription,
+                            fontSize: 36,
+                            initDelay: const Duration(milliseconds: 100),
+                          ),
+                        ),
+                        for (int i = 0; i < PuzzleDifficulty.values.length; i++)
+                          Center(
+                            child: LayoutBuilder(
+                              builder: (context, constraints) => Container(
+                                margin: const EdgeInsets.only(bottom: 48),
+                                child: AnimatedElevatedButton(
+                                  initDelay: Duration(milliseconds: 1450 + i * 600),
+                                  offset: 8.0,
+                                  width: constraints.maxWidth,
+                                  height: MediaQuery.of(context).size.height / 1024 * 104,
+                                  text: PuzzleDifficulty.values[i].name.toUpperCase(),
+                                  fontSize: 48,
+                                  fontFamily: 'ThinkBig',
+                                  onPressed: () {
+                                    context.read<PuzzleBloc>().add(PuzzleInitialized(difficulty: PuzzleDifficulty.values[i]));
+                                    context.beamToNamed('/puzzle');
+                                  },
+                                  onHover: (bool value) {
+                                    setState(() {
+                                      _difficultyDescription = getDifficultyDescription(PuzzleDifficulty.values[i]);
+                                      print(_difficultyDescription);
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 4,
+                  child: Container(),
+                ),
+              ],
+            ),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(
+                vertical: 32,
+                horizontal: 96,
+              ),
+              child: AnimatedTextButton(
+                initDelay: const Duration(milliseconds: 3750),
+                text: 'HOME',
+                onPressed: () {
+                  context.beamToNamed('/');
+                },
+              ),
+            ),
+          ],
         ),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
-}
-
-class _DifficultyButton extends StatelessWidget {
-  final double minWidth;
-  final double height;
-  final String title;
-  final double fontSize;
-  final Function onTap;
-  final Function(bool value) onHover;
-
-  const _DifficultyButton({
-    Key? key,
-    required this.minWidth,
-    required this.height,
-    required this.title,
-    required this.fontSize,
-    required this.onTap,
-    required this.onHover,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(
-        bottom: 48,
-      ),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          return AppElevatedButton(
-            width: min(minWidth, constraints.maxWidth),
-            height: height,
-            title: title,
-            fontSize: fontSize,
-            fontFamily: 'ThinkBig',
-            offset: 8,
-            onTap: () {
-              onTap.call();
-            },
-            onHover: (bool value) {
-              onHover.call(value);
-            },
-          );
-        },
       ),
     );
   }
