@@ -4,6 +4,8 @@ import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
 import 'package:leave_me_alone/components/puzzle_tile.dart';
 import 'package:leave_me_alone/models/puzzle.dart';
 
+import 'animated_puzzle_tile.dart';
+
 class PuzzleBoard extends StatelessWidget {
   final double dimenision;
   final bool isHints;
@@ -17,8 +19,6 @@ class PuzzleBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Puzzle puzzle = context.select((PuzzleBloc bloc) => bloc.state.puzzle);
-    PuzzleStatus status =
-        context.select((PuzzleBloc bloc) => bloc.state.status);
 
     if (isHints) {
       puzzle = puzzle.sort();
@@ -54,7 +54,7 @@ class PuzzleBoard extends StatelessWidget {
             context.read<PuzzleBloc>().add(TileTapped(tile));
           }
         }
-        // Swiping in down direction.
+
         if (details.primaryVelocity! < 0) {
           final tile =
               puzzle.getTileRelativeToWhitespaceTile(const Offset(0, 1));
@@ -68,12 +68,12 @@ class PuzzleBoard extends StatelessWidget {
         child: Stack(
           children: [
             for (int i = 0; i < puzzle.tiles.length; i++)
-              PuzzleTile(
+              AnimatedPuzzleTile(
                 tile: puzzle.tiles[i],
                 puzzleDimension: puzzle.getDimension(),
                 dimension: dimenision / puzzle.getDimension(),
-                isReadOnly: status == PuzzleStatus.complete,
-                isHints: isHints,
+                // isReadOnly: status == PuzzleStatus.complete,
+                // isHints: isHints,
               ),
           ],
         ),

@@ -1,16 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:leave_me_alone/components/simple_puzzle_tile2.dart';
 
-import 'animated_puzzle_tile.dart';
-
-class AnimatedPuzzleBoard extends StatefulWidget {
-  const AnimatedPuzzleBoard({Key? key}) : super(key: key);
+class SimplePuzzleBoard2 extends StatefulWidget {
+  const SimplePuzzleBoard2({Key? key}) : super(key: key);
 
   @override
-  State<AnimatedPuzzleBoard> createState() => _AnimatedPuzzleBoardState();
+  State<SimplePuzzleBoard2> createState() => _SimplePuzzleBoard2State();
 }
 
-class _AnimatedPuzzleBoardState extends State<AnimatedPuzzleBoard> {
+class _SimplePuzzleBoard2State extends State<SimplePuzzleBoard2> {
   List<int> order = [];
 
   bool checkWin(List<int> order) {
@@ -47,7 +46,7 @@ class _AnimatedPuzzleBoardState extends State<AnimatedPuzzleBoard> {
         child: Stack(
           children: [
             for (int i = 0; i < order.length; i++)
-              AnimatedPuzzleTile(
+              SimplePuzzleTile2(
                 order: order,
                 value: order[i],
                 onTap: (List<int> order) {
