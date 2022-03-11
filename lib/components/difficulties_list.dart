@@ -21,21 +21,21 @@ class DifficultiesList extends StatefulWidget {
 }
 
 class _DifficultiesListState extends State<DifficultiesList> {
+  String _description = 'so you like stupid game huh';
+
+  String getDifficultyDescription(PuzzleDifficulty difficulty) {
+    switch (difficulty) {
+      case PuzzleDifficulty.beta:
+        return 'Oh, you think you can handle this?';
+      case PuzzleDifficulty.delta:
+        return 'Ha! Don\'t even think about winning.';
+      default:
+        return 'Come on, this is way too easy.';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    String _description = 'so you like stupid game huh';
-
-    String getDifficultyDescription(PuzzleDifficulty difficulty) {
-      switch (difficulty) {
-        case PuzzleDifficulty.beta:
-          return 'Oh, you think you can handle this?';
-        case PuzzleDifficulty.delta:
-          return 'Ha! Don\'t even think about winning.';
-        default:
-          return 'Come on, this is way too easy.';
-      }
-    }
-
     return ResponsiveLayoutBuilder(
       mobile: Align(
         alignment: Alignment.topCenter,
