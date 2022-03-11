@@ -22,21 +22,19 @@ class AnimatedBottomSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Visibility(
-            visible: puzzle.hasNextDifficulty(),
+            visible: !(!puzzle.hasNextDifficulty() && status == PuzzleStatus.complete),
             child: Container(
-              margin: const EdgeInsets.only(right: 36),
+              margin: const EdgeInsets.only(right: 24),
               child: AnimatedElevatedButton(
                 key: ValueKey(status),
-                width: puzzle.hasNextDifficulty() && status == PuzzleStatus.complete
-                  ? 80
-                  : 136,
+                width: 136,
                 height: 40,
                 text:
                     puzzle.hasNextDifficulty() && status == PuzzleStatus.complete
                         ? 'Next Level'
                         : 'Shuffle',
                 fontSize: 24,
-                offset: 8,
+                offset: 4,
                 initDelay: Duration(
                   milliseconds: stage == PuzzleStage.initialized
                       ? initDelay + puzzle.getDifficulty().name.length * 50 + 2000 + 500
@@ -60,7 +58,7 @@ class AnimatedBottomSection extends StatelessWidget {
             height: 40,
             text: status == PuzzleStatus.complete ? 'Play Again' : 'Hint',
             fontSize: 24,
-            offset: 8,
+            offset: 4,
             initDelay: Duration(
                 milliseconds: stage == PuzzleStage.initialized
                     ? initDelay + puzzle.getDifficulty().name.length * 50 + 2000 + 500
