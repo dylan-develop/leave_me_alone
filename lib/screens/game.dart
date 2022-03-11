@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
+import 'package:leave_me_alone/components/animated_bottom_section.dart';
 import 'package:leave_me_alone/components/animated_side_section.dart';
-import 'package:leave_me_alone/components/bottom_section.dart';
+import 'package:leave_me_alone/components/animated_top_section.dart';
 import 'package:leave_me_alone/components/page_container.dart';
 import 'package:leave_me_alone/components/popup_win.dart';
 import 'package:leave_me_alone/components/puzzle_board.dart';
 import 'package:leave_me_alone/components/responsive_layout_builder.dart';
-import 'package:leave_me_alone/components/top_section.dart';
 import 'package:leave_me_alone/helpers/modal_helper.dart';
 
 class GamePage extends StatelessWidget {
@@ -68,7 +68,7 @@ class GamePage extends StatelessWidget {
           child: ResponsiveLayoutBuilder(
             mobile: Column(
               children: [
-                const TopSection(),
+                const AnimatedTopSection(),
                 Expanded(
                   child: LayoutBuilder(
                     builder: (context, constraints) {
@@ -83,7 +83,7 @@ class GamePage extends StatelessWidget {
                     },
                   ),
                 ),
-                const BottomSection()
+                const AnimatedBottomSection()
               ],
             ),
             desktop: Container(
