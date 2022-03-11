@@ -1,8 +1,17 @@
+
+@font-face {
+  font-family: 'Think Big';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../assets/fonts/thinkbig.ttf') format('truetype')
+}
+
+
 body {
   margin:0;
   height:100%;
-  background: #000000;
-  background-image: url("img/light-background.png");
+  background: #ffffff;
+  
   background-size: 100% 100%;
 }
 
@@ -36,8 +45,42 @@ body {
   body {
     margin:0;
     height:100%;
-    background: #000000;
-    background-image: url("img/dark-background.png");
+    background: #ffffff;
+    
     background-size: 100% 100%;
+  }
+}
+
+#splash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.splash-mask {
+  width: 210px;
+  animation: maskRotation 1s infinite;
+}
+
+.welcome-text {
+  font-family: 'Think Big';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: center; 
+  color: black; 
+}
+
+@keyframes maskRotation {
+  0% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(10deg);
   }
 }
