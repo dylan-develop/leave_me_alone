@@ -1,7 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
+import 'package:leave_me_alone/components/animated_mask.dart';
 import 'package:leave_me_alone/components/app_elevated_button.dart';
 import 'package:leave_me_alone/components/popup_container.dart';
 import 'package:leave_me_alone/components/responsive_layout_builder.dart';
@@ -47,13 +47,11 @@ class WinPopup extends StatelessWidget {
                 ),
               ),
             ),
-            Image.asset(
-              kIsWeb ? 'assets/images/mask.png' : 'assets/images/mask.gif',
-            ),
+            const AnimatedMask(),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 12),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Flexible(
                     child: AppElevatedButton(
@@ -121,16 +119,15 @@ class WinPopup extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(
-                child: Image.asset(
-                  kIsWeb ? 'assets/images/mask.png' : 'assets/images/mask.gif',
-                ),
+              const Expanded(
+                child: AnimatedMask()
               ),
               Container(
                 margin: const EdgeInsets.symmetric(
                   vertical: 24,
                 ),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     AppElevatedButton(

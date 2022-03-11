@@ -38,7 +38,7 @@ class Puzzle extends Equatable {
   }
 
   bool hasNextDifficulty() {
-    if (getNextDifficulty() != PuzzleDifficulty.values.last) {
+    if (getDifficulty() != PuzzleDifficulty.values.last) {
       return true;
     } 
     return false;

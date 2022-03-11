@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:leave_me_alone/components/responsive_layout_builder.dart';
@@ -50,9 +49,7 @@ class PopupContainer extends StatelessWidget {
                           Navigator.of(context).pop();
                         },
                         child: SvgPicture.asset(
-                          kIsWeb
-                              ? 'icons/delete.svg'
-                              : 'assets/icons/delete.svg',
+                          'assets/icons/delete.svg',
                         ),
                       ),
                     ),
@@ -112,9 +109,7 @@ class PopupContainer extends StatelessWidget {
                                         Navigator.of(context).pop();
                                       },
                                       child: SvgPicture.asset(
-                                        kIsWeb
-                                            ? 'icons/delete.svg'
-                                            : 'assets/icons/delete.svg',
+                                        'assets/icons/delete.svg',
                                       ),
                                     ),
                                   ),

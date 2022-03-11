@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AnimatedElevatedButton extends StatefulWidget {
   final Duration initDelay;
+  final bool isAnimated;
   final double width;
   final double height;
   final double offset;
@@ -14,6 +15,7 @@ class AnimatedElevatedButton extends StatefulWidget {
   const AnimatedElevatedButton({
     Key? key,
     this.initDelay = Duration.zero,
+    this.isAnimated = true,
     required this.width,
     required this.height,
     required this.offset,
@@ -37,18 +39,26 @@ class _AnimatedElevatedButtonState extends State<AnimatedElevatedButton> {
 
   @override
   void initState() {
-    Future.delayed(widget.initDelay, () {
+    if (!widget.isAnimated) {
       setState(() {
         _scale = 1;
+        _opacity = 1;
+        _initAnimationCompleted = true;
       });
-    }).whenComplete(() {
-      Future.delayed(const Duration(milliseconds: 500), () {
+    } else {
+      Future.delayed(widget.initDelay, () {
         setState(() {
-          _opacity = 1;
-          _initAnimationCompleted = true;
+          _scale = 1;
+        });
+      }).whenComplete(() {
+        Future.delayed(const Duration(milliseconds: 500), () {
+          setState(() {
+            _opacity = 1;
+            _initAnimationCompleted = true;
+          });
         });
       });
-    });
+    }
     super.initState();
   }
 

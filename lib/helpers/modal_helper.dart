@@ -37,12 +37,13 @@ Future<T?> showSlideDialog<T>({
   bool barrierDismissible = true,
   String barrierLabel = '',
   Offset? beginOffset,
+  Curve curve = Curves.easeInOutBack
 }) =>
     showGeneralDialog<T>(
       transitionBuilder: (context, animation, secondaryAnimation, widget) {
         final curvedAnimation = CurvedAnimation(
           parent: animation,
-          curve: Curves.easeInOut,
+          curve: curve,
         );
 
         return BackdropFilter(
