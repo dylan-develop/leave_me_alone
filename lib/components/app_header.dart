@@ -6,8 +6,27 @@ import 'package:leave_me_alone/components/responsive_layout_builder.dart';
 import 'package:leave_me_alone/components/side_menu.dart';
 import 'package:leave_me_alone/helpers/modal_helper.dart';
 
-class AppHeader extends StatelessWidget {
+class AppHeader extends StatefulWidget {
+
   const AppHeader({Key? key}) : super(key: key);
+
+  @override
+  State<AppHeader> createState() => _AppHeaderState();
+}
+
+class _AppHeaderState extends State<AppHeader> {
+  double _opacity = 0;
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+        _opacity = 1;
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ResponsiveLayoutBuilder(
@@ -99,11 +118,15 @@ class AppHeader extends StatelessWidget {
                           child: const DifficultiesMenu(),
                         );
                       },
-                      child: const Text(
-                        'Difficulty',
-                        style: TextStyle(
-                          fontSize: 32,
-                          fontFamily: 'ThinkBig',
+                      child: AnimatedOpacity(
+                        opacity: _opacity,
+                        duration: const Duration(milliseconds: 500),
+                        child: const Text(
+                          'Difficulty',
+                          style: TextStyle(
+                            fontSize: 32,
+                            fontFamily: 'ThinkBig',
+                          ),
                         ),
                       ),
                     ),

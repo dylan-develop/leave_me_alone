@@ -69,6 +69,7 @@ class PuzzleBoard extends StatelessWidget {
           children: [
             for (int i = 0; i < puzzle.tiles.length; i++)
               AnimatedPuzzleTile(
+                initDelay: const Duration(milliseconds: 500),
                 tile: puzzle.tiles[i],
                 puzzleDimension: puzzle.getDimension(),
                 dimension: dimenision / puzzle.getDimension(),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
@@ -11,7 +13,7 @@ class AnimatedTopSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final puzzle = context.select((PuzzleBloc bloc) => bloc.state.puzzle);
 
-    final initDelay = 500 + puzzle.getDimension() * 250;
+    final initDelay = 500 + 500 + pow(puzzle.getDimension(), 2) ~/ 2 * 250;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -43,10 +45,7 @@ class AnimatedTopSection extends StatelessWidget {
           child: Center(
             child: AnimatedMovesNumber(
               initDelay: Duration(
-                milliseconds: initDelay +
-                    puzzle.getDifficulty().name.length * 50 +
-                    500 +
-                    800,
+                milliseconds: initDelay + puzzle.getDifficulty().name.length * 2000,
               ),
               fontSize: 20,
             ),

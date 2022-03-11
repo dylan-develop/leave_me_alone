@@ -39,10 +39,7 @@ class AnimatedBottomSection extends StatelessWidget {
                 offset: 8,
                 initDelay: Duration(
                   milliseconds: stage == PuzzleStage.initialized
-                      ? initDelay +
-                          puzzle.getDifficulty().name.length * 50 +
-                          500 +
-                          800
+                      ? initDelay + puzzle.getDifficulty().name.length * 50 + 2000 + 500
                       : 0,
                 ),
                 onPressed: () {
@@ -66,10 +63,7 @@ class AnimatedBottomSection extends StatelessWidget {
             offset: 8,
             initDelay: Duration(
                 milliseconds: stage == PuzzleStage.initialized
-                    ? initDelay +
-                        puzzle.getDifficulty().name.length * 50 +
-                        500 +
-                        800
+                    ? initDelay + puzzle.getDifficulty().name.length * 50 + 2000 + 500
                     : 0),
             onPressed: () {
               if (status == PuzzleStatus.complete) {

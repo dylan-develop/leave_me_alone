@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
@@ -17,7 +19,7 @@ class AnimatedSideSection extends StatelessWidget {
     final status = context.select((PuzzleBloc bloc) => bloc.state.status);
     final stage = context.select((PuzzleBloc bloc) => bloc.state.stage);
 
-    final initDelay = 500 + puzzle.getDimension() * 250;
+    final initDelay = 500 + 500 + pow(puzzle.getDimension(), 2) ~/ 2 * 250;
 
     return Center(
       key: ValueKey(puzzle.getDifficulty()),
@@ -49,7 +51,9 @@ class AnimatedSideSection extends StatelessWidget {
               ),
             ),
             AnimatedMovesNumber(
-              initDelay: Duration(milliseconds: initDelay + puzzle.getDifficulty().name.length * 50 + 500 + 800),
+              initDelay: Duration(
+                milliseconds: initDelay + puzzle.getDifficulty().name.length * 50 + 2000,
+              ),
               fontSize: 36,
             ),
             Container(
@@ -58,7 +62,7 @@ class AnimatedSideSection extends StatelessWidget {
                 key: ValueKey(status),
                 initDelay: Duration(
                   milliseconds: stage == PuzzleStage.initialized
-                    ? initDelay + puzzle.getDifficulty().name.length * 50 + 500 + 800
+                    ? initDelay + puzzle.getDifficulty().name.length * 50 + 2000 + 500
                     : 0
                 ),
                 width: status == PuzzleStatus.incomplete ? 133 : 240,
@@ -91,7 +95,7 @@ class AnimatedSideSection extends StatelessWidget {
                 offset: 8,
                 initDelay: Duration(
                   milliseconds: stage == PuzzleStage.initialized
-                    ? initDelay + puzzle.getDifficulty().name.length * 50 + 500 + 800
+                    ? initDelay + puzzle.getDifficulty().name.length * 50 + 2000 + 500
                     : 0
                 ),
                 onPressed: () {
