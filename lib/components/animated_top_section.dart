@@ -45,7 +45,7 @@ class AnimatedTopSection extends StatelessWidget {
           child: Center(
             child: AnimatedMovesNumber(
               initDelay: Duration(
-                milliseconds: initDelay + puzzle.getDifficulty().name.length * 2000,
+                milliseconds: initDelay + puzzle.getDifficulty().name.length * 50 + 2000,
               ),
               fontSize: 20,
             ),
