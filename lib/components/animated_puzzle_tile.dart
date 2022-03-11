@@ -12,6 +12,7 @@ class AnimatedPuzzleTile extends StatelessWidget {
   final int puzzleDimension;
   final double dimension;
   final Tile tile;
+  final int imageIndex;
 
   const AnimatedPuzzleTile({
     Key? key,
@@ -19,6 +20,7 @@ class AnimatedPuzzleTile extends StatelessWidget {
     required this.tile,
     required this.puzzleDimension,
     required this.dimension,
+    this.imageIndex = 0,
   }) : super(key: key);
 
   @override
@@ -40,7 +42,7 @@ class AnimatedPuzzleTile extends StatelessWidget {
             child: tile.type == TileType.character
                 ? AnimatedCharacterBlock(
                     initDelay: initDelay + Duration(milliseconds: 500 + tile.value ~/2 * 250),
-                    imageUrl: 'assets/images/character${Random().nextInt(4)}.png',
+                    imageUrl: 'assets/images/character$imageIndex.png',
                   )
                 : AnimatedDistanceBlock(
                   initDelay: initDelay,

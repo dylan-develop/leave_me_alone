@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
@@ -73,8 +75,8 @@ class PuzzleBoard extends StatelessWidget {
                 tile: puzzle.tiles[i],
                 puzzleDimension: puzzle.getDimension(),
                 dimension: dimenision / puzzle.getDimension(),
+                imageIndex: isHints ? 0 : i % puzzle.getDimension(),
                 // isReadOnly: status == PuzzleStatus.complete,
-                // isHints: isHints,
               ),
           ],
         ),
