@@ -46,8 +46,18 @@
 
   <title>Leave Me Alone</title>
   <link rel="manifest" href="manifest.json">
+
+  <script src="splash/splash.js"></script>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <link rel="stylesheet" type="text/css" href="splash/style.css">
 </head>
 <body>
+  <!-- splash screen -->
+  <div id="splash" class="center">
+    <img class="splash-mask" src="assets/images/mask.png"></img>
+    <p class="welcome-text">We are putting on our masks, give us a minute</p>
+  </div>
+  
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
