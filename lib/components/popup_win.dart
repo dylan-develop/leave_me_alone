@@ -53,7 +53,7 @@ class WinPopup extends StatelessWidget {
             Container(
               margin: const EdgeInsets.symmetric(vertical: 12),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Flexible(
                     child: AppElevatedButton(
@@ -137,9 +137,9 @@ class WinPopup extends StatelessWidget {
                       width: !hasNextLevel && status == PuzzleStatus.complete
                           ? 296
                           : 204,
-                      height: 56,
+                      height: 49,
                       title: 'Play Again',
-                      fontSize: 36,
+                      fontSize: 28,
                       onTap: () {
                         context.read<PuzzleBloc>().add(PuzzleReset());
                         Navigator.of(context).pop();
@@ -151,9 +151,9 @@ class WinPopup extends StatelessWidget {
                       ),
                       child: AppElevatedButton(
                         width: hasNextLevel ? 204 : 0,
-                        height: 56,
+                        height: 49,
                         title: 'Next Level',
-                        fontSize: 36,
+                        fontSize: 28,
                         onTap: () {
                           context.read<PuzzleBloc>().add(PuzzleInitialized(
                               difficulty: puzzle.getNextDifficulty()));

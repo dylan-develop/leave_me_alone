@@ -164,7 +164,6 @@ class _DifficultiesPageState extends State<DifficultiesPage> {
                                   onHover: (bool value) {
                                     setState(() {
                                       _difficultyDescription = getDifficultyDescription(PuzzleDifficulty.values[i]);
-                                      print(_difficultyDescription);
                                     });
                                   },
                                 ),

@@ -30,6 +30,7 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
           puzzle: _generatePuzzle(dimension),
           numberOfMoves: 0,
           status: PuzzleStatus.incomplete,
+          stage: PuzzleStage.initialized,
         ),
       );
     });
@@ -53,6 +54,7 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
                 puzzle: puzzle,
                 status: PuzzleStatus.incomplete,
                 numberOfMoves: state.numberOfMoves + 1,
+                stage: PuzzleStage.started,
               ),
             );
           }
@@ -65,6 +67,7 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
           puzzle: _generatePuzzle(state.puzzle.getDimension()),
           numberOfMoves: 0,
           status: PuzzleStatus.incomplete,
+          stage: PuzzleStage.reset,
         ),
       );
     });

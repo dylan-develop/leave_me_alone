@@ -37,6 +37,13 @@ class Puzzle extends Equatable {
     }
   }
 
+  bool hasNextDifficulty() {
+    if (getNextDifficulty() != PuzzleDifficulty.values.last) {
+      return true;
+    } 
+    return false;
+  }
+
   Tile getWhitespaceTile() {
     return tiles.singleWhere((tile) => tile.type == TileType.whitespace);
   }
