@@ -89,7 +89,9 @@ class WinPopup extends StatelessWidget {
           ],
         ),
         desktop: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 55),
+          padding: const EdgeInsets.symmetric(
+            vertical: 55,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -119,43 +121,61 @@ class WinPopup extends StatelessWidget {
                   ),
                 ),
               ),
-              const Expanded(
-                child: AnimatedMask()
-              ),
+              const Expanded(child: AnimatedMask()),
               Container(
                 margin: const EdgeInsets.symmetric(
                   vertical: 24,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    AppElevatedButton(
-                      width: !hasNextLevel && status == PuzzleStatus.complete
-                          ? 296
-                          : 204,
-                      height: 49,
-                      title: 'Play Again',
-                      fontSize: 28,
-                      onTap: () {
-                        context.read<PuzzleBloc>().add(PuzzleReset());
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                        left: hasNextLevel ? 24 : 0,
-                      ),
-                      child: AppElevatedButton(
-                        width: hasNextLevel ? 204 : 0,
-                        height: 49,
-                        title: 'Next Level',
-                        fontSize: 28,
-                        onTap: () {
-                          context.read<PuzzleBloc>().add(PuzzleInitialized(
-                              difficulty: puzzle.getNextDifficulty()));
-                          Navigator.of(context).pop();
+                    Expanded(
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return Container(
+                            margin: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.1),
+                            child: Center(
+                              child: AppElevatedButton(
+                                width: constraints.maxWidth * 0.8,
+                                height: 49,
+                                title: 'Play Again',
+                                fontSize: 28,
+                                onTap: () {
+                                  context.read<PuzzleBloc>().add(PuzzleReset());
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ),
+                          );
                         },
+                      ),
+                    ),
+                    Visibility(
+                      visible: !(!hasNextLevel && status == PuzzleStatus.complete),
+                      child: Expanded(
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            return Container(
+                              margin: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.1),
+                              child: Center(
+                                child: AppElevatedButton(
+                                  width: constraints.maxWidth * 0.8,
+                                  height: 49,
+                                  title: 'Next Level',
+                                  fontSize: 28,
+                                  onTap: () {
+                                    context.read<PuzzleBloc>().add(
+                                        PuzzleInitialized(
+                                            difficulty:
+                                                puzzle.getNextDifficulty()));
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ],

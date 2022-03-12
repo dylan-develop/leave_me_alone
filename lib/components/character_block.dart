@@ -64,8 +64,8 @@ class _CharacterBlockState extends State<CharacterBlock>
               child: Image.asset(
                 widget.imageUrl ??
                     (kIsWeb
-                        ? 'assets/images/character0.png'
-                        : 'assets/images/character0.gif'),
+                        ? 'assets/images/char_1.png'
+                        : 'assets/images/char_1_default.gif'),
               ),
             );
           }),

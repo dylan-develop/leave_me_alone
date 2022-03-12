@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
@@ -42,7 +40,7 @@ class AnimatedPuzzleTile extends StatelessWidget {
             child: tile.type == TileType.character
                 ? AnimatedCharacterBlock(
                     initDelay: initDelay + Duration(milliseconds: 500 + tile.value ~/2 * 250),
-                    imageUrl: 'assets/images/character$imageIndex.png',
+                    imageUrl: 'assets/images/char_$imageIndex.png',
                   )
                 : AnimatedDistanceBlock(
                   initDelay: initDelay,
