@@ -40,7 +40,7 @@ class AnimatedPuzzleTile extends StatelessWidget {
             child: tile.type == TileType.character
                 ? AnimatedCharacterBlock(
                     initDelay: initDelay + Duration(milliseconds: 500 + tile.value ~/2 * 250),
-                    imageUrl: 'assets/images/char_$imageIndex.png',
+                    index: imageIndex,
                   )
                 : AnimatedDistanceBlock(
                   initDelay: initDelay,

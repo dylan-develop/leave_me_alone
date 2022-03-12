@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:lottie/lottie.dart';
 
 class AnimatedCharacterBlock extends StatefulWidget {
-  final String imageUrl;
+  final int index;
   final Duration initDelay;
   final bool isAnimated;
 
   const AnimatedCharacterBlock({
     Key? key,
-    required this.imageUrl,
+    required this.index,
     this.initDelay = Duration.zero,
     this.isAnimated = true,
   }) : super(key: key);
@@ -26,9 +28,9 @@ class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
         _scale = 1;
       });
     });
+    // _composition = _loadComposition();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return AnimatedScale(
@@ -36,8 +38,20 @@ class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
       duration: Duration(milliseconds: widget.isAnimated ? 1000 : 0),
       curve: Curves.elasticOut,
       child: Image.asset(
-        widget.imageUrl,
+        'assets/images/characters/char_${widget.index}.png',
       ),
+      // child: MouseRegion(
+      //   onEnter: (detail) {
+      //     setState(() {
+      //       _onHover = true;
+      //     });
+      //   },
+      //   onExit: (detail) {
+      //     setState(() {
+      //       _onHover = false;
+      //     });
+      //   },
+      // ),
     );
   }
 }

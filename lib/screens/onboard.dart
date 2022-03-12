@@ -44,7 +44,7 @@ class OnboardPage extends StatelessWidget {
                         const Expanded(
                           flex: 5,
                           child: AnimatedCharacterBlock(
-                            imageUrl: 'assets/images/char_1.png',
+                            index: 1,
                             initDelay: Duration(milliseconds: 200),
                           ),
                         ),
@@ -55,7 +55,7 @@ class OnboardPage extends StatelessWidget {
                         const Expanded(
                           flex: 5,
                           child: AnimatedCharacterBlock(
-                            imageUrl: 'assets/images/char_2.png',
+                            index: 2,
                             initDelay: Duration(milliseconds: 700),
                           ),
                         ),
@@ -119,7 +119,7 @@ class OnboardPage extends StatelessWidget {
                           const Expanded(
                             flex: 5,
                             child: AnimatedCharacterBlock(
-                              imageUrl: 'assets/images/char_1.png',
+                              index: 1,
                               initDelay: Duration(milliseconds: 200),
                             ),
                           ),
@@ -130,7 +130,7 @@ class OnboardPage extends StatelessWidget {
                           const Expanded(
                             flex: 5,
                             child: AnimatedCharacterBlock(
-                              imageUrl: 'assets/images/char_2.png',
+                              index: 2,
                               initDelay: Duration(milliseconds: 700),
                             ),
                           ),

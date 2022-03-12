@@ -7,7 +7,6 @@ import 'package:leave_me_alone/models/tile.dart';
 import 'package:collection/collection.dart';
 
 enum PuzzleDifficulty { alpha, beta, delta }
-
 class Puzzle extends Equatable {
   final List<Tile> tiles;
 

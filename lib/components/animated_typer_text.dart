@@ -38,7 +38,6 @@ class _AnimatedTyperTextState extends State<AnimatedTyperText> {
                 fontFamily: widget.fontFamily,
                 fontSize: widget.fontSize,
               ),
-              speed: const Duration(milliseconds: 50),
               textAlign: widget.textAlign,
             ),
           ];
