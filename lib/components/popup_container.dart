@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:leave_me_alone/components/responsive_layout_builder.dart';
+import 'package:leave_me_alone/components/responsive_builder.dart';
 
 class PopupContainer extends StatelessWidget {
   final Widget child;
@@ -14,7 +14,7 @@ class PopupContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveLayoutBuilder(
+    return ResponsiveBuilder(
       mobile: Center(
         child: Container(
           padding: const EdgeInsets.all(24),

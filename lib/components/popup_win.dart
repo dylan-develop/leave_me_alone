@@ -4,7 +4,7 @@ import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
 import 'package:leave_me_alone/components/animated_mask.dart';
 import 'package:leave_me_alone/components/app_elevated_button.dart';
 import 'package:leave_me_alone/components/popup_container.dart';
-import 'package:leave_me_alone/components/responsive_layout_builder.dart';
+import 'package:leave_me_alone/components/responsive_builder.dart';
 import 'package:leave_me_alone/models/puzzle.dart';
 
 class WinPopup extends StatelessWidget {
@@ -17,7 +17,7 @@ class WinPopup extends StatelessWidget {
     final hasNextLevel = puzzle.getDifficulty() != PuzzleDifficulty.values.last;
 
     return PopupContainer(
-      child: ResponsiveLayoutBuilder(
+      child: ResponsiveBuilder(
         mobile: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

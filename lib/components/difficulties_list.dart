@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
 import 'package:leave_me_alone/components/animated_elevated_button.dart';
 import 'package:leave_me_alone/components/animated_typer_text.dart';
-import 'package:leave_me_alone/components/responsive_layout_builder.dart';
+import 'package:leave_me_alone/components/responsive_builder.dart';
 import 'package:leave_me_alone/models/puzzle.dart';
 
 class DifficultiesList extends StatefulWidget {
@@ -38,7 +38,7 @@ class _DifficultiesListState extends State<DifficultiesList> {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveLayoutBuilder(
+    return ResponsiveBuilder(
       mobile: Align(
         alignment: Alignment.topCenter,
         child: SingleChildScrollView(

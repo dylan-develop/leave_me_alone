@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:leave_me_alone/components/animated_icon_button.dart';
 import 'package:leave_me_alone/components/animated_text_button.dart';
 import 'package:leave_me_alone/components/difficulties_list.dart';
-import 'package:leave_me_alone/components/responsive_layout_builder.dart';
+import 'package:leave_me_alone/components/responsive_builder.dart';
 class DifficultiesPage extends StatefulWidget {
   const DifficultiesPage({Key? key}) : super(key: key);
 
@@ -15,7 +15,7 @@ class _DifficultiesPageState extends State<DifficultiesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ResponsiveLayoutBuilder(
+      body: ResponsiveBuilder(
         mobile: Stack(
           children: [
             DifficultiesList(

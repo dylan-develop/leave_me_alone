@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
 import 'package:leave_me_alone/components/app_elevated_button.dart';
 import 'package:leave_me_alone/components/page_container.dart';
-import 'package:leave_me_alone/components/responsive_layout_builder.dart';
+import 'package:leave_me_alone/components/responsive_builder.dart';
 import 'package:leave_me_alone/models/puzzle.dart';
 
 class DifficultiesPage extends StatefulWidget {
@@ -36,7 +36,7 @@ class _DifficultiesPageState extends State<DifficultiesPage> {
     final _screenHeight = MediaQuery.of(context).size.height;
 
     return PageContainer(
-      child: ResponsiveLayoutBuilder(
+      child: ResponsiveBuilder(
         mobile: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(

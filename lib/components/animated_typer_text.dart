@@ -63,6 +63,7 @@ class _AnimatedTyperTextState extends State<AnimatedTyperText> {
         : AnimatedTextKit(
             animatedTexts: animatedTexts,
             isRepeatingAnimation: false,
+            displayFullTextOnTap: widget.initDelay == Duration.zero,
           );
   }
 }

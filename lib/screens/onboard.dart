@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:leave_me_alone/components/animated_character_block.dart';
 import 'package:leave_me_alone/components/animated_elevated_button.dart';
 import 'package:leave_me_alone/components/animated_typer_text.dart';
-import 'package:leave_me_alone/components/responsive_layout_builder.dart';
+import 'package:leave_me_alone/components/responsive_builder.dart';
 
 class OnboardPage extends StatelessWidget {
   const OnboardPage({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class OnboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ResponsiveLayoutBuilder(
+      body: ResponsiveBuilder(
         mobile: Center(
           child: SingleChildScrollView(
             child: SizedBox(

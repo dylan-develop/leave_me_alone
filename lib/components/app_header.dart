@@ -2,7 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:leave_me_alone/components/difficulties_menu.dart';
-import 'package:leave_me_alone/components/responsive_layout_builder.dart';
+import 'package:leave_me_alone/components/responsive_builder.dart';
 import 'package:leave_me_alone/components/side_menu.dart';
 import 'package:leave_me_alone/helpers/modal_helper.dart';
 
@@ -29,7 +29,7 @@ class _AppHeaderState extends State<AppHeader> {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveLayoutBuilder(
+    return ResponsiveBuilder(
       mobile: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: 32,

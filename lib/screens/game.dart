@@ -10,7 +10,7 @@ import 'package:leave_me_alone/components/animated_top_section.dart';
 import 'package:leave_me_alone/components/page_container.dart';
 import 'package:leave_me_alone/components/popup_win.dart';
 import 'package:leave_me_alone/components/puzzle_board.dart';
-import 'package:leave_me_alone/components/responsive_layout_builder.dart';
+import 'package:leave_me_alone/components/responsive_builder.dart';
 import 'package:leave_me_alone/helpers/modal_helper.dart';
 
 class GamePage extends StatelessWidget {
@@ -65,7 +65,7 @@ class GamePage extends StatelessWidget {
               });
             }
           },
-          child: ResponsiveLayoutBuilder(
+          child: ResponsiveBuilder(
             mobile: Column(
               children: [
                 const AnimatedTopSection(),

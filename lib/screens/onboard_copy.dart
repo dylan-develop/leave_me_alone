@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:leave_me_alone/components/app_elevated_button.dart';
 import 'package:leave_me_alone/components/character_block.dart';
-import 'package:leave_me_alone/components/responsive_layout_builder.dart';
+import 'package:leave_me_alone/components/responsive_builder.dart';
 
 class OnboardPage extends StatelessWidget {
   const OnboardPage({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class OnboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _focusNode = FocusNode()..requestFocus();
     return Scaffold(
-      body: ResponsiveLayoutBuilder(
+      body: ResponsiveBuilder(
         mobile: Container(
           margin: const EdgeInsets.symmetric(
             horizontal: 32,
