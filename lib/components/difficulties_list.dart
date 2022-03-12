@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
@@ -102,79 +104,63 @@ class _DifficultiesListState extends State<DifficultiesList> {
           ),
         ),
       ),
-      desktop: Row(
-        children: [
-          Expanded(
-            flex: 4,
-            child: Container(),
-          ),
-          Expanded(
-            flex: 5,
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.only(top: 80),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 16),
-                    child: AnimatedTyperText(
-                      text: 'DIFFICULTY',
-                      fontFamily: 'ThinkBig',
-                      fontSize: 72,
-                      initDelay: const Duration(milliseconds: 3250),
-                      isAnimated: widget.isAnimated,
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 32),
-                    child: AnimatedTyperText(
-                      key: ValueKey(_description),
-                      text: _description,
-                      fontSize: 36,
-                      initDelay: const Duration(milliseconds: 100),
-                      isAnimated: widget.isAnimated,
-                    ),
-                  ),
-                  for (int i = 0; i < PuzzleDifficulty.values.length; i++)
-                    Center(
-                      child: LayoutBuilder(
-                        builder: (context, constraints) => Container(
-                          margin: const EdgeInsets.only(bottom: 48),
-                          child: AnimatedElevatedButton(
-                            initDelay: Duration(milliseconds: 1450 + i * 600),
-                            isAnimated: widget.isAnimated,
-                            offset: 8.0,
-                            width: constraints.maxWidth,
-                            height:
-                                MediaQuery.of(context).size.height / 1024 * 104,
-                            text: PuzzleDifficulty.values[i].name.toUpperCase(),
-                            fontSize: 48,
-                            fontFamily: 'ThinkBig',
-                            onPressed: () {
-                              context.read<PuzzleBloc>().add(PuzzleInitialized(
-                                  difficulty: PuzzleDifficulty.values[i]));
-                              widget.onPressedCallback?.call();
-                            },
-                            onHover: (bool value) {
-                              setState(() {
-                                _description = getDifficultyDescription(
-                                    PuzzleDifficulty.values[i]);
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
+      desktop: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.only(top: 80),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 16),
+                child: AnimatedTyperText(
+                  text: 'DIFFICULTY',
+                  fontFamily: 'ThinkBig',
+                  fontSize: 72,
+                  initDelay: const Duration(milliseconds: 3250),
+                  isAnimated: widget.isAnimated,
+                ),
               ),
-            ),
+              Container(
+                margin: const EdgeInsets.only(bottom: 32),
+                child: AnimatedTyperText(
+                  key: ValueKey(_description),
+                  text: _description,
+                  fontSize: 36,
+                  initDelay: const Duration(milliseconds: 100),
+                  isAnimated: widget.isAnimated,
+                ),
+              ),
+              for (int i = 0; i < PuzzleDifficulty.values.length; i++)
+                Center(
+                  child:Container(
+                    margin: const EdgeInsets.only(bottom: 48),
+                    child: AnimatedElevatedButton(
+                      initDelay: Duration(milliseconds: 1450 + i * 600),
+                      isAnimated: widget.isAnimated,
+                      offset: 8.0,
+                      width: max(344, MediaQuery.of(context).size.width / 1440 * 416),
+                      height: max(88, MediaQuery.of(context).size.height / 1024 * 104),
+                      text: PuzzleDifficulty.values[i].name.toUpperCase(),
+                      fontSize: 48,
+                      fontFamily: 'ThinkBig',
+                      onPressed: () {
+                        context.read<PuzzleBloc>().add(PuzzleInitialized(
+                            difficulty: PuzzleDifficulty.values[i]));
+                        widget.onPressedCallback?.call();
+                      },
+                      onHover: (bool value) {
+                        setState(() {
+                          _description = getDifficultyDescription(
+                              PuzzleDifficulty.values[i]);
+                        });
+                      },
+                    ),
+                  ),
+                ),
+            ],
           ),
-          Expanded(
-            flex: 4,
-            child: Container(),
-          ),
-        ],
+        ),
       ),
     );
   }
