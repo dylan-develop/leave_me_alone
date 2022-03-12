@@ -2,7 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:leave_me_alone/components/responsive_builder.dart';
+
+import 'package:leave_me_alone/components/responsive_layout_builder.dart';
 
 class PopupContainer extends StatelessWidget {
   final Widget child;
@@ -14,122 +15,125 @@ class PopupContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveBuilder(
-      mobile: Center(
-        child: Container(
-          padding: const EdgeInsets.all(24),
-          margin: EdgeInsets.all(max(24, MediaQuery.of(context).size.width / 375)),
-          decoration: BoxDecoration(
-            border: Border.all(),
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black,
-                offset: Offset(8, 8),
-              ),
-            ],
-          ),
-          child: Material(
-            color: Colors.transparent,
-            child: SizedBox(
-              width: min(
-                MediaQuery.of(context).size.width - 16 * 2,
-                MediaQuery.of(context).size.height * 9 / 20,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: SvgPicture.asset(
-                          'assets/icons/delete.svg',
+    return ResponsiveLayoutBuilder(
+      small: (context, child) {
+        return Center(
+          child: Container(
+            padding: const EdgeInsets.all(24),
+            margin: EdgeInsets.all(
+                max(24, MediaQuery.of(context).size.width / 375)),
+            decoration: BoxDecoration(
+              border: Border.all(),
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black,
+                  offset: Offset(8, 8),
+                ),
+              ],
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: SizedBox(
+                width: min(
+                  MediaQuery.of(context).size.width - 16 * 2,
+                  MediaQuery.of(context).size.height * 9 / 20,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: SvgPicture.asset(
+                            'assets/icons/delete.svg',
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  child,
-                ],
+                    this.child,
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
-      desktop: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 144),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 5,
-              child: Container(),
-            ),
-            Expanded(
-              flex: 6,
-              child: Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 2
+        );
+      },
+      large: (context, child) {
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 144),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 5,
+                child: Container(),
+              ),
+              Expanded(
+                flex: 6,
+                child: Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 2),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black,
+                          offset: Offset(16, 21),
+                        ),
+                      ],
                     ),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black,
-                        offset: Offset(16, 21),
-                      ),
-                    ],
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: LayoutBuilder(
-                      builder: ((context, constraints) {
-                        return SizedBox.square(
-                          dimension: min(
-                            constraints.maxWidth,
-                            constraints.maxHeight,
-                          ),
-                          child: Container(
-                            margin: const EdgeInsets.all(32),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: MouseRegion(
-                                    cursor: SystemMouseCursors.click,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: SvgPicture.asset(
-                                        'assets/icons/delete.svg',
+                    child: Material(
+                      color: Colors.transparent,
+                      child: LayoutBuilder(
+                        builder: ((context, constraints) {
+                          return SizedBox.square(
+                            dimension: min(
+                              constraints.maxWidth,
+                              constraints.maxHeight,
+                            ),
+                            child: Container(
+                              margin: const EdgeInsets.all(32),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: MouseRegion(
+                                      cursor: SystemMouseCursors.click,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: SvgPicture.asset(
+                                          'assets/icons/delete.svg',
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: child,
-                                ),
-                              ],
+                                  Expanded(
+                                    child: this.child,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      }),
+                          );
+                        }),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

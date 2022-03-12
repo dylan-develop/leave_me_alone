@@ -10,7 +10,8 @@ import 'package:leave_me_alone/components/animated_top_section.dart';
 import 'package:leave_me_alone/components/page_container.dart';
 import 'package:leave_me_alone/components/popup_win.dart';
 import 'package:leave_me_alone/components/puzzle_board.dart';
-import 'package:leave_me_alone/components/responsive_builder.dart';
+
+import 'package:leave_me_alone/components/responsive_layout_builder.dart';
 import 'package:leave_me_alone/helpers/modal_helper.dart';
 
 class GamePage extends StatelessWidget {
@@ -65,58 +66,62 @@ class GamePage extends StatelessWidget {
               });
             }
           },
-          child: ResponsiveBuilder(
-            mobile: Column(
-              children: [
-                const AnimatedTopSection(),
-                Expanded(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      return Center(
-                        child: PuzzleBoard(
-                          dimenision: min(
-                            constraints.maxWidth - 16 * 2,
-                            constraints.maxHeight,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                const AnimatedBottomSection()
-              ],
-            ),
-            desktop: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 96),
-              child: Row(
+          child: ResponsiveLayoutBuilder(
+            small: (context, child) {
+              return Column(
                 children: [
-                  const Expanded(
-                    flex: 4,
-                    child: AnimatedSideSection(),
-                  ),
+                  const AnimatedTopSection(),
                   Expanded(
-                    flex: 1,
-                    child: Container(),
-                  ),
-                  Expanded(
-                    flex: 6,
                     child: LayoutBuilder(
                       builder: (context, constraints) {
                         return Center(
                           child: PuzzleBoard(
                             dimenision: min(
-                                  constraints.maxWidth,
-                                  constraints.maxHeight,
-                                ) -
-                                16 * 2,
+                              constraints.maxWidth - 16,
+                              constraints.maxHeight,
+                            ),
                           ),
                         );
                       },
                     ),
                   ),
+                  const AnimatedBottomSection()
                 ],
-              ),
-            ),
+              );
+            },
+            large: (context, child) {
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 96),
+                child: Row(
+                  children: [
+                    const Expanded(
+                      flex: 4,
+                      child: AnimatedSideSection(),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(),
+                    ),
+                    Expanded(
+                      flex: 6,
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return Center(
+                            child: PuzzleBoard(
+                              dimenision: min(
+                                    constraints.maxWidth,
+                                    constraints.maxHeight,
+                                  ) -
+                                  16 * 2,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ),
       ),

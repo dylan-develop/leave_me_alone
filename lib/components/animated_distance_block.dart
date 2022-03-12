@@ -68,7 +68,7 @@ class _AnimatedDistanceBlockState extends State<AnimatedDistanceBlock> {
                     alignment: Alignment.center,
                     fit: BoxFit.fitWidth,
                     child: AnimatedOpacity(
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 250),
                       opacity: status == PuzzleStatus.incomplete && !_onHover ? 1 : 0,
                       child: Container(
                         margin: EdgeInsets.symmetric(
@@ -94,7 +94,7 @@ class _AnimatedDistanceBlockState extends State<AnimatedDistanceBlock> {
                     alignment: Alignment.center,
                     fit: BoxFit.fitWidth,
                     child: AnimatedOpacity(
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 250),
                       opacity: status == PuzzleStatus.incomplete && _onHover ? 1 : 0,
                       child: Container(
                         margin: EdgeInsets.symmetric(
@@ -119,7 +119,7 @@ class _AnimatedDistanceBlockState extends State<AnimatedDistanceBlock> {
                     alignment: Alignment.center,
                     fit: BoxFit.fitWidth,
                     child: AnimatedOpacity(
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 250),
                       opacity: status == PuzzleStatus.complete ? 1 : 0,
                       child: Container(
                         margin: EdgeInsets.symmetric(

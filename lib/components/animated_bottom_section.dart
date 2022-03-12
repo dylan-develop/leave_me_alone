@@ -17,7 +17,7 @@ class AnimatedBottomSection extends StatelessWidget {
     final initDelay = 500 + puzzle.getDimension() * 250;
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 64),
+      padding: const EdgeInsets.symmetric(vertical: 48),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

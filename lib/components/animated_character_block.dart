@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:lottie/lottie.dart';
 
 class AnimatedCharacterBlock extends StatefulWidget {
   final int index;
@@ -28,7 +26,6 @@ class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
         _scale = 1;
       });
     });
-    // _composition = _loadComposition();
     super.initState();
   }
   @override
@@ -40,18 +37,6 @@ class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
       child: Image.asset(
         'assets/images/characters/char_${widget.index}.png',
       ),
-      // child: MouseRegion(
-      //   onEnter: (detail) {
-      //     setState(() {
-      //       _onHover = true;
-      //     });
-      //   },
-      //   onExit: (detail) {
-      //     setState(() {
-      //       _onHover = false;
-      //     });
-      //   },
-      // ),
     );
   }
 }
