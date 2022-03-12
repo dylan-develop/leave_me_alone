@@ -71,7 +71,7 @@ class _MyAppState extends State<MyApp> {
     // prefetchToMemory('assets/audio/bg.wav');
     // prefetchToMemory('assets/audio/female_cough.wav');
     // prefetchToMemory('assets/audio/male_cough.wav');
-    prefetchToMemory('assets/audio/sneeze.wav');
+    prefetchToMemory('assets/assets/audio/sneeze.wav');
 
     super.initState();
   }
@@ -95,6 +95,9 @@ class _MyAppState extends State<MyApp> {
         routeInformationParser: BeamerParser(),
         routerDelegate: routerDelegate,
         backButtonDispatcher: BeamerBackButtonDispatcher(delegate: routerDelegate),
+        theme: ThemeData(
+          primaryColor: Colors.white,
+        ),
       ),
     );
   }

@@ -44,7 +44,7 @@ class _AnimatedElevatedButtonState extends State<AnimatedElevatedButton> {
   @override
   void initState() {
     _audioPlayer.setVolume(context.read<AudioControlBloc>().state.muted ? 1 : 0);
-    _audioPlayer.setUrl('assets/audio/sneeze.wav');
+    _audioPlayer.setAsset('assets/audio/sneeze.wav');
 
     if (!widget.isAnimated) {
       setState(() {
