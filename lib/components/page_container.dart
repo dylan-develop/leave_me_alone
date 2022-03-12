@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leave_me_alone/components/app_header.dart';
+import 'package:leave_me_alone/components/audio_control.dart';
 
 class PageContainer extends StatelessWidget {
   final Widget child;
@@ -20,6 +21,11 @@ class PageContainer extends StatelessWidget {
               ),
             ),
             const AppHeader(),
+            const Positioned(
+              right: 32,
+              top: 32,
+              child: AudioControl(),
+            ),
           ],
         ),
       ),

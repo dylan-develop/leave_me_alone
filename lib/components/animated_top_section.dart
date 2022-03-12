@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
+import 'package:leave_me_alone/bloc/puzzle/puzzle_bloc.dart';
 import 'package:leave_me_alone/components/animated_moves_number.dart';
 import 'package:leave_me_alone/components/animated_typer_text.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
+import 'package:leave_me_alone/bloc/puzzle/puzzle_bloc.dart';
 
 class AnimatedMovesNumber extends StatefulWidget {
   final Duration initDelay;

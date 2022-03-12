@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
+import 'package:leave_me_alone/bloc/puzzle/puzzle_bloc.dart';
 import 'package:leave_me_alone/components/animated_bottom_section.dart';
 import 'package:leave_me_alone/components/animated_side_section.dart';
 import 'package:leave_me_alone/components/animated_top_section.dart';

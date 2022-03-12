@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
+import 'package:leave_me_alone/bloc/puzzle/puzzle_bloc.dart';
 import 'package:leave_me_alone/components/animated_elevated_button.dart';
 import 'package:leave_me_alone/components/animated_typer_text.dart';
 import 'package:leave_me_alone/components/responsive_layout_builder.dart';

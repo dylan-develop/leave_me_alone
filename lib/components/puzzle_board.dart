@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
+import 'package:leave_me_alone/bloc/puzzle/puzzle_bloc.dart';
 import 'package:leave_me_alone/models/puzzle.dart';
 
 import 'animated_puzzle_tile.dart';

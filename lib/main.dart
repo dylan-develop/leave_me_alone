@@ -1,8 +1,11 @@
 import 'package:beamer/beamer.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leave_me_alone/bloc/puzzle_bloc.dart';
+import 'package:leave_me_alone/bloc/audio_control/audio_control_bloc.dart';
+import 'package:leave_me_alone/bloc/puzzle/puzzle_bloc.dart';
 import 'package:leave_me_alone/models/puzzle.dart';
 import 'package:leave_me_alone/screens/difficulties.dart';
 import 'package:leave_me_alone/screens/game.dart';
@@ -16,12 +19,17 @@ void main() async {
       DeviceOrientation.portraitDown,
     ],
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final routerDelegate = BeamerDelegate(
     locationBuilder: RoutesLocationBuilder(
       routes: {
@@ -47,6 +55,27 @@ class MyApp extends StatelessWidget {
     ),
   );
 
+  Future<void> prefetchToMemory(String filePath) async {
+    if (kIsWeb) {
+      await Dio().get(filePath);
+      return;
+    }
+    throw UnimplementedError(
+      'The function `prefetchToMemory` is not implemented '
+      'for platforms other than Web.',
+    );
+  }
+
+  @override
+  void initState() {
+    // prefetchToMemory('assets/audio/bg.wav');
+    // prefetchToMemory('assets/audio/female_cough.wav');
+    // prefetchToMemory('assets/audio/male_cough.wav');
+    prefetchToMemory('assets/audio/sneeze.wav');
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -54,6 +83,10 @@ class MyApp extends StatelessWidget {
         BlocProvider<PuzzleBloc>(
           create: (context) => PuzzleBloc()
             ..add(const PuzzleInitialized(difficulty: PuzzleDifficulty.alpha)),
+        ),
+        BlocProvider<AudioControlBloc>(
+          create: (context) => AudioControlBloc()
+            ..add(AudioToggled()),
         ),
       ],
       child: MaterialApp.router(

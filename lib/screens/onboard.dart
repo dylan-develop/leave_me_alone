@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:leave_me_alone/components/animated_character_block.dart';
 import 'package:leave_me_alone/components/animated_elevated_button.dart';
 import 'package:leave_me_alone/components/animated_typer_text.dart';
+import 'package:leave_me_alone/components/audio_control.dart';
 
 import 'package:leave_me_alone/components/responsive_layout_builder.dart';
 
@@ -13,28 +14,38 @@ class OnboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ResponsiveLayoutBuilder(
-        small: (context, child) {
+        child: (size) {
+          final width = size == ResponsiveLayoutSize.large ? null : 264.0;
+          final titleFontSize =
+              size == ResponsiveLayoutSize.large ? 96.0 : 48.0;
+          final descriptionFontSize =
+              size == ResponsiveLayoutSize.large ? 36.0 : 24.0;
+          final buttonOffset = size == ResponsiveLayoutSize.large ? 8.0 : 4.0;
+          final buttonFontSize =
+              size == ResponsiveLayoutSize.large ? 36.0 : 24.0;
+          final buttonHeight = size == ResponsiveLayoutSize.large ? 56.0 : 40.0;
+
           return Center(
             child: SingleChildScrollView(
               child: SizedBox(
-                width: 264,
+                width: width,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
                       margin: const EdgeInsets.only(bottom: 16),
-                      child: const AnimatedTyperText(
+                      child: AnimatedTyperText(
                         text: 'LEAVE ME ALONE',
                         fontFamily: 'ThinkBig',
-                        fontSize: 48,
-                        initDelay: Duration(milliseconds: 1700),
+                        fontSize: titleFontSize,
+                        initDelay: const Duration(milliseconds: 1700),
                       ),
                     ),
-                    const AnimatedTyperText(
+                    AnimatedTyperText(
                       text: 'A stupid game',
-                      fontSize: 24,
-                      initDelay: Duration(milliseconds: 2400),
+                      fontSize: descriptionFontSize,
+                      initDelay: const Duration(milliseconds: 2400),
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 64),
@@ -69,11 +80,11 @@ class OnboardPage extends StatelessWidget {
                         builder: (context, constraints) =>
                             AnimatedElevatedButton(
                           initDelay: const Duration(milliseconds: 3050),
-                          offset: 4.0,
+                          offset: buttonOffset,
                           width: constraints.maxWidth,
-                          height: 40,
+                          height: buttonHeight,
                           text: 'Start Now',
-                          fontSize: 24,
+                          fontSize: buttonFontSize,
                           onPressed: () {
                             context.beamToNamed('/difficulties');
                           },
@@ -86,85 +97,41 @@ class OnboardPage extends StatelessWidget {
             ),
           );
         },
-        large: (context, child) {
-          return Row(
+        small: (context, child) {
+          return Stack(
             children: [
-              Expanded(
-                flex: 4,
-                child: Container(),
+              child!,
+              const Positioned(
+                right: 32,
+                top: 32,
+                child: AudioControl(),
               ),
-              Expanded(
-                flex: 5,
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 16),
-                        child: const AnimatedTyperText(
-                          text: 'LEAVE ME ALONE',
-                          fontFamily: 'ThinkBig',
-                          fontSize: 96,
-                          initDelay: Duration(milliseconds: 1700),
-                        ),
-                      ),
-                      const AnimatedTyperText(
-                        text: 'A stupid game',
-                        fontSize: 36,
-                        initDelay: Duration(milliseconds: 2400),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 64),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            const Expanded(
-                              flex: 5,
-                              child: AnimatedCharacterBlock(
-                                index: 1,
-                                initDelay: Duration(milliseconds: 200),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(),
-                            ),
-                            const Expanded(
-                              flex: 5,
-                              child: AnimatedCharacterBlock(
-                                index: 2,
-                                initDelay: Duration(milliseconds: 700),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Center(
-                        child: LayoutBuilder(
-                          builder: (context, constraints) =>
-                              AnimatedElevatedButton(
-                            initDelay: const Duration(milliseconds: 3050),
-                            offset: 8.0,
-                            width: constraints.maxWidth,
-                            height: 56,
-                            text: 'Start Now',
-                            fontSize: 36,
-                            onPressed: () {
-                              context.beamToNamed('/difficulties');
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
+            ],
+          );
+        },
+        large: (context, child) {
+          return Stack(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: Container(),
                   ),
-                ),
+                  Expanded(
+                    flex: 5,
+                    child: child!,
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: Container(),
+                  ),
+                ],
               ),
-              Expanded(
-                flex: 4,
-                child: Container(),
+              const Positioned(
+                right: 32,
+                top: 32,
+                child: AudioControl(),
               ),
             ],
           );
