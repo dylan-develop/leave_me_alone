@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class AnimatedCharacterBlock extends StatefulWidget {
   final int index;
@@ -19,6 +21,8 @@ class AnimatedCharacterBlock extends StatefulWidget {
 class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
   double _scale = 0;
 
+  bool _onHover = false;
+
   @override
   void initState() {
     Future.delayed(widget.isAnimated ? widget.initDelay : Duration.zero, () {
@@ -35,9 +39,29 @@ class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
       scale: _scale,
       duration: Duration(milliseconds: widget.isAnimated ? 1000 : 0),
       curve: Curves.elasticOut,
-      child: Image.asset(
-        'assets/images/characters/char_${widget.index}.png',
-      ),
+      child: kIsWeb
+          ? Image.asset(
+              'assets/images/characters/char_${widget.index}.png',
+            )
+          : MouseRegion(
+              onEnter: (detail) {
+                if (widget.isAnimated) {
+                  setState(() {
+                    _onHover = true;
+                  });
+                }
+              },
+              onExit: (detail) {
+                if (widget.isAnimated) {
+                  setState(() {
+                    _onHover = false;
+                  });
+                }
+              },
+              child: Lottie.asset(
+                'assets/lottie/char_${widget.index}_${_onHover ? 'hover' : 'default'}.json',
+              ),
+            ),
     );
   }
 }
