@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(leave_me_alone LANGUAGES CXX)
 
-set(BINARY_NAME "leave_me_alone")
+set(BINARY_NAME "Leave Me Alone")
 
 cmake_policy(SET CMP0063 NEW)
 
