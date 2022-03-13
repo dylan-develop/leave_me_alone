@@ -68,16 +68,16 @@ class _AnimatedBottomSectionState extends State<AnimatedBottomSection> {
                       final nextDifficulty = puzzle.getNextDifficulty();
                       if (nextDifficulty == PuzzleDifficulty.beta) {
                         await _audioPlayer
-                            .setAsset('assets/audio/female_cough.mp3');
+                            .setAsset('assets/audio/female_cough.wav');
                       } else if (nextDifficulty == PuzzleDifficulty.delta) {
                         await _audioPlayer
-                            .setAsset('assets/audio/male_cough.mp3');
+                            .setAsset('assets/audio/male_cough.wav');
                       }
                       context
                           .read<PuzzleBloc>()
                           .add(PuzzleInitialized(difficulty: nextDifficulty));
                     } else {
-                      await _audioPlayer.setAsset('assets/audio/sneeze.mp3');
+                      await _audioPlayer.setAsset('assets/audio/sneeze.wav');
                       await _audioPlayer.play();
                       await _audioPlayer.seek(Duration.zero);
                       await _audioPlayer.pause();

@@ -22,11 +22,9 @@ class AnimatedIconButton extends StatefulWidget {
 class _AnimatedIconButtonState extends State<AnimatedIconButton> {
   double _opacity = 0;
 
-  late Timer _timer;
-
   @override
   void initState() {
-    Timer(widget.initDelay, () {
+    Future.delayed(widget.initDelay, () {
       if (mounted) {
         setState(() {
           _opacity = 1;
@@ -34,12 +32,6 @@ class _AnimatedIconButtonState extends State<AnimatedIconButton> {
       }
     });
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
   }
 
   @override

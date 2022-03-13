@@ -23,11 +23,9 @@ class _AnimatedDistanceBlockState extends State<AnimatedDistanceBlock> {
   double _scale = 0;
   bool _onHover = false;
 
-  late Timer timer;
-
   @override
   void initState() {
-    timer = Timer(widget.initDelay, () {
+    Future.delayed(widget.initDelay, () {
       if (mounted) {
         setState(() {
           _scale = 1;
@@ -36,13 +34,7 @@ class _AnimatedDistanceBlockState extends State<AnimatedDistanceBlock> {
     });
     super.initState();
   }
-
-  @override
-  void dispose() {
-    timer.cancel();
-    super.dispose();
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     final status = context.select((PuzzleBloc bloc) => bloc.state.status);

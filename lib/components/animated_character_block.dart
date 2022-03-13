@@ -25,11 +25,9 @@ class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
 
   bool _onHover = false;
 
-  late Timer _timer;
-
   @override
   void initState() {
-    _timer = Timer(widget.isAnimated ? widget.initDelay : Duration.zero, () {
+    Future.delayed(widget.isAnimated ? widget.initDelay : Duration.zero, () {
       if (mounted) {
         setState(() {
           _scale = 1;
@@ -37,12 +35,6 @@ class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
       }
     });
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
   }
 
   @override

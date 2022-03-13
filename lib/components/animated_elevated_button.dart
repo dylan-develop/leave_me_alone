@@ -39,9 +39,6 @@ class _AnimatedElevatedButtonState extends State<AnimatedElevatedButton> {
   bool _onHover = false;
   bool _initAnimationCompleted = false;
 
-  late Timer _scaleTimer;
-  late Timer _opacityTimer;
-
   @override
   void initState() {
     if (!widget.isAnimated) {
@@ -51,15 +48,14 @@ class _AnimatedElevatedButtonState extends State<AnimatedElevatedButton> {
         _initAnimationCompleted = true;
       });
     } else {
-      _scaleTimer = Timer(widget.initDelay, () {
+      Future.delayed(widget.initDelay, () {
         if (mounted) {
           setState(() {
             _scale = 1;
           });
         }
       });
-      _opacityTimer =
-          Timer(widget.initDelay + const Duration(milliseconds: 500), () {
+      Future.delayed(widget.initDelay + const Duration(milliseconds: 500), () {
         if (mounted) {
           setState(() {
             _opacity = 1;
@@ -70,14 +66,7 @@ class _AnimatedElevatedButtonState extends State<AnimatedElevatedButton> {
     }
     super.initState();
   }
-
-  @override
-  void dispose() {
-    _scaleTimer.cancel();
-    _opacityTimer.cancel();
-    super.dispose();
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return SizedBox(

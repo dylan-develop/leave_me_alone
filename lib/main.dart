@@ -58,9 +58,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     CacheHelper.prefetchToMemory([
-      'assets/audio/female_cough.mp3',
-      'assets/audio/male_cough.mp3',
-      'assets/audio/sneeze.mp3',
+      'assets/audio/female_cough.wav',
+      'assets/audio/male_cough.wav',
+      'assets/audio/sneeze.wav',
     ]);
 
     super.initState();
@@ -79,6 +79,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ],
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         title: 'Leave Me Alone',
         scrollBehavior:
             ScrollConfiguration.of(context).copyWith(scrollbars: false),

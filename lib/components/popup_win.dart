@@ -104,10 +104,10 @@ class _WinPopupState extends State<WinPopup> {
                               final nextDifficulty = puzzle.getNextDifficulty();
                               if (nextDifficulty == PuzzleDifficulty.beta) {
                                 await _audioPlayer
-                                    .setAsset('assets/audio/female_cough.mp3');
+                                    .setAsset('assets/audio/female_cough.wav');
                               } else if (nextDifficulty == PuzzleDifficulty.delta) {
                                 await _audioPlayer
-                                    .setAsset('assets/audio/male_cough.mp3');
+                                    .setAsset('assets/audio/male_cough.wav');
                               }
                               await _audioPlayer.play();
                               await _audioPlayer.seek(Duration.zero);
@@ -209,9 +209,9 @@ class _WinPopupState extends State<WinPopup> {
                                       onTap: () async {
                                         final nextDifficulty = puzzle.getNextDifficulty();
                                         if (nextDifficulty == PuzzleDifficulty.beta) {
-                                          await _audioPlayer.setAsset('assets/audio/female_cough.mp3');
+                                          await _audioPlayer.setAsset('assets/audio/female_cough.wav');
                                         } else if (nextDifficulty == PuzzleDifficulty.delta) {
-                                          await _audioPlayer.setAsset('assets/audio/male_cough.mp3');
+                                          await _audioPlayer.setAsset('assets/audio/male_cough.wav');
                                         }
                                         await _audioPlayer.play();
                                         await _audioPlayer.seek(Duration.zero);
