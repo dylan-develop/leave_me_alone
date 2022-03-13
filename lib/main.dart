@@ -1,11 +1,10 @@
 import 'package:beamer/beamer.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/audio_control/audio_control_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle/puzzle_bloc.dart';
+import 'package:leave_me_alone/helpers/cache_helper.dart';
 import 'package:leave_me_alone/models/puzzle.dart';
 import 'package:leave_me_alone/screens/difficulties.dart';
 import 'package:leave_me_alone/screens/game.dart';
@@ -55,23 +54,13 @@ class _MyAppState extends State<MyApp> {
     ),
   );
 
-  Future<void> prefetchToMemory(String filePath) async {
-    if (kIsWeb) {
-      await Dio().get(filePath);
-      return;
-    }
-    throw UnimplementedError(
-      'The function `prefetchToMemory` is not implemented '
-      'for platforms other than Web.',
-    );
-  }
-
   @override
   void initState() {
-    // prefetchToMemory('assets/audio/bg.wav');
-    prefetchToMemory('assets/audio/female_cough.wav');
-    prefetchToMemory('assets/audio/male_cough.wav');
-    prefetchToMemory('assets/assets/audio/sneeze.wav');
+    CacheHelper.prefetchToMemory([
+      'assets/audio/female_cough.wav',
+      'assets/audio/male_cough.wav',
+      'assets/audio/sneeze.wav',
+    ]);
 
     super.initState();
   }
@@ -90,10 +79,12 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp.router(
         title: 'Leave Me Alone',
-        scrollBehavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+        scrollBehavior:
+            ScrollConfiguration.of(context).copyWith(scrollbars: false),
         routeInformationParser: BeamerParser(),
         routerDelegate: routerDelegate,
-        backButtonDispatcher: BeamerBackButtonDispatcher(delegate: routerDelegate),
+        backButtonDispatcher:
+            BeamerBackButtonDispatcher(delegate: routerDelegate),
         theme: ThemeData(
           primaryColor: Colors.white,
         ),

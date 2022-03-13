@@ -35,24 +35,26 @@ class DifficultiesPage extends StatelessWidget {
                   },
                 );
 
-          return Stack(
-            children: [
-              DifficultiesList(
-                onPressedCallback: () {
-                  context.beamToNamed('/puzzle');
-                },
-              ),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(32),
-                child: icon,
-              ),
-              const Positioned(
-                right: 32,
-                top: 32,
-                child: AudioControl(),
-              ),
-            ],
+          return SafeArea(
+            child: Stack(
+              children: [
+                DifficultiesList(
+                  onPressedCallback: () {
+                    context.beamToNamed('/puzzle');
+                  },
+                ),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(32),
+                  child: icon,
+                ),
+                const Positioned(
+                  right: 32,
+                  top: 32,
+                  child: AudioControl(),
+                ),
+              ],
+            ),
           );
         },
       ),

@@ -44,6 +44,7 @@ dependencies:
   just_audio: ^0.9.20
   just_audio_libwinmedia: ^0.0.4
   dio: ^4.0.4
+  lottie: ^1.2.2
 
 dev_dependencies:
   flutter_test:

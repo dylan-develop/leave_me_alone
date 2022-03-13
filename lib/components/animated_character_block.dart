@@ -28,6 +28,7 @@ class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedScale(
