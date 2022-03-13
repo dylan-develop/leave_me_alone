@@ -20,12 +20,6 @@ class _OnboardPageState extends State<OnboardPage> {
   final _audioPlayer = AudioPlayer();
 
   @override
-  void initState() {
-    _audioPlayer.setAsset('assets/audio/sneeze.wav');
-    super.initState();
-  }
-
-  @override
   void dispose() {
     _audioPlayer.dispose();
     super.dispose();
@@ -111,6 +105,7 @@ class _OnboardPageState extends State<OnboardPage> {
                               text: 'Start Now',
                               fontSize: buttonFontSize,
                               onPressed: () async {
+                                await _audioPlayer.setAsset('assets/audio/sneeze.wav');
                                 await _audioPlayer.play();
                                 await _audioPlayer.seek(Duration.zero);
                                 context.beamToNamed('/difficulties');
