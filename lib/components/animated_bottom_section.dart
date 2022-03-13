@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:leave_me_alone/bloc/puzzle/puzzle_bloc.dart';
 import 'package:leave_me_alone/components/animated_elevated_button.dart';
+import 'package:leave_me_alone/components/audio_control_listener.dart';
 import 'package:leave_me_alone/components/popup_hints.dart';
 import 'package:leave_me_alone/helpers/modal_helper.dart';
 
@@ -36,66 +37,77 @@ class _AnimatedBottomSectionState extends State<AnimatedBottomSection> {
 
     final initDelay = 500 + puzzle.getDimension() * 250;
 
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 48),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Visibility(
-            visible: !(!puzzle.hasNextDifficulty() && status == PuzzleStatus.complete),
-            child: Container(
-              margin: const EdgeInsets.only(right: 24),
-              child: AnimatedElevatedButton(
-                key: ValueKey(status),
-                width: 136,
-                height: 40,
-                text:
-                    puzzle.hasNextDifficulty() && status == PuzzleStatus.complete
-                        ? 'Next Level'
-                        : 'Shuffle',
-                fontSize: 24,
-                offset: 4,
-                initDelay: Duration(
-                  milliseconds: stage == PuzzleStage.initialized
-                      ? initDelay + puzzle.getDifficulty().name.length * 50 + 2000 + 500
-                      : 0,
+    return AudioControlListener(
+      audioPlayer: _audioPlayer,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 48),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Visibility(
+              visible: !(!puzzle.hasNextDifficulty() &&
+                  status == PuzzleStatus.complete),
+              child: Container(
+                margin: const EdgeInsets.only(right: 24),
+                child: AnimatedElevatedButton(
+                  key: ValueKey(status),
+                  width: 136,
+                  height: 40,
+                  text: puzzle.hasNextDifficulty() &&
+                          status == PuzzleStatus.complete
+                      ? 'Next Level'
+                      : 'Shuffle',
+                  fontSize: 24,
+                  offset: 4,
+                  initDelay: Duration(
+                    milliseconds: stage == PuzzleStage.initialized
+                        ? initDelay +
+                            puzzle.getDifficulty().name.length * 50 +
+                            2000 +
+                            500
+                        : 0,
+                  ),
+                  onPressed: () async {
+                    await _audioPlayer.play();
+                    await _audioPlayer.seek(Duration.zero);
+                    if (puzzle.hasNextDifficulty() &&
+                        status == PuzzleStatus.complete) {
+                      context.read<PuzzleBloc>().add(PuzzleInitialized(
+                          difficulty: puzzle.getNextDifficulty()));
+                    } else {
+                      context.read<PuzzleBloc>().add(PuzzleReset());
+                    }
+                  },
                 ),
-                onPressed: () async {
-                  await _audioPlayer.play();
-                  if (puzzle.hasNextDifficulty() &&
-                      status == PuzzleStatus.complete) {
-                    context.read<PuzzleBloc>().add(PuzzleInitialized(
-                        difficulty: puzzle.getNextDifficulty()));
-                  } else {
-                    context.read<PuzzleBloc>().add(PuzzleReset());
-                  }
-                },
               ),
             ),
-          ),
-          AnimatedElevatedButton(
-            key: ValueKey(status),
-            width: status == PuzzleStatus.complete ? 136 : 80,
-            height: 40,
-            text: status == PuzzleStatus.complete ? 'Play Again' : 'Hint',
-            fontSize: 24,
-            offset: 4,
-            initDelay: Duration(
-                milliseconds: stage == PuzzleStage.initialized
-                    ? initDelay + puzzle.getDifficulty().name.length * 50 + 2000 + 500
-                    : 0),
-            onPressed: () {
-              if (status == PuzzleStatus.complete) {
-                context.read<PuzzleBloc>().add(PuzzleReset());
-              } else {
-                showSlideDialog(
-                  context: context,
-                  child: const HintsPopup(),
-                );
-              }
-            },
-          ),
-        ],
+            AnimatedElevatedButton(
+              key: ValueKey(status),
+              width: status == PuzzleStatus.complete ? 136 : 80,
+              height: 40,
+              text: status == PuzzleStatus.complete ? 'Play Again' : 'Hint',
+              fontSize: 24,
+              offset: 4,
+              initDelay: Duration(
+                  milliseconds: stage == PuzzleStage.initialized
+                      ? initDelay +
+                          puzzle.getDifficulty().name.length * 50 +
+                          2000 +
+                          500
+                      : 0),
+              onPressed: () {
+                if (status == PuzzleStatus.complete) {
+                  context.read<PuzzleBloc>().add(PuzzleReset());
+                } else {
+                  showSlideDialog(
+                    context: context,
+                    child: const HintsPopup(),
+                  );
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

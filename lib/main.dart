@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:beamer/beamer.dart';
+import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,12 +15,16 @@ import 'package:leave_me_alone/screens/onboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    await DesktopWindow.setFullScreen(true);
+  }
   await SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ],
   );
+
   runApp(const MyApp());
 }
 
