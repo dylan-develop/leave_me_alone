@@ -142,6 +142,7 @@ class _AnimatedSideSectionState extends State<AnimatedSideSection> {
                             .setAsset('assets/audio/male_cough.wav');
                       }
                       await _audioPlayer.play();
+                      await _audioPlayer.seek(Duration.zero);
 
                       context
                           .read<PuzzleBloc>()

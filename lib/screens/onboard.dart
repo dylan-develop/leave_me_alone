@@ -112,6 +112,7 @@ class _OnboardPageState extends State<OnboardPage> {
                               fontSize: buttonFontSize,
                               onPressed: () async {
                                 await _audioPlayer.play();
+                                await _audioPlayer.seek(Duration.zero);
                                 context.beamToNamed('/difficulties');
                               },
                             ),

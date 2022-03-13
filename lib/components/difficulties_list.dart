@@ -126,6 +126,7 @@ class _DifficultiesListState extends State<DifficultiesList> {
                             await _audioPlayer
                                 .setAsset('assets/audio/${_audios[i]}.wav');
                             await _audioPlayer.play();
+                            await _audioPlayer.seek(Duration.zero);
 
                             context.read<PuzzleBloc>().add(PuzzleInitialized(
                                 difficulty: PuzzleDifficulty.values[i]));

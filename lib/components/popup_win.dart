@@ -107,6 +107,7 @@ class _WinPopupState extends State<WinPopup> {
                                   .setAsset('assets/audio/male_cough.wav');
                             }
                             await _audioPlayer.play();
+                            await _audioPlayer.seek(Duration.zero);
                             context.read<PuzzleBloc>().add(
                                 PuzzleInitialized(difficulty: nextDifficulty));
                             Navigator.of(context).pop();
@@ -214,6 +215,7 @@ class _WinPopupState extends State<WinPopup> {
                                               'assets/audio/male_cough.wav');
                                         }
                                         await _audioPlayer.play();
+                                        await _audioPlayer.seek(Duration.zero);
                                         context.read<PuzzleBloc>().add(
                                             PuzzleInitialized(
                                                 difficulty: nextDifficulty));
