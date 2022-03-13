@@ -95,7 +95,7 @@ BEGIN
             VALUE "InternalName", "leave_me_alone" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.example. All rights reserved." "\0"
             VALUE "OriginalFilename", "leave_me_alone.exe" "\0"
-            VALUE "ProductName", "Leave Me Alone" "\0"
+            VALUE "ProductName", "leave_me_alone" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
