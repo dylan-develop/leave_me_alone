@@ -1,12 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:leave_me_alone/bloc/puzzle/puzzle_bloc.dart';
 import 'package:leave_me_alone/components/animated_elevated_button.dart';
 import 'package:leave_me_alone/components/popup_hints.dart';
 import 'package:leave_me_alone/helpers/modal_helper.dart';
 
-class AnimatedBottomSection extends StatelessWidget {
+class AnimatedBottomSection extends StatefulWidget {
   const AnimatedBottomSection({Key? key}) : super(key: key);
+
+  @override
+  State<AnimatedBottomSection> createState() => _AnimatedBottomSectionState();
+}
+
+class _AnimatedBottomSectionState extends State<AnimatedBottomSection> {
+  final _audioPlayer = AudioPlayer();
+
+  @override
+  void initState() {
+    _audioPlayer.setAsset('assets/audio/sneeze.wav');
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +60,8 @@ class AnimatedBottomSection extends StatelessWidget {
                       ? initDelay + puzzle.getDifficulty().name.length * 50 + 2000 + 500
                       : 0,
                 ),
-                onPressed: () {
+                onPressed: () async {
+                  await _audioPlayer.play();
                   if (puzzle.hasNextDifficulty() &&
                       status == PuzzleStatus.complete) {
                     context.read<PuzzleBloc>().add(PuzzleInitialized(

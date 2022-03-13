@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_audio/just_audio.dart';
-import 'package:leave_me_alone/bloc/audio_control/audio_control_bloc.dart';
 
 class AnimatedElevatedButton extends StatefulWidget {
   final Duration initDelay;

@@ -69,8 +69,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     // prefetchToMemory('assets/audio/bg.wav');
-    // prefetchToMemory('assets/audio/female_cough.wav');
-    // prefetchToMemory('assets/audio/male_cough.wav');
+    prefetchToMemory('assets/audio/female_cough.wav');
+    prefetchToMemory('assets/audio/male_cough.wav');
     prefetchToMemory('assets/assets/audio/sneeze.wav');
 
     super.initState();

@@ -17,7 +17,7 @@ class AudioControlListener extends StatefulWidget {
   State<AudioControlListener> createState() => _AudioControlListenerState();
 }
 
-class _AudioControlListenerState extends State<AudioControlListener> {
+class _AudioControlListenerState extends State<AudioControlListener> with WidgetsBindingObserver {
   void updateAudioPlayer({required bool muted}) {
     widget.audioPlayer?.setVolume(muted ? 0.0 : 1.0);
   }
@@ -38,6 +38,19 @@ class _AudioControlListenerState extends State<AudioControlListener> {
   void didUpdateWidget(covariant AudioControlListener oldWidget) {
     super.didUpdateWidget(oldWidget);
     updateAudioPlayer(muted: context.read<AudioControlBloc>().state.muted);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      widget.audioPlayer?.stop();
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance?.removeObserver(this);
+    super.dispose();
   }
 
   @override

@@ -16,7 +16,7 @@ class OnboardPage extends StatefulWidget {
   State<OnboardPage> createState() => _OnboardPageState();
 }
 
-class _OnboardPageState extends State<OnboardPage> with WidgetsBindingObserver{
+class _OnboardPageState extends State<OnboardPage> {
   final _audioPlayer = AudioPlayer();
 
   @override
@@ -27,16 +27,8 @@ class _OnboardPageState extends State<OnboardPage> with WidgetsBindingObserver{
 
   @override
   void dispose() {
-    WidgetsBinding.instance?.removeObserver(this);
     _audioPlayer.dispose();
     super.dispose();
-  }
-
-    @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.paused) {
-      _audioPlayer.stop();
-    }
   }
 
   @override
