@@ -6,6 +6,7 @@ import 'package:leave_me_alone/components/animated_elevated_button.dart';
 import 'package:leave_me_alone/components/audio_control_listener.dart';
 import 'package:leave_me_alone/components/popup_hints.dart';
 import 'package:leave_me_alone/helpers/modal_helper.dart';
+import 'package:leave_me_alone/models/puzzle.dart';
 
 class AnimatedBottomSection extends StatefulWidget {
   const AnimatedBottomSection({Key? key}) : super(key: key);
@@ -16,12 +17,6 @@ class AnimatedBottomSection extends StatefulWidget {
 
 class _AnimatedBottomSectionState extends State<AnimatedBottomSection> {
   final _audioPlayer = AudioPlayer();
-
-  @override
-  void initState() {
-    _audioPlayer.setAsset('assets/audio/sneeze.wav');
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -68,13 +63,23 @@ class _AnimatedBottomSectionState extends State<AnimatedBottomSection> {
                         : 0,
                   ),
                   onPressed: () async {
-                    await _audioPlayer.play();
-                    await _audioPlayer.seek(Duration.zero);
                     if (puzzle.hasNextDifficulty() &&
                         status == PuzzleStatus.complete) {
-                      context.read<PuzzleBloc>().add(PuzzleInitialized(
-                          difficulty: puzzle.getNextDifficulty()));
+                      final nextDifficulty = puzzle.getNextDifficulty();
+                      if (nextDifficulty == PuzzleDifficulty.beta) {
+                        await _audioPlayer
+                            .setAsset('assets/audio/female_cough.wav');
+                      } else if (nextDifficulty == PuzzleDifficulty.delta) {
+                        await _audioPlayer
+                            .setAsset('assets/audio/male_cough.wav');
+                      }
+                      context
+                          .read<PuzzleBloc>()
+                          .add(PuzzleInitialized(difficulty: nextDifficulty));
                     } else {
+                      await _audioPlayer.setAsset('assets/audio/sneeze.wav');
+                      await _audioPlayer.play();
+                      await _audioPlayer.seek(Duration.zero);
                       context.read<PuzzleBloc>().add(PuzzleReset());
                     }
                   },

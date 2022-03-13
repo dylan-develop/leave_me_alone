@@ -132,7 +132,7 @@ class _AnimatedSideSectionState extends State<AnimatedSideSection> {
                               500
                           : 0),
                   onPressed: () async {
-                    if (status == PuzzleStatus.complete &&puzzle.hasNextDifficulty()) {
+                    if (status == PuzzleStatus.complete && puzzle.hasNextDifficulty()) {
                       final nextDifficulty = puzzle.getNextDifficulty();
                       if (nextDifficulty == PuzzleDifficulty.beta) {
                         await _audioPlayer
