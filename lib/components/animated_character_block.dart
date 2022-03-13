@@ -30,9 +30,11 @@ class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
   @override
   void initState() {
     _timer = Timer(widget.isAnimated ? widget.initDelay : Duration.zero, () {
-      setState(() {
-        _scale = 1;
-      });
+      if (mounted) {
+        setState(() {
+          _scale = 1;
+        });
+      }
     });
     super.initState();
   }

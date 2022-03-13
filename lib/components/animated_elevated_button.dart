@@ -52,15 +52,20 @@ class _AnimatedElevatedButtonState extends State<AnimatedElevatedButton> {
       });
     } else {
       _scaleTimer = Timer(widget.initDelay, () {
-        setState(() {
-          _scale = 1;
-        });
+        if (mounted) {
+          setState(() {
+            _scale = 1;
+          });
+        }
       });
-      _opacityTimer = Timer(widget.initDelay + const Duration(milliseconds: 500), () {
-        setState(() {
-          _opacity = 1;
-          _initAnimationCompleted = true;
-        });
+      _opacityTimer =
+          Timer(widget.initDelay + const Duration(milliseconds: 500), () {
+        if (mounted) {
+          setState(() {
+            _opacity = 1;
+            _initAnimationCompleted = true;
+          });
+        }
       });
     }
     super.initState();

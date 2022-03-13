@@ -124,7 +124,7 @@ class _DifficultiesListState extends State<DifficultiesList> {
                           fontFamily: 'ThinkBig',
                           onPressed: () async {
                             await _audioPlayer
-                                .setAsset('assets/audio/${_audios[i]}.wav');
+                                .setAsset('assets/audio/${_audios[i]}.mp3');
                             await _audioPlayer.play();
                             await _audioPlayer.seek(Duration.zero);
                             await _audioPlayer.pause();

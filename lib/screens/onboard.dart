@@ -106,7 +106,7 @@ class _OnboardPageState extends State<OnboardPage> {
                               text: 'Start Now',
                               fontSize: buttonFontSize,
                               onPressed: () async {
-                                await _audioPlayer.setAsset('assets/audio/sneeze.wav');
+                                await _audioPlayer.setAsset('assets/audio/sneeze.mp3');
                                 await _audioPlayer.play();
                                 await _audioPlayer.seek(Duration.zero);
                                 await _audioPlayer.pause();

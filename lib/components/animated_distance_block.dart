@@ -28,9 +28,11 @@ class _AnimatedDistanceBlockState extends State<AnimatedDistanceBlock> {
   @override
   void initState() {
     timer = Timer(widget.initDelay, () {
-      setState(() {
-        _scale = 1;
-      });
+      if (mounted) {
+        setState(() {
+          _scale = 1;
+        });
+      }
     });
     super.initState();
   }
@@ -78,7 +80,9 @@ class _AnimatedDistanceBlockState extends State<AnimatedDistanceBlock> {
                     fit: BoxFit.fitWidth,
                     child: AnimatedOpacity(
                       duration: const Duration(milliseconds: 250),
-                      opacity: status == PuzzleStatus.incomplete && !_onHover ? 1 : 0,
+                      opacity: status == PuzzleStatus.incomplete && !_onHover
+                          ? 1
+                          : 0,
                       child: Container(
                         margin: EdgeInsets.symmetric(
                           horizontal: max(constraints.maxWidth * 0.2, 20),
@@ -104,7 +108,8 @@ class _AnimatedDistanceBlockState extends State<AnimatedDistanceBlock> {
                     fit: BoxFit.fitWidth,
                     child: AnimatedOpacity(
                       duration: const Duration(milliseconds: 250),
-                      opacity: status == PuzzleStatus.incomplete && _onHover ? 1 : 0,
+                      opacity:
+                          status == PuzzleStatus.incomplete && _onHover ? 1 : 0,
                       child: Container(
                         margin: EdgeInsets.symmetric(
                           horizontal: max(constraints.maxWidth * 0.2, 20),

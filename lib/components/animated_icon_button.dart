@@ -27,9 +27,11 @@ class _AnimatedIconButtonState extends State<AnimatedIconButton> {
   @override
   void initState() {
     Timer(widget.initDelay, () {
-      setState(() {
-        _opacity = 1;
-      });
+      if (mounted) {
+        setState(() {
+          _opacity = 1;
+        });
+      }
     });
     super.initState();
   }

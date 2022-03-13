@@ -58,9 +58,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     CacheHelper.prefetchToMemory([
-      'assets/audio/female_cough.wav',
-      'assets/audio/male_cough.wav',
-      'assets/audio/sneeze.wav',
+      'assets/audio/female_cough.mp3',
+      'assets/audio/male_cough.mp3',
+      'assets/audio/sneeze.mp3',
     ]);
 
     super.initState();
