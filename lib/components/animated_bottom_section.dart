@@ -80,6 +80,7 @@ class _AnimatedBottomSectionState extends State<AnimatedBottomSection> {
                       await _audioPlayer.setAsset('assets/audio/sneeze.wav');
                       await _audioPlayer.play();
                       await _audioPlayer.seek(Duration.zero);
+                      await _audioPlayer.pause();
                       context.read<PuzzleBloc>().add(PuzzleReset());
                     }
                   },

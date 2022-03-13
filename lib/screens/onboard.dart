@@ -38,7 +38,8 @@ class _OnboardPageState extends State<OnboardPage> {
                   size == ResponsiveLayoutSize.large ? 96.0 : 48.0;
               final descriptionFontSize =
                   size == ResponsiveLayoutSize.large ? 36.0 : 24.0;
-              final buttonOffset = size == ResponsiveLayoutSize.large ? 8.0 : 4.0;
+              final buttonOffset =
+                  size == ResponsiveLayoutSize.large ? 8.0 : 4.0;
               final buttonFontSize =
                   size == ResponsiveLayoutSize.large ? 36.0 : 24.0;
               final buttonHeight =
@@ -108,6 +109,8 @@ class _OnboardPageState extends State<OnboardPage> {
                                 await _audioPlayer.setAsset('assets/audio/sneeze.wav');
                                 await _audioPlayer.play();
                                 await _audioPlayer.seek(Duration.zero);
+                                await _audioPlayer.pause();
+
                                 context.beamToNamed('/difficulties');
                               },
                             ),

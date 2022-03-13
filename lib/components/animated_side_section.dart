@@ -143,6 +143,7 @@ class _AnimatedSideSectionState extends State<AnimatedSideSection> {
                       }
                       await _audioPlayer.play();
                       await _audioPlayer.seek(Duration.zero);
+                      await _audioPlayer.pause();
 
                       context
                           .read<PuzzleBloc>()
@@ -151,6 +152,7 @@ class _AnimatedSideSectionState extends State<AnimatedSideSection> {
                       await _audioPlayer.setAsset('assets/audio/sneeze.wav');
                       await _audioPlayer.play();
                       await _audioPlayer.seek(Duration.zero);
+                      await _audioPlayer.pause();
 
                       context.read<PuzzleBloc>().add(PuzzleReset());
                     }

@@ -108,6 +108,8 @@ class _WinPopupState extends State<WinPopup> {
                             }
                             await _audioPlayer.play();
                             await _audioPlayer.seek(Duration.zero);
+                            await _audioPlayer.pause();
+
                             context.read<PuzzleBloc>().add(
                                 PuzzleInitialized(difficulty: nextDifficulty));
                             Navigator.of(context).pop();
@@ -216,6 +218,8 @@ class _WinPopupState extends State<WinPopup> {
                                         }
                                         await _audioPlayer.play();
                                         await _audioPlayer.seek(Duration.zero);
+                                        await _audioPlayer.pause();
+
                                         context.read<PuzzleBloc>().add(
                                             PuzzleInitialized(
                                                 difficulty: nextDifficulty));
