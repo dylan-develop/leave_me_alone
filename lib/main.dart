@@ -85,8 +85,7 @@ class _MyAppState extends State<MyApp> {
             ..add(const PuzzleInitialized(difficulty: PuzzleDifficulty.alpha)),
         ),
         BlocProvider<AudioControlBloc>(
-          create: (context) => AudioControlBloc()
-            ..add(AudioToggled()),
+          create: (context) => AudioControlBloc(),
         ),
       ],
       child: MaterialApp.router(
