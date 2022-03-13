@@ -24,9 +24,11 @@ class _AnimatedMovesNumberState extends State<AnimatedMovesNumber> {
   @override
   void initState() {
     Future.delayed(widget.isAnimated ? widget.initDelay : Duration.zero, () {
-      setState(() {
-        _opacity = 1;
-      });
+      if (mounted) {
+        setState(() {
+          _opacity = 1;
+        });
+      }
     });
     super.initState();
   }

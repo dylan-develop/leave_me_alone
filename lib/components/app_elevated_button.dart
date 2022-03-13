@@ -48,10 +48,12 @@ class _AppElevatedButtonState extends State<AppElevatedButton> {
             _onHover = true;
           });
           await Future.delayed(const Duration(milliseconds: 500), () {
-            setState(() {
-              _onHover = false;
-              widget.onTap.call();
-            });
+            if (mounted) {
+              setState(() {
+                _onHover = false;
+                widget.onTap.call();
+              });
+            }
           });
         }
         widget.onKeyEventCallback?.call(event);

@@ -22,16 +22,18 @@ class _AnimatedMaskState extends State<AnimatedMask>
   @override
   void initState() {
     _rotationController = AnimationController(
-      duration: const Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
     Future.delayed(widget.initDelay, () {
-      setState(() {
-        _scale = 1;
-      });
-      _rotationController
-        ..forward()
-        ..repeat(reverse: true);
+      if (mounted) {
+        setState(() {
+          _scale = 1;
+        });
+        _rotationController
+            .forward()
+            .whenComplete(() => _rotationController.repeat(reverse: true));
+      }
     });
     super.initState();
   }

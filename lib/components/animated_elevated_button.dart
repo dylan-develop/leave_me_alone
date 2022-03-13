@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class AnimatedElevatedButton extends StatefulWidget {
@@ -37,6 +39,9 @@ class _AnimatedElevatedButtonState extends State<AnimatedElevatedButton> {
   bool _onHover = false;
   bool _initAnimationCompleted = false;
 
+  late Timer _scaleTimer;
+  late Timer _opacityTimer;
+
   @override
   void initState() {
     if (!widget.isAnimated) {
@@ -46,20 +51,26 @@ class _AnimatedElevatedButtonState extends State<AnimatedElevatedButton> {
         _initAnimationCompleted = true;
       });
     } else {
-      Future.delayed(widget.initDelay, () {
+      _scaleTimer = Timer(widget.initDelay, () {
         setState(() {
           _scale = 1;
         });
-      }).whenComplete(() {
-        Future.delayed(const Duration(milliseconds: 500), () {
-          setState(() {
-            _opacity = 1;
-            _initAnimationCompleted = true;
-          });
+      });
+      _opacityTimer = Timer(widget.initDelay + const Duration(milliseconds: 500), () {
+        setState(() {
+          _opacity = 1;
+          _initAnimationCompleted = true;
         });
       });
     }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scaleTimer.cancel();
+    _opacityTimer.cancel();
+    super.dispose();
   }
 
   @override

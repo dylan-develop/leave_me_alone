@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -22,14 +23,22 @@ class _AnimatedDistanceBlockState extends State<AnimatedDistanceBlock> {
   double _scale = 0;
   bool _onHover = false;
 
+  late Timer timer;
+
   @override
   void initState() {
-    Future.delayed(widget.initDelay, () {
+    timer = Timer(widget.initDelay, () {
       setState(() {
         _scale = 1;
       });
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   @override

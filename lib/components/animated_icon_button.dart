@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -20,14 +22,22 @@ class AnimatedIconButton extends StatefulWidget {
 class _AnimatedIconButtonState extends State<AnimatedIconButton> {
   double _opacity = 0;
 
+  late Timer _timer;
+
   @override
   void initState() {
-    Future.delayed(widget.initDelay, () {
+    Timer(widget.initDelay, () {
       setState(() {
         _opacity = 1;
       });
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   @override

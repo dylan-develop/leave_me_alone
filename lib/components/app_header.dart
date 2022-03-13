@@ -20,9 +20,11 @@ class _AppHeaderState extends State<AppHeader> {
   @override
   void initState() {
     Future.delayed(const Duration(milliseconds: 500), () {
+            if (mounted) {
       setState(() {
         _opacity = 1;
       });
+            }
     });
     super.initState();
   }

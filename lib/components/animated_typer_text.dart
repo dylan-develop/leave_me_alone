@@ -30,18 +30,20 @@ class _AnimatedTyperTextState extends State<AnimatedTyperText> {
   void initState() {
     if (widget.isAnimated) {
       Future.delayed(widget.initDelay, () {
-        setState(() {
-          animatedTexts = [
-            TyperAnimatedText(
-              widget.text,
-              textStyle: TextStyle(
-                fontFamily: widget.fontFamily,
-                fontSize: widget.fontSize,
+        if (mounted) {
+          setState(() {
+            animatedTexts = [
+              TyperAnimatedText(
+                widget.text,
+                textStyle: TextStyle(
+                  fontFamily: widget.fontFamily,
+                  fontSize: widget.fontSize,
+                ),
+                textAlign: widget.textAlign,
               ),
-              textAlign: widget.textAlign,
-            ),
-          ];
-        });
+            ];
+          });
+        }
       });
     }
     super.initState();

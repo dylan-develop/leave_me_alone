@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:leave_me_alone/bloc/puzzle/puzzle_bloc.dart';
+import 'package:leave_me_alone/components/animated_elevated_button.dart';
 import 'package:leave_me_alone/components/animated_mask.dart';
 import 'package:leave_me_alone/components/app_elevated_button.dart';
 import 'package:leave_me_alone/components/audio_control_listener.dart';
@@ -73,47 +74,50 @@ class _WinPopupState extends State<WinPopup> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Flexible(
-                        child: AppElevatedButton(
-                          width:
-                              !hasNextLevel && status == PuzzleStatus.complete
+                        child: AnimatedElevatedButton(
+                           width: !hasNextLevel && status == PuzzleStatus.complete
                                   ? 144
                                   : 112,
                           height: 40,
-                          title: 'Play Again',
+                          text: 'Play Again',
                           fontSize: 20,
-                          onTap: () {
+                          offset: 4,
+                          onPressed: () {
                             context.read<PuzzleBloc>().add(PuzzleReset());
                             Navigator.of(context).pop();
                           },
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.only(
-                          left: hasNextLevel ? 12 : 0,
-                        ),
-                        child: AppElevatedButton(
-                          width: hasNextLevel ? 112 : 0,
-                          height: 40,
-                          title: 'Next Level',
-                          fontSize: 20,
-                          onTap: () async {
-                            final nextDifficulty = puzzle.getNextDifficulty();
-                            if (nextDifficulty == PuzzleDifficulty.beta) {
-                              await _audioPlayer
-                                  .setAsset('assets/audio/female_cough.wav');
-                            } else if (nextDifficulty ==
-                                PuzzleDifficulty.delta) {
-                              await _audioPlayer
-                                  .setAsset('assets/audio/male_cough.wav');
-                            }
-                            await _audioPlayer.play();
-                            await _audioPlayer.seek(Duration.zero);
-                            await _audioPlayer.pause();
+                      Visibility(
+                        visible: hasNextLevel,
+                        child: Container(
+                          margin: EdgeInsets.only(
+                            left: hasNextLevel ? 12 : 0,
+                          ),
+                          child: AnimatedElevatedButton(
+                            width: 112,
+                            height: 40,
+                            text: 'Next Level',
+                            fontSize: 20,
+                            offset: 4,
+                            onPressed: () async {
+                              final nextDifficulty = puzzle.getNextDifficulty();
+                              if (nextDifficulty == PuzzleDifficulty.beta) {
+                                await _audioPlayer
+                                    .setAsset('assets/audio/female_cough.wav');
+                              } else if (nextDifficulty == PuzzleDifficulty.delta) {
+                                await _audioPlayer
+                                    .setAsset('assets/audio/male_cough.wav');
+                              }
+                              await _audioPlayer.play();
+                              await _audioPlayer.seek(Duration.zero);
+                              await _audioPlayer.pause();
 
-                            context.read<PuzzleBloc>().add(
-                                PuzzleInitialized(difficulty: nextDifficulty));
-                            Navigator.of(context).pop();
-                          },
+                              context.read<PuzzleBloc>().add(PuzzleInitialized(difficulty: nextDifficulty));
+
+                              Navigator.of(context).pop();
+                            },
+                          ),
                         ),
                       ),
                     ],
@@ -178,9 +182,7 @@ class _WinPopupState extends State<WinPopup> {
                                     title: 'Play Again',
                                     fontSize: 28,
                                     onTap: () {
-                                      context
-                                          .read<PuzzleBloc>()
-                                          .add(PuzzleReset());
+                                      context.read<PuzzleBloc>().add(PuzzleReset());
                                       Navigator.of(context).pop();
                                     },
                                   ),
@@ -205,24 +207,18 @@ class _WinPopupState extends State<WinPopup> {
                                       title: 'Next Level',
                                       fontSize: 28,
                                       onTap: () async {
-                                        final nextDifficulty =
-                                            puzzle.getNextDifficulty();
-                                        if (nextDifficulty ==
-                                            PuzzleDifficulty.beta) {
-                                          await _audioPlayer.setAsset(
-                                              'assets/audio/female_cough.wav');
-                                        } else if (nextDifficulty ==
-                                            PuzzleDifficulty.delta) {
-                                          await _audioPlayer.setAsset(
-                                              'assets/audio/male_cough.wav');
+                                        final nextDifficulty = puzzle.getNextDifficulty();
+                                        if (nextDifficulty == PuzzleDifficulty.beta) {
+                                          await _audioPlayer.setAsset('assets/audio/female_cough.wav');
+                                        } else if (nextDifficulty == PuzzleDifficulty.delta) {
+                                          await _audioPlayer.setAsset('assets/audio/male_cough.wav');
                                         }
                                         await _audioPlayer.play();
                                         await _audioPlayer.seek(Duration.zero);
                                         await _audioPlayer.pause();
 
-                                        context.read<PuzzleBloc>().add(
-                                            PuzzleInitialized(
-                                                difficulty: nextDifficulty));
+                                        context.read<PuzzleBloc>().add(PuzzleInitialized(difficulty: nextDifficulty));
+
                                         Navigator.of(context).pop();
                                       },
                                     ),

@@ -26,9 +26,11 @@ class _AnimatedTextButtonState extends State<AnimatedTextButton> {
   @override
   void initState() {
     Future.delayed(widget.initDelay, () {
-      setState(() {
-        _opacity = 1;
-      });
+      if (mounted) {
+        setState(() {
+          _opacity = 1;
+        });
+      }
     });
     super.initState();
   }

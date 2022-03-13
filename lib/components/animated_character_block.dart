@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -23,14 +25,22 @@ class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
 
   bool _onHover = false;
 
+  late Timer _timer;
+
   @override
   void initState() {
-    Future.delayed(widget.isAnimated ? widget.initDelay : Duration.zero, () {
+    _timer = Timer(widget.isAnimated ? widget.initDelay : Duration.zero, () {
       setState(() {
         _scale = 1;
       });
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   @override
