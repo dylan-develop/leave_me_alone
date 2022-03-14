@@ -61,6 +61,18 @@ class _MyAppState extends State<MyApp> {
       'assets/audio/female_cough.wav',
       'assets/audio/male_cough.wav',
       'assets/audio/sneeze.wav',
+      'assets/lottie/char_1.json',
+      'assets/lottie/char_2.json',
+      'assets/lottie/char_3.json',
+      'assets/lottie/char_4.json',
+      'assets/lottie/char_5.json',
+      'assets/lottie/char_6.json',
+      'assets/lottie/char_7.json',
+      'assets/lottie/char_8.json',
+      'assets/lottie/char_9.json',
+      'assets/lottie/char_10.json',
+      'assets/lottie/char_11.json',
+      'assets/lottie/char_12.json',
     ]);
 
     super.initState();

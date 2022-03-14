@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leave_me_alone/bloc/puzzle/puzzle_bloc.dart';
+import 'package:leave_me_alone/models/puzzle.dart';
 import 'package:lottie/lottie.dart';
 import 'package:universal_platform/universal_platform.dart';
 
@@ -46,16 +48,18 @@ class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
 
   @override
   Widget build(BuildContext context) {
+    final puzzle = context.select((PuzzleBloc bloc) => bloc.state.puzzle);
+
     return AnimatedScale(
       scale: _scale,
       duration: Duration(milliseconds: widget.isAnimated ? 500 : 0),
       curve: Curves.elasticOut,
-      child: UniversalPlatform.isWeb
-          ? Image.asset(
-              'assets/images/characters/char_${widget.imageIndex}.png',
-            )
-          : Lottie.asset(
+      child: !UniversalPlatform.isWeb || puzzle.getDifficulty() == PuzzleDifficulty.alpha
+          ? Lottie.asset(
               'assets/lottie/char_${widget.imageIndex}.json',
+            )
+          : Image.asset(
+              'assets/images/characters/char_${widget.imageIndex}.png',
             ),
     );
   }
