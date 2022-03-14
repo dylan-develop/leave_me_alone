@@ -10,6 +10,7 @@ class AudioControl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final audioMuted = context.select((AudioControlBloc bloc) => bloc.state.muted);
+    
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(

@@ -15,44 +15,46 @@ class AnimatedTopSection extends StatelessWidget {
 
     final initDelay = 500 + 500 + pow(puzzle.getDimension(), 2) ~/ 2 * 250;
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 12),
-          child: AnimatedTyperText(
-            key: ValueKey(puzzle.getDifficulty()),
-            text: puzzle.getDifficulty().name,
-            fontSize: 32,
-            fontFamily: 'ThinkBig',
-            initDelay: Duration(
-              milliseconds: initDelay,
-            ),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-          child: AnimatedTyperText(
-            text: 'separate everyone with the blocks to win',
-            fontSize: 20,
-            initDelay: Duration(
-              milliseconds: initDelay + puzzle.getDifficulty().name.length * 50,
-            ),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-          height: 32,
-          child: Center(
-            child: AnimatedMovesNumber(
+    return Container(
+      key: ValueKey(puzzle.getDifficulty()),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 12),
+            child: AnimatedTyperText(
+              text: puzzle.getDifficulty().name,
+              fontSize: 32,
+              fontFamily: 'ThinkBig',
               initDelay: Duration(
-                milliseconds: initDelay + puzzle.getDifficulty().name.length * 50 + 2000,
+                milliseconds: initDelay,
               ),
-              fontSize: 20,
             ),
           ),
-        ),
-      ],
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            child: AnimatedTyperText(
+              text: 'separate everyone with the blocks to win',
+              fontSize: 20,
+              initDelay: Duration(
+                milliseconds: initDelay + puzzle.getDifficulty().name.length * 50,
+              ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            height: 32,
+            child: Center(
+              child: AnimatedMovesNumber(
+                initDelay: Duration(
+                  milliseconds: initDelay + puzzle.getDifficulty().name.length * 50 + 2000,
+                ),
+                fontSize: 20,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
