@@ -7,10 +7,11 @@ import 'package:leave_me_alone/models/tile.dart';
 
 class AnimatedPuzzleTile extends StatelessWidget {
   final Duration initDelay;
-  final int puzzleDimension;
-  final double dimension;
   final Tile tile;
+  final double dimension;
+  final int puzzleDimension;
   final int imageIndex;
+  final bool isHints;
 
   const AnimatedPuzzleTile({
     Key? key,
@@ -18,11 +19,14 @@ class AnimatedPuzzleTile extends StatelessWidget {
     required this.tile,
     required this.puzzleDimension,
     required this.dimension,
-    this.imageIndex = 0,
+    this.imageIndex = 1,
+    required this.isHints,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final status = context.select((PuzzleBloc bloc) => bloc.state.status);
+
     return AnimatedAlign(
       duration: const Duration(milliseconds: 500),
       alignment: FractionalOffset(
@@ -33,17 +37,20 @@ class AnimatedPuzzleTile extends StatelessWidget {
         visible: tile.type != TileType.whitespace,
         child: GestureDetector(
           onTap: () {
-            context.read<PuzzleBloc>().add(TileTapped(tile));
+            if (!(isHints || status == PuzzleStatus.complete)) {
+              context.read<PuzzleBloc>().add(TileTapped(tile));
+            }
           },
           child: SizedBox.square(
             dimension: dimension,
             child: tile.type == TileType.character
                 ? AnimatedCharacterBlock(
                     initDelay: initDelay + Duration(milliseconds: 500 + tile.value * 250),
-                    index: imageIndex,
+                    imageIndex: imageIndex,
                   )
                 : AnimatedDistanceBlock(
                   initDelay: initDelay,
+                  isHints: isHints,
                 ),
           ),
         ),

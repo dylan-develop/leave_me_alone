@@ -8,6 +8,7 @@ import 'package:leave_me_alone/components/animated_elevated_button.dart';
 import 'package:leave_me_alone/components/animated_typer_text.dart';
 import 'package:leave_me_alone/components/audio_control_listener.dart';
 import 'package:leave_me_alone/components/popup_hints.dart';
+import 'package:leave_me_alone/helpers/audio_helper.dart';
 import 'package:leave_me_alone/helpers/modal_helper.dart';
 import 'package:leave_me_alone/models/puzzle.dart';
 
@@ -132,7 +133,8 @@ class _AnimatedSideSectionState extends State<AnimatedSideSection> {
                               500
                           : 0),
                   onPressed: () async {
-                    if (status == PuzzleStatus.complete && puzzle.hasNextDifficulty()) {
+                    if (status == PuzzleStatus.complete &&
+                        puzzle.hasNextDifficulty()) {
                       final nextDifficulty = puzzle.getNextDifficulty();
                       if (nextDifficulty == PuzzleDifficulty.beta) {
                         await _audioPlayer
@@ -141,18 +143,23 @@ class _AnimatedSideSectionState extends State<AnimatedSideSection> {
                         await _audioPlayer
                             .setAsset('assets/audio/male_cough.wav');
                       }
-                      await _audioPlayer.play();
-                      await _audioPlayer.seek(Duration.zero);
-                      await _audioPlayer.pause();
+                      await _audioPlayer.replay();
 
                       context
                           .read<PuzzleBloc>()
                           .add(PuzzleInitialized(difficulty: nextDifficulty));
                     } else {
-                      await _audioPlayer.setAsset('assets/audio/sneeze.wav');
-                      await _audioPlayer.play();
-                      await _audioPlayer.seek(Duration.zero);
-                      await _audioPlayer.pause();
+                      final difficulty = puzzle.getDifficulty();
+                      if (difficulty == PuzzleDifficulty.beta) {
+                        await _audioPlayer
+                            .setAsset('assets/audio/female_cough.wav');
+                      } else if (difficulty == PuzzleDifficulty.delta) {
+                        await _audioPlayer
+                            .setAsset('assets/audio/male_cough.wav');
+                      } else {
+                        await _audioPlayer.setAsset('assets/audio/sneeze.wav');
+                      }
+                      _audioPlayer.replay();
 
                       context.read<PuzzleBloc>().add(PuzzleReset());
                     }

@@ -1,13 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+import 'package:universal_platform/universal_platform.dart';
 
-class CacheHelper {
-  static Future<void> prefetchToMemory(List<String> filePaths) async {
-    if (kIsWeb) {
-      for (final path in filePaths) {
-        Dio().get('assets/$path');
-      }
+Future<void> prefetchToMemory(List<String> filePaths) async {
+  if (UniversalPlatform.isWeb) {
+    for (final path in filePaths) {
+      await Dio().get('assets/$path');
     }
-    return;
   }
+  return;
 }

@@ -9,6 +9,7 @@ import 'package:leave_me_alone/components/audio_control_listener.dart';
 import 'package:leave_me_alone/components/popup_container.dart';
 
 import 'package:leave_me_alone/components/responsive_layout_builder.dart';
+import 'package:leave_me_alone/helpers/audio_helper.dart';
 import 'package:leave_me_alone/models/puzzle.dart';
 
 class WinPopup extends StatefulWidget {
@@ -109,9 +110,7 @@ class _WinPopupState extends State<WinPopup> {
                                 await _audioPlayer
                                     .setAsset('assets/audio/male_cough.wav');
                               }
-                              await _audioPlayer.play();
-                              await _audioPlayer.seek(Duration.zero);
-                              await _audioPlayer.pause();
+                              await _audioPlayer.replay();
 
                               context.read<PuzzleBloc>().add(PuzzleInitialized(difficulty: nextDifficulty));
 
@@ -213,9 +212,7 @@ class _WinPopupState extends State<WinPopup> {
                                         } else if (nextDifficulty == PuzzleDifficulty.delta) {
                                           await _audioPlayer.setAsset('assets/audio/male_cough.wav');
                                         }
-                                        await _audioPlayer.play();
-                                        await _audioPlayer.seek(Duration.zero);
-                                        await _audioPlayer.pause();
+                                        await _audioPlayer.replay();
 
                                         context.read<PuzzleBloc>().add(PuzzleInitialized(difficulty: nextDifficulty));
 

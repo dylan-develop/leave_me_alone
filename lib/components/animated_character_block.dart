@@ -1,19 +1,19 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class AnimatedCharacterBlock extends StatefulWidget {
-  final int index;
   final Duration initDelay;
   final bool isAnimated;
+  final int imageIndex;
 
   const AnimatedCharacterBlock({
     Key? key,
-    required this.index,
     this.initDelay = Duration.zero,
     this.isAnimated = true,
+    required this.imageIndex,
   }) : super(key: key);
 
   @override
@@ -41,11 +41,11 @@ class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
   Widget build(BuildContext context) {
     return AnimatedScale(
       scale: _scale,
-      duration: Duration(milliseconds: widget.isAnimated ? 1000 : 0),
+      duration: Duration(milliseconds: widget.isAnimated ? 500 : 0),
       curve: Curves.elasticOut,
-      child: kIsWeb
+      child: UniversalPlatform.isWeb
           ? Image.asset(
-              'assets/images/characters/char_${widget.index}.png',
+              'assets/images/characters/char_${widget.imageIndex}.png',
             )
           : MouseRegion(
               onEnter: (detail) {
@@ -63,7 +63,7 @@ class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
                 }
               },
               child: Lottie.asset(
-                'assets/lottie/char_${widget.index}_${_onHover ? 'hover' : 'default'}.json',
+                'assets/lottie/char_${widget.imageIndex}_${_onHover ? 'hover' : 'default'}.json',
               ),
             ),
     );

@@ -25,16 +25,18 @@ class ResponsiveLayoutBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final screenWidth = MediaQuery.of(context).size.width;
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final screenWidth = MediaQuery.of(context).size.width;
 
-        if (screenWidth >= ResponsiveLayoutBreakpoints.large) {
-          return large(context, child?.call(ResponsiveLayoutSize.large));
-        }
+          if (screenWidth >= ResponsiveLayoutBreakpoints.large) {
+            return large(context, child?.call(ResponsiveLayoutSize.large));
+          }
 
-        return small(context, child?.call(ResponsiveLayoutSize.small));
-      },
+          return small(context, child?.call(ResponsiveLayoutSize.small));
+        },
+      ),
     );
   }
 }

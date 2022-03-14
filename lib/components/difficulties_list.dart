@@ -6,6 +6,7 @@ import 'package:leave_me_alone/components/animated_elevated_button.dart';
 import 'package:leave_me_alone/components/animated_typer_text.dart';
 import 'package:leave_me_alone/components/audio_control_listener.dart';
 import 'package:leave_me_alone/components/responsive_layout_builder.dart';
+import 'package:leave_me_alone/helpers/audio_helper.dart';
 import 'package:leave_me_alone/models/puzzle.dart';
 
 class DifficultiesList extends StatefulWidget {
@@ -125,9 +126,7 @@ class _DifficultiesListState extends State<DifficultiesList> {
                           onPressed: () async {
                             await _audioPlayer
                                 .setAsset('assets/audio/${_audios[i]}.wav');
-                            await _audioPlayer.play();
-                            await _audioPlayer.seek(Duration.zero);
-                            await _audioPlayer.pause();
+                            await _audioPlayer.replay();
 
                             context.read<PuzzleBloc>().add(PuzzleInitialized(
                                 difficulty: PuzzleDifficulty.values[i]));

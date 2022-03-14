@@ -22,9 +22,13 @@ class AudioControl extends StatelessWidget {
             child: (size) {
               final iconWidth = size == ResponsiveLayoutSize.large ? 32.0 : 24.0;
 
-              return SvgPicture.asset(
-                'assets/icons/volume-${audioMuted ? 'x' : '1'}.svg',
-                width: iconWidth,
+              return AnimatedSwitcher(
+                duration: const Duration(milliseconds: 200),
+                child: SvgPicture.asset(
+                  'assets/icons/volume-${audioMuted ? 'x' : '1'}.svg',
+                  key: ValueKey(audioMuted),
+                  width: iconWidth,
+                ),
               );
             }),
       ),

@@ -74,7 +74,7 @@ class PuzzleBoard extends StatelessWidget {
                 puzzleDimension: puzzle.getDimension(),
                 dimension: dimenision / puzzle.getDimension(),
                 imageIndex: isHints ? 1 : i ~/ 2 + 1,
-                // isReadOnly: status == PuzzleStatus.complete,
+                isHints: isHints,
               ),
           ],
         ),
