@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle/puzzle_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class AnimatedDistanceBlock extends StatefulWidget {
   final Duration initDelay;
@@ -35,7 +36,7 @@ class _AnimatedDistanceBlockState extends State<AnimatedDistanceBlock> {
     });
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     final status = context.select((PuzzleBloc bloc) => bloc.state.status);
@@ -62,9 +63,13 @@ class _AnimatedDistanceBlockState extends State<AnimatedDistanceBlock> {
         duration: const Duration(milliseconds: 500),
         child: Stack(
           children: [
-            Lottie.asset(
-              'assets/lottie/block.json',
-            ),
+            UniversalPlatform.isWeb
+                ? Image.asset(
+                    'assets/images/block.png',
+                  )
+                : Lottie.asset(
+                    'assets/lottie/block.json',
+                  ),
             Positioned.fill(
               child: LayoutBuilder(
                 builder: (context, constraints) {

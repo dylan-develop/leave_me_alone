@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class AnimatedMask extends StatefulWidget {
   final Duration initDelay;
@@ -52,7 +53,9 @@ class _AnimatedMaskState extends State<AnimatedMask>
       duration: const Duration(milliseconds: 500),
       child: RotationTransition(
         turns: _rotationTween.animate(_rotationController),
-        child: Lottie.asset('assets/lottie/mask.json'),
+        child: UniversalPlatform.isWeb
+            ? Image.asset('assets/images/mask.png')
+            : Lottie.asset('assets/lottie/mask.json'),
       ),
     );
   }

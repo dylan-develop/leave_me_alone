@@ -21,6 +21,7 @@ class AnimatedTopSection extends StatelessWidget {
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 12),
           child: AnimatedTyperText(
+            key: ValueKey(puzzle.getDifficulty()),
             text: puzzle.getDifficulty().name,
             fontSize: 32,
             fontFamily: 'ThinkBig',

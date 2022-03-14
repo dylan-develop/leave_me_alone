@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle/puzzle_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class AnimatedMovesNumber extends StatefulWidget {
   final Duration initDelay;
@@ -53,11 +54,17 @@ class _AnimatedMovesNumberState extends State<AnimatedMovesNumber> {
                 visible: status == PuzzleStatus.complete,
                 child: Container(
                   margin: const EdgeInsets.only(right: 24),
-                  child: Lottie.asset(
-                    'assets/lottie/mask.json',
-                    width: widget.fontSize * 2,
-                    height: widget.fontSize,
-                  ),
+                  child: UniversalPlatform.isWeb
+                      ? Image.asset(
+                          'assets/images/mask.png',
+                          width: widget.fontSize * 2,
+                          height: widget.fontSize,
+                        )
+                      : Lottie.asset(
+                          'assets/lottie/mask.json',
+                          width: widget.fontSize * 2,
+                          height: widget.fontSize,
+                        ),
                 ),
               ),
             ),
