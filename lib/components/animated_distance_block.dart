@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leave_me_alone/bloc/puzzle/puzzle_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 class AnimatedDistanceBlock extends StatefulWidget {
   final Duration initDelay;
@@ -61,8 +62,8 @@ class _AnimatedDistanceBlockState extends State<AnimatedDistanceBlock> {
         duration: const Duration(milliseconds: 500),
         child: Stack(
           children: [
-            Image.asset(
-              'assets/images/social_distance_block.png',
+            Lottie.asset(
+              'assets/lottie/block.json',
             ),
             Positioned.fill(
               child: LayoutBuilder(

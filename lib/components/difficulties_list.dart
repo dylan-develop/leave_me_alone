@@ -25,7 +25,6 @@ class DifficultiesList extends StatefulWidget {
 
 class _DifficultiesListState extends State<DifficultiesList> {
   final _audios = ['sneeze', 'female_cough', 'male_cough'];
-  final _audioPlayer = AudioPlayer();
 
   String _description = 'so you like stupid game huh';
 
@@ -42,10 +41,18 @@ class _DifficultiesListState extends State<DifficultiesList> {
 
   late bool _isAnimated;
 
+  final _audioPlayer = AudioPlayer();
+
   @override
   void initState() {
     _isAnimated = widget.isAnimated;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
   }
 
   @override

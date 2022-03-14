@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:universal_platform/universal_platform.dart';
 
@@ -21,13 +22,13 @@ class AnimatedCharacterBlock extends StatefulWidget {
 }
 
 class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
-  double _scale = 0;
+  late Timer _timer;
 
-  bool _onHover = false;
+  double _scale = 0;
 
   @override
   void initState() {
-    Future.delayed(widget.isAnimated ? widget.initDelay : Duration.zero, () {
+    _timer = Timer(widget.isAnimated ? widget.initDelay : Duration.zero, () {
       if (mounted) {
         setState(() {
           _scale = 1;
@@ -35,6 +36,12 @@ class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
       }
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -47,24 +54,8 @@ class _AnimatedCharacterBlockState extends State<AnimatedCharacterBlock> {
           ? Image.asset(
               'assets/images/characters/char_${widget.imageIndex}.png',
             )
-          : MouseRegion(
-              onEnter: (detail) {
-                if (widget.isAnimated) {
-                  setState(() {
-                    _onHover = true;
-                  });
-                }
-              },
-              onExit: (detail) {
-                if (widget.isAnimated) {
-                  setState(() {
-                    _onHover = false;
-                  });
-                }
-              },
-              child: Lottie.asset(
-                'assets/lottie/char_${widget.imageIndex}_${_onHover ? 'hover' : 'default'}.json',
-              ),
+          : Lottie.asset(
+              'assets/lottie/char_${widget.imageIndex}.json',
             ),
     );
   }
